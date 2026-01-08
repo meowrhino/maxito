@@ -2,85 +2,98 @@
   "arboles-bailando": [
     {
       "image": "images/arbol-03.png",
-      "text": "Los árboles bailan cuando nadie los mira. Este proyecto explora el movimiento invisible de las formas orgánicas.",
+      "text_es": "Los árboles bailan cuando nadie los mira. Este proyecto explora el movimiento invisible de las formas orgánicas.",
+      "text_en": "Trees dance when no one is watching. This project explores the invisible movement of organic forms.",
       "links": [
-        { "text": "Ver más", "url": "#" }
+        { "text_es": "Ver más", "text_en": "See more", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-01.png",
-      "text": null,
+      "text_es": null,
+      "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-05.png",
-      "text": "La melancolía del sauce.\n\nSus ramas caen como lágrimas suspendidas en el tiempo, creando cortinas de silencio.",
+      "text_es": "La melancolía del sauce.\n\nSus ramas caen como lágrimas suspendidas en el tiempo, creando cortinas de silencio.",
+      "text_en": "The melancholy of the willow.\n\nIts branches fall like tears suspended in time, creating curtains of silence.",
       "links": [
-        { "text": "Documentación", "url": "#" },
-        { "text": "Archivo", "url": "#" }
+        { "text_es": "Documentación", "text_en": "Documentation", "url": "#" },
+        { "text_es": "Archivo", "text_en": "Archive", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-11.png",
-      "text": null,
+      "text_es": null,
+      "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-04.png",
-      "text": "El invierno desnuda la verdad de las estructuras. Cada rama es una decisión, cada bifurcación un camino no tomado.",
+      "text_es": "El invierno desnuda la verdad de las estructuras. Cada rama es una decisión, cada bifurcación un camino no tomado.",
+      "text_en": "Winter lays bare the truth of structures. Each branch is a decision, each fork a path not taken.",
       "links": [
-        { "text": "Contacto", "url": "mailto:maxazemar@gmail.com" }
+        { "text_es": "Contacto", "text_en": "Contact", "url": "mailto:maxazemar@gmail.com" }
       ]
     }
   ],
   "forest-management-systems": [
     {
       "image": "images/arbol-06.png",
-      "text": "Forest Management Systems es una investigación sobre la gestión de ecosistemas urbanos y la relación entre naturaleza y control.",
+      "text_es": "Forest Management Systems es una investigación sobre la gestión de ecosistemas urbanos y la relación entre naturaleza y control.",
+      "text_en": "Forest Management Systems is a research on urban ecosystem management and the relationship between nature and control.",
       "links": [
-        { "text": "Leer investigación", "url": "#" }
+        { "text_es": "Leer investigación", "text_en": "Read research", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-07.png",
-      "text": "El bonsái como metáfora del control.\n\nLa miniaturización de lo salvaje, la domesticación del tiempo.",
+      "text_es": "El bonsái como metáfora del control.\n\nLa miniaturización de lo salvaje, la domesticación del tiempo.",
+      "text_en": "The bonsai as a metaphor for control.\n\nThe miniaturization of the wild, the domestication of time.",
       "links": []
     },
     {
       "image": "images/arbol-12.png",
-      "text": null,
+      "text_es": null,
+      "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-13.png",
-      "text": "Las secuoyas nos recuerdan nuestra escala temporal. Ellas miden el tiempo en siglos, nosotros en décadas.",
+      "text_es": "Las secuoyas nos recuerdan nuestra escala temporal. Ellas miden el tiempo en siglos, nosotros en décadas.",
+      "text_en": "Redwoods remind us of our temporal scale. They measure time in centuries, we in decades.",
       "links": [
-        { "text": "Más info", "url": "#" }
+        { "text_es": "Más info", "text_en": "More info", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-02.png",
-      "text": null,
+      "text_es": null,
+      "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-08.png",
-      "text": "La palmera es un árbol fuera de lugar en Barcelona. Un símbolo de colonialismo botánico y deseo mediterráneo.",
+      "text_es": "La palmera es un árbol fuera de lugar en Barcelona. Un símbolo de colonialismo botánico y deseo mediterráneo.",
+      "text_en": "The palm tree is a tree out of place in Barcelona. A symbol of botanical colonialism and Mediterranean desire.",
       "links": [
-        { "text": "Artículo completo", "url": "#" },
-        { "text": "Galería", "url": "#" }
+        { "text_es": "Artículo completo", "text_en": "Full article", "url": "#" },
+        { "text_es": "Galería", "text_en": "Gallery", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-09.png",
-      "text": "Reducir un árbol a triángulos y rectángulos. La geometría como lenguaje universal, la abstracción como pérdida.",
+      "text_es": "Reducir un árbol a triángulos y rectángulos. La geometría como lenguaje universal, la abstracción como pérdida.",
+      "text_en": "Reducing a tree to triangles and rectangles. Geometry as universal language, abstraction as loss.",
       "links": []
     }
   ],
   "horizonte": [
     {
       "image": "images/arbol-10.png",
-      "text": null,
+      "text_es": null,
+      "text_en": null,
       "links": []
     }
   ]

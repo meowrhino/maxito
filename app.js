@@ -4,7 +4,8 @@ const state = {
   projects: [],
   currentProjectIndex: 0,
   currentSlideIndex: 0,
-  lang: 'es'
+  lang: 'es',
+  isTransitioning: false
 };
 
 // Elementos del DOM
@@ -14,6 +15,7 @@ const elements = {
   slideText: document.getElementById('slide-text'),
   slideLinks: document.getElementById('slide-links'),
   slideCounter: document.getElementById('slide-counter'),
+  slideContent: document.querySelector('.slide-content'),
   prevBtn: document.getElementById('prev-btn'),
   nextBtn: document.getElementById('next-btn'),
   aboutBtn: document.getElementById('about-btn'),
@@ -82,19 +84,41 @@ function updateActiveProject() {
   });
 }
 
-// Renderizar slide actual
-function renderSlide() {
+// Obtener texto según idioma
+function getText(slide) {
+  const key = `text_${state.lang}`;
+  return slide[key] || slide.text_es || slide.text_en || null;
+}
+
+// Obtener texto de link según idioma
+function getLinkText(link) {
+  const key = `text_${state.lang}`;
+  return link[key] || link.text_es || link.text_en || link.text || '';
+}
+
+// Renderizar slide actual con transición
+async function renderSlide(withTransition = true) {
+  if (state.isTransitioning) return;
+
   const projectSlug = state.projects[state.currentProjectIndex];
   const slides = state.data[projectSlug];
   const slide = slides[state.currentSlideIndex];
+
+  // Iniciar transición
+  if (withTransition) {
+    state.isTransitioning = true;
+    elements.slideContent.classList.add('transitioning');
+    await sleep(300); // Duración de la transición
+  }
 
   // Actualizar imagen
   elements.slideImage.src = slide.image;
   elements.slideImage.alt = getProjectName(projectSlug);
 
   // Actualizar texto
-  if (slide.text) {
-    elements.slideText.textContent = slide.text;
+  const text = getText(slide);
+  if (text) {
+    elements.slideText.textContent = text;
     elements.slideText.style.display = 'block';
   } else {
     elements.slideText.textContent = '';
@@ -107,7 +131,7 @@ function renderSlide() {
     slide.links.forEach(link => {
       const a = document.createElement('a');
       a.href = link.url;
-      a.textContent = link.text;
+      a.textContent = getLinkText(link);
       a.target = link.url.startsWith('http') ? '_blank' : '_self';
       elements.slideLinks.appendChild(a);
     });
@@ -122,7 +146,18 @@ function renderSlide() {
   // Actualizar navegación
   updateActiveProject();
 
+  // Finalizar transición
+  if (withTransition) {
+    elements.slideContent.classList.remove('transitioning');
+    state.isTransitioning = false;
+  }
+
   console.log(`Rendering: ${projectSlug} - Slide ${state.currentSlideIndex + 1}/${slides.length}`);
+}
+
+// Función auxiliar para esperar
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Navegar a proyecto específico
@@ -134,6 +169,8 @@ function goToProject(projectIndex) {
 
 // Navegar a slide anterior
 function goPrev() {
+  if (state.isTransitioning) return;
+
   const projectSlug = state.projects[state.currentProjectIndex];
   const slides = state.data[projectSlug];
 
@@ -152,6 +189,8 @@ function goPrev() {
 
 // Navegar a slide siguiente
 function goNext() {
+  if (state.isTransitioning) return;
+
   const projectSlug = state.projects[state.currentProjectIndex];
   const slides = state.data[projectSlug];
 
@@ -169,10 +208,19 @@ function goNext() {
 
 // Manejar navegación con teclado
 function handleKeyboard(e) {
-  if (state.aboutPanel && elements.aboutPanel.classList.contains('open')) {
+  if (elements.aboutPanel.classList.contains('open')) {
     // Si el about está abierto, solo ESC funciona
     if (e.key === 'Escape') {
       closeAbout();
+    }
+    return;
+  }
+
+  // Si el modal de imagen está abierto, solo ESC funciona
+  const imageModal = document.querySelector('.image-modal');
+  if (imageModal && imageModal.classList.contains('open')) {
+    if (e.key === 'Escape') {
+      closeImageModal();
     }
     return;
   }
@@ -201,15 +249,56 @@ function closeAbout() {
   elements.aboutBtn.classList.remove('active');
 }
 
-// Cambiar idioma
-function changeLang(lang) {
+// Cambiar idioma con transición
+async function changeLang(lang) {
+  if (state.lang === lang || state.isTransitioning) return;
+
   state.lang = lang;
   elements.langBtns.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
-  initProjectNav();
-  renderSlide();
+
+  // Actualizar nombres de proyectos en navegación
+  const links = elements.projectNav.querySelectorAll('.project-link');
+  links.forEach((link, index) => {
+    const projectSlug = state.projects[index];
+    link.textContent = getProjectName(projectSlug);
+  });
+
+  // Re-renderizar slide actual con transición
+  await renderSlide(true);
+
   console.log('Language changed to:', lang);
+}
+
+// Modal de zoom de imagen
+function createImageModal() {
+  const modal = document.createElement('div');
+  modal.className = 'image-modal';
+  modal.innerHTML = '<img src="" alt="">';
+  document.body.appendChild(modal);
+
+  modal.addEventListener('click', closeImageModal);
+
+  return modal;
+}
+
+function openImageModal(imageSrc, imageAlt) {
+  const modal = document.querySelector('.image-modal') || createImageModal();
+  const img = modal.querySelector('img');
+  img.src = imageSrc;
+  img.alt = imageAlt;
+  
+  // Forzar reflow para que la transición funcione
+  modal.offsetHeight;
+  modal.classList.add('open');
+}
+
+function closeImageModal() {
+  const modal = document.querySelector('.image-modal');
+  if (modal) {
+    modal.classList.remove('open');
+  }
 }
 
 // Parsear URL para slug inicial
@@ -234,7 +323,7 @@ async function init() {
 
   parseURL();
   initProjectNav();
-  renderSlide();
+  renderSlide(false); // Primera renderización sin transición
 
   // Event listeners
   elements.prevBtn.addEventListener('click', goPrev);
@@ -242,6 +331,12 @@ async function init() {
   elements.aboutBtn.addEventListener('click', toggleAbout);
   elements.aboutClose.addEventListener('click', closeAbout);
   
+  // Click en imagen para zoom
+  elements.slideImage.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openImageModal(elements.slideImage.src, elements.slideImage.alt);
+  });
+
   elements.langBtns.forEach(btn => {
     btn.addEventListener('click', () => changeLang(btn.dataset.lang));
   });
