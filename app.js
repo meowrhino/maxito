@@ -30,14 +30,20 @@ const i18n = {
     projectNames: {
       'arboles-bailando': 'Árboles Bailando',
       'forest-management-systems': 'Forest Management Systems',
-      'horizonte': 'Horizonte'
+      'horizonte': 'Horizonte',
+      'raices-urbanas': 'Raíces Urbanas',
+      'memoria-vegetal': 'Memoria Vegetal',
+      'especies-invasoras': 'Especies Invasoras'
     }
   },
   en: {
     projectNames: {
       'arboles-bailando': 'Dancing Trees',
       'forest-management-systems': 'Forest Management Systems',
-      'horizonte': 'Horizon'
+      'horizonte': 'Horizon',
+      'raices-urbanas': 'Urban Roots',
+      'memoria-vegetal': 'Plant Memory',
+      'especies-invasoras': 'Invasive Species'
     }
   }
 };
@@ -96,6 +102,42 @@ function getLinkText(link) {
   return link[key] || link.text_es || link.text_en || link.text || '';
 }
 
+// Actualizar indicadores de navegación entre proyectos
+function updateProjectIndicators() {
+  const projectSlug = state.projects[state.currentProjectIndex];
+  const slides = state.data[projectSlug];
+  const isFirstSlide = state.currentSlideIndex === 0;
+  const isLastSlide = state.currentSlideIndex === slides.length - 1;
+
+  // Limpiar indicadores existentes
+  const existingIndicators = document.querySelectorAll('.project-indicator');
+  existingIndicators.forEach(indicator => indicator.remove());
+
+  // Indicador de proyecto anterior (cuando estamos en la primera slide)
+  if (isFirstSlide) {
+    const prevProjectIndex = (state.currentProjectIndex - 1 + state.projects.length) % state.projects.length;
+    const prevProjectSlug = state.projects[prevProjectIndex];
+    const prevProjectName = getProjectName(prevProjectSlug);
+    
+    const prevIndicator = document.createElement('span');
+    prevIndicator.className = 'project-indicator';
+    prevIndicator.textContent = prevProjectName;
+    elements.prevBtn.appendChild(prevIndicator);
+  }
+
+  // Indicador de proyecto siguiente (cuando estamos en la última slide)
+  if (isLastSlide) {
+    const nextProjectIndex = (state.currentProjectIndex + 1) % state.projects.length;
+    const nextProjectSlug = state.projects[nextProjectIndex];
+    const nextProjectName = getProjectName(nextProjectSlug);
+    
+    const nextIndicator = document.createElement('span');
+    nextIndicator.className = 'project-indicator';
+    nextIndicator.textContent = nextProjectName;
+    elements.nextBtn.appendChild(nextIndicator);
+  }
+}
+
 // Renderizar slide actual con transición
 async function renderSlide(withTransition = true) {
   if (state.isTransitioning) return;
@@ -145,6 +187,9 @@ async function renderSlide(withTransition = true) {
 
   // Actualizar navegación
   updateActiveProject();
+
+  // Actualizar indicadores de proyectos
+  updateProjectIndicators();
 
   // Finalizar transición
   if (withTransition) {

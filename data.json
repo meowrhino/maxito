@@ -96,5 +96,67 @@
       "text_en": null,
       "links": []
     }
+  ],
+  "raices-urbanas": [
+    {
+      "image": "images/arbol-01.png",
+      "text_es": "Raíces Urbanas documenta la relación entre el asfalto y las raíces de los árboles en la ciudad.",
+      "text_en": "Urban Roots documents the relationship between asphalt and tree roots in the city.",
+      "links": [
+        { "text_es": "Ver proyecto", "text_en": "View project", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-06.png",
+      "text_es": null,
+      "text_en": null,
+      "links": []
+    },
+    {
+      "image": "images/arbol-12.png",
+      "text_es": "Los árboles rompen el pavimento buscando espacio. Una lucha silenciosa entre lo natural y lo construido.",
+      "text_en": "Trees break through pavement seeking space. A silent struggle between the natural and the built.",
+      "links": []
+    }
+  ],
+  "memoria-vegetal": [
+    {
+      "image": "images/arbol-04.png",
+      "text_es": "Memoria Vegetal es un archivo de árboles que ya no existen. Fotografías de ausencias.",
+      "text_en": "Plant Memory is an archive of trees that no longer exist. Photographs of absences.",
+      "links": [
+        { "text_es": "Archivo completo", "text_en": "Full archive", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-10.png",
+      "text_es": "Un árbol solitario en el horizonte.\n\nTestigo del paso del tiempo y las transformaciones del paisaje.",
+      "text_en": "A solitary tree on the horizon.\n\nWitness to the passage of time and landscape transformations.",
+      "links": []
+    }
+  ],
+  "especies-invasoras": [
+    {
+      "image": "images/arbol-08.png",
+      "text_es": "Especies Invasoras cuestiona el concepto de lo nativo y lo foráneo en el contexto botánico urbano.",
+      "text_en": "Invasive Species questions the concept of native and foreign in the urban botanical context.",
+      "links": [
+        { "text_es": "Leer más", "text_en": "Read more", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-07.png",
+      "text_es": null,
+      "text_en": null,
+      "links": []
+    },
+    {
+      "image": "images/arbol-09.png",
+      "text_es": "¿Qué hace que un árbol pertenezca a un lugar? La geometría simplificada de la identidad botánica.",
+      "text_en": "What makes a tree belong to a place? The simplified geometry of botanical identity.",
+      "links": [
+        { "text_es": "Ensayo", "text_en": "Essay", "url": "#" }
+      ]
+    }
   ]
 }
