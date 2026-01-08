@@ -1,0 +1,87 @@
+{
+  "arboles-bailando": [
+    {
+      "image": "images/arbol-03.png",
+      "text": "Los árboles bailan cuando nadie los mira. Este proyecto explora el movimiento invisible de las formas orgánicas.",
+      "links": [
+        { "text": "Ver más", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-01.png",
+      "text": null,
+      "links": []
+    },
+    {
+      "image": "images/arbol-05.png",
+      "text": "La melancolía del sauce.\n\nSus ramas caen como lágrimas suspendidas en el tiempo, creando cortinas de silencio.",
+      "links": [
+        { "text": "Documentación", "url": "#" },
+        { "text": "Archivo", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-11.png",
+      "text": null,
+      "links": []
+    },
+    {
+      "image": "images/arbol-04.png",
+      "text": "El invierno desnuda la verdad de las estructuras. Cada rama es una decisión, cada bifurcación un camino no tomado.",
+      "links": [
+        { "text": "Contacto", "url": "mailto:maxazemar@gmail.com" }
+      ]
+    }
+  ],
+  "forest-management-systems": [
+    {
+      "image": "images/arbol-06.png",
+      "text": "Forest Management Systems es una investigación sobre la gestión de ecosistemas urbanos y la relación entre naturaleza y control.",
+      "links": [
+        { "text": "Leer investigación", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-07.png",
+      "text": "El bonsái como metáfora del control.\n\nLa miniaturización de lo salvaje, la domesticación del tiempo.",
+      "links": []
+    },
+    {
+      "image": "images/arbol-12.png",
+      "text": null,
+      "links": []
+    },
+    {
+      "image": "images/arbol-13.png",
+      "text": "Las secuoyas nos recuerdan nuestra escala temporal. Ellas miden el tiempo en siglos, nosotros en décadas.",
+      "links": [
+        { "text": "Más info", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-02.png",
+      "text": null,
+      "links": []
+    },
+    {
+      "image": "images/arbol-08.png",
+      "text": "La palmera es un árbol fuera de lugar en Barcelona. Un símbolo de colonialismo botánico y deseo mediterráneo.",
+      "links": [
+        { "text": "Artículo completo", "url": "#" },
+        { "text": "Galería", "url": "#" }
+      ]
+    },
+    {
+      "image": "images/arbol-09.png",
+      "text": "Reducir un árbol a triángulos y rectángulos. La geometría como lenguaje universal, la abstracción como pérdida.",
+      "links": []
+    }
+  ],
+  "horizonte": [
+    {
+      "image": "images/arbol-10.png",
+      "text": null,
+      "links": []
+    }
+  ]
+}

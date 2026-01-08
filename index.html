@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌳 Max Azemar</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Barra lateral de navegación -->
+    <aside id="sidebar">
+        <div class="sidebar-top">
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+
+        <nav id="project-nav" class="sidebar-nav">
+            <!-- Se llenará dinámicamente con JavaScript -->
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button id="about-btn" class="about-btn">Max Azemar</button>
+        </div>
+    </aside>
+
+    <!-- Contenedor principal de slides -->
+    <main id="slide-container">
+        <div class="slide-content">
+            <div class="slide-image-wrapper">
+                <img id="slide-image" src="" alt="">
+            </div>
+            <div class="slide-text-wrapper">
+                <p id="slide-text"></p>
+                <div id="slide-links" class="slide-links"></div>
+            </div>
+        </div>
+
+        <!-- Controles de navegación -->
+        <nav class="slide-controls">
+            <button id="prev-btn" class="control-btn">←</button>
+            <span id="slide-counter" class="slide-counter"></span>
+            <button id="next-btn" class="control-btn">→</button>
+        </nav>
+    </main>
+
+    <!-- Panel About -->
+    <section id="about-panel" class="about-panel">
+        <button id="about-close" class="about-close">×</button>
+        <div class="about-content">
+            <h1>Max Azemar</h1>
+            <p>I'm an Artist and researcher from Barcelona, although my full CV states that I worked in the subway as a Train Driver, in an airplane as a Flight Attendant and currently I'm managing trees as a technician in urban arboriculture, while I may end up working as a crew on a ship. I'm doing my best to blur the gap between art and life.</p>
+
+            <h2>Education</h2>
+            <p>2023 Management and maintenance of ornamental trees and palms (CIFO SC.)</p>
+            <p>2022 Master in comparative studies between Literature, Art and Thought (UPF)</p>
+            <p>2021 Auxiliary activities in forest conservation and improvement (EMFO Mollet)</p>
+            <p>2019 Degree in Arts and Design (Escola Massana, UAB. 9,10)</p>
+            <p>2018 ERASMUS+ in Mixed Media (LUCA School of Arts, Ghent, Belgium)</p>
+
+            <h2>Lectures and Seminars</h2>
+            <p>2023 Cabaret del Crepúscle, l'horiginal, Barcelona.</p>
+            <p>2023 Presentation of the book "El que no és un arbre", La Capella.</p>
+            <p>2023 Performative conference "El que no és un arbre", IBB.</p>
+            <p>2023 Seminar on "El que no és un arbre", CREAF (UAB).</p>
+            <p>2023 Guided tour "El que no és un arbre", Collserola Visitor Centre.</p>
+            <p>2023 Èxit through the Ale-Hop, MOCO museum, Barcelona. (GDE)</p>
+            <p>2023 Ep. 02: "Sobre el performar", Ralet Ralet Ràdio.</p>
+            <p>2022 Carpa Grup d'Estudi, Fundació Joan Brossa. (GDE)</p>
+            <p>2022 Un arbre per cada cigarreta. Distensions, MACBA.</p>
+            <p>2022 Exhibition View Control Wars, Index Stockholm, Suècia. (GDE)</p>
+            <p>2021 ¿PARA K KIERES SABER ESO? a La Virreina CI. (GDE)</p>
+            <p>2021 Rifa Grup d'Estudi, Distensions, MACBA. (GDE)</p>
+            <p>2021 Conferencias3000, ESTRUCTURAS3000, Esplugues.</p>
+
+            <h2>Curated Exhibitions</h2>
+            <p>2023 OTHER TRASH: STOP THEATRE, Fundació Joan Brossa.</p>
+            <p>2023 La possibilitat de no haver sigut, Santa Mònica. (GDE)</p>
+            <p>2021 Sala Grup d'Estudi, Àngels Barcelona (GDE)</p>
+
+            <h2>Collective Exhibitions</h2>
+            <p>2022 Mapes d'allò que no pot venir, Sala d'Art Jove.</p>
+            <p>2019 Centrifugacions III: Davant la incertesa, Escola Massana.</p>
+            <p>2018 Reflection, Àngels Barcelona.</p>
+
+            <h2>Art Residencies</h2>
+            <p>2023 Climate Care Festival 2023, Floating University, Berlin.</p>
+            <p>2022 Konvent.0, Berga.</p>
+            <p>2021 Plinton Flash Recidency, Àngels Barcelona. (GDE)</p>
+            <p>2019 Apertus 02. Fundació Han Nefkens i Sojung Jun, Escola Massana.</p>
+            <p>2017 Workshop Young Connected Designers, ESAD-Saint-Etienne, França.</p>
+
+            <h2>Artistic Awards</h2>
+            <p>2022 Art Jove 2022 Creation Award, Sala d'Art Jove.</p>
+            <p>2020 La Caixa Production award, 2020. (GDE)</p>
+            <p>2019 Finalist of the award of the best bachelors thesis project, Escola Massana.</p>
+
+            <p><em>*GDE: as a member of Grup d'Estudi</em></p>
+
+            <p>My projects usually expand the artistic research through tools such as performative lectures, installations and actions linked to specific contexts. After generating an extensive research process on facts that may seem conflicting, I propose anecdotal actions that underline problems that can go unnoticed, as a result of personal worries and the inherent paradoxes in society. I activate "gags" that use the absurd to generate debates where those political, economic and social realities that I consider necessary to highlight are evident.</p>
+
+            <p><a href="mailto:maxazemar@gmail.com">maxazemar@gmail.com</a></p>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>

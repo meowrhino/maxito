@@ -1,0 +1,395 @@
+/* Reset y variables */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --sidebar-width: 280px;
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #000000;
+  --transition-speed: 0.3s;
+}
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+/* Layout principal */
+body {
+  display: flex;
+}
+
+/* Sidebar */
+#sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  position: relative;
+}
+
+.sidebar-top {
+  margin-bottom: 2rem;
+}
+
+.language-selector {
+  display: flex;
+  gap: 1rem;
+}
+
+.lang-btn {
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: text-decoration var(--transition-speed);
+}
+
+.lang-btn.active {
+  text-decoration: underline;
+}
+
+.lang-btn:hover {
+  text-decoration: underline;
+}
+
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+
+.project-link {
+  text-align: left;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: text-decoration var(--transition-speed);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.project-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 0 4px 7px;
+  border-color: transparent transparent transparent var(--text-color);
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+}
+
+.project-link.active::before {
+  opacity: 1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(3px);
+  }
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+.sidebar-bottom {
+  margin-top: 2rem;
+}
+
+.about-btn {
+  text-align: left;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: text-decoration var(--transition-speed);
+}
+
+.about-btn:hover,
+.about-btn.active {
+  text-decoration: underline;
+}
+
+/* Contenedor de slides */
+#slide-container {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.slide-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  position: relative;
+}
+
+.slide-image-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 60%;
+}
+
+#slide-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.slide-text-wrapper {
+  width: 40%;
+  max-width: 400px;
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+#slide-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  white-space: pre-line;
+}
+
+.slide-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.slide-links a {
+  font-size: 0.875rem;
+  text-decoration: underline;
+}
+
+/* Controles de navegación */
+.slide-controls {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.control-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  transition: transform var(--transition-speed);
+}
+
+.control-btn:hover {
+  transform: scale(1.2);
+}
+
+.slide-counter {
+  font-size: 0.875rem;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Panel About */
+.about-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--sidebar-width);
+  background: var(--bg-color);
+  z-index: 100;
+  overflow-y: auto;
+  padding: 4rem;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+}
+
+.about-panel.open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.about-close {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0.5rem;
+  z-index: 101;
+}
+
+.about-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.about-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: normal;
+}
+
+.about-content h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: normal;
+}
+
+.about-content p {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Responsive: Mobile */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 100%;
+  }
+
+  body {
+    flex-direction: column;
+  }
+
+  #sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem;
+  }
+
+  .sidebar-top {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .sidebar-bottom {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    margin-top: 0;
+  }
+
+  .sidebar-nav {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 1rem;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .project-link {
+    flex-shrink: 0;
+  }
+
+  #slide-container {
+    height: auto;
+    min-height: 60vh;
+  }
+
+  .slide-content {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+  }
+
+  .slide-image-wrapper {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  #slide-image {
+    max-height: 50vh;
+  }
+
+  .slide-text-wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .slide-links {
+    align-items: flex-start;
+  }
+
+  .slide-controls {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  .about-panel {
+    left: 0;
+    padding: 2rem 1.5rem;
+  }
+
+  .about-close {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+/* Ocultar elementos vacíos */
+.slide-text-wrapper:empty,
+#slide-text:empty,
+.slide-links:empty {
+  display: none;
+}
