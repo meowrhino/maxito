@@ -240,18 +240,15 @@ body {
   color: var(--arrow-color);
 }
 
-/* Controles de navegación rediseñados */
+/* Controles de navegación */
 .nav-arrow {
-  position: fixed;
+  position: absolute;
   bottom: 2rem;
   font-size: 2rem;
   padding: 0.5rem;
   transition: all 0.2s ease;
   font-weight: bold;
   z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .nav-arrow:hover {
@@ -267,14 +264,8 @@ body {
   right: 2rem;
 }
 
-.project-indicator {
-  font-size: 0.75rem;
-  white-space: nowrap;
-  font-weight: bold;
-}
-
 .slide-counter {
-  position: fixed;
+  position: absolute;
   top: 2rem;
   right: 2rem;
   font-size: 1.25rem;
@@ -344,6 +335,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .about-panel.open {
@@ -367,7 +359,7 @@ body {
 }
 
 .about-content {
-  max-width: 600px;
+  max-width: 800px;
   max-height: 80vh;
   overflow-y: auto;
   background-color: #ffffff;
@@ -375,6 +367,7 @@ body {
   border: 2px solid var(--border-color);
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
   position: relative;
+  cursor: default;
 }
 
 .about-content h1 {
@@ -522,10 +515,6 @@ body {
     right: 1rem;
   }
 
-  .project-indicator {
-    font-size: 0.625rem;
-  }
-
   .slide-counter {
     top: 1rem;
     right: 1rem;
@@ -551,6 +540,7 @@ body {
   .about-content {
     padding: 2rem 1.5rem;
     max-height: 70vh;
+    max-width: 100%;
   }
 
   .about-close {

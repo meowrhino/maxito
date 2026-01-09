@@ -102,42 +102,6 @@ function getLinkText(link) {
   return link[key] || link.text_es || link.text_en || link.text || '';
 }
 
-// Actualizar indicadores de navegación entre proyectos
-function updateProjectIndicators() {
-  const projectSlug = state.projects[state.currentProjectIndex];
-  const slides = state.data[projectSlug];
-  const isFirstSlide = state.currentSlideIndex === 0;
-  const isLastSlide = state.currentSlideIndex === slides.length - 1;
-
-  // Limpiar indicadores existentes
-  const existingIndicators = document.querySelectorAll('.project-indicator');
-  existingIndicators.forEach(indicator => indicator.remove());
-
-  // Indicador de proyecto anterior (cuando estamos en la primera slide)
-  if (isFirstSlide) {
-    const prevProjectIndex = (state.currentProjectIndex - 1 + state.projects.length) % state.projects.length;
-    const prevProjectSlug = state.projects[prevProjectIndex];
-    const prevProjectName = getProjectName(prevProjectSlug);
-    
-    const prevIndicator = document.createElement('span');
-    prevIndicator.className = 'project-indicator';
-    prevIndicator.textContent = prevProjectName;
-    elements.prevBtn.appendChild(prevIndicator);
-  }
-
-  // Indicador de proyecto siguiente (cuando estamos en la última slide)
-  if (isLastSlide) {
-    const nextProjectIndex = (state.currentProjectIndex + 1) % state.projects.length;
-    const nextProjectSlug = state.projects[nextProjectIndex];
-    const nextProjectName = getProjectName(nextProjectSlug);
-    
-    const nextIndicator = document.createElement('span');
-    nextIndicator.className = 'project-indicator';
-    nextIndicator.textContent = nextProjectName;
-    elements.nextBtn.insertBefore(nextIndicator, elements.nextBtn.firstChild);
-  }
-}
-
 // Actualizar contador de slides
 function updateSlideCounter() {
   const projectSlug = state.projects[state.currentProjectIndex];
@@ -197,7 +161,6 @@ async function renderSlide(withTransition = true) {
   // Actualizar contador y navegación
   updateSlideCounter();
   updateActiveProject();
-  updateProjectIndicators();
 
   // Finalizar transición
   if (withTransition) {
@@ -373,6 +336,13 @@ async function init() {
   elements.nextBtn.addEventListener('click', goNext);
   elements.aboutBtn.addEventListener('click', toggleAbout);
   elements.aboutClose.addEventListener('click', closeAbout);
+  
+  // Cerrar About al clicar fuera del contenido
+  elements.aboutPanel.addEventListener('click', (e) => {
+    if (e.target === elements.aboutPanel) {
+      closeAbout();
+    }
+  });
   
   elements.slideImage.addEventListener('click', (e) => {
     e.stopPropagation();
