@@ -41,6 +41,14 @@ maxito/
 - CSS3 (sin frameworks)
 - JavaScript vanilla (sin librerías)
 
+## Cambios v2
+
+- **Estética Windows XP "Roto":** Nueva paleta de colores con tonos suaves y rotos.
+- **Controles Rediseñados:** Flechas fijas en las esquinas inferiores y contador de diapositivas como fracción diagonal.
+- **Responsive Mejorado:** Barra de navegación móvil optimizada (max 25dvh) y contenido más compacto.
+- **About como Popup:** El panel "About" ahora es un modal centrado con borde y sombra.
+- **Indicadores de Navegación Mejorados:** El nombre del proyecto anterior/siguiente aparece junto a las flechas de navegación.
+
 ## Créditos
 
 Desarrollado por [meowrhino.studio](https://meowrhino.studio)

@@ -7,11 +7,12 @@
 
 :root {
   --sidebar-width: 280px;
-  --bg-color: #cccccc;
+  --bg-color: #f5f5f0;
+  --sidebar-bg: #d4d0c8;
   --text-color: #000000;
-  --border-color: #666666;
-  --active-color: #00ff00;
-  --arrow-color: #0000ff;
+  --border-color: #808080;
+  --active-color: #0a0;
+  --arrow-color: #6b9bd1;
   --transition-speed: 0.3s;
 }
 
@@ -52,10 +53,10 @@ body {
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  border-right: 2px solid var(--border-color);
-  overflow-y: auto;
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
   position: relative;
-  background-color: #999999;
+  background-color: var(--sidebar-bg);
 }
 
 .sidebar-top {
@@ -88,6 +89,7 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .project-link {
@@ -174,7 +176,7 @@ body {
   position: relative;
   opacity: 1;
   transition: opacity var(--transition-speed) ease-in-out;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 100px);
 }
 
 .slide-content.transitioning {
@@ -238,57 +240,63 @@ body {
   color: var(--arrow-color);
 }
 
-/* Controles de navegación */
-.slide-controls {
-  position: sticky;
+/* Controles de navegación rediseñados */
+.nav-arrow {
+  position: fixed;
   bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  background-color: #999999;
-  padding: 0.5rem 1.5rem;
-  border: 2px solid var(--border-color);
-  margin: 2rem auto;
-  width: fit-content;
-}
-
-.control-btn {
-  font-size: 1.5rem;
-  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  padding: 0.5rem;
   transition: all 0.2s ease;
   font-weight: bold;
-  position: relative;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.control-btn:hover {
+.nav-arrow:hover {
   color: var(--arrow-color);
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
-.control-btn .project-indicator {
-  position: absolute;
+.nav-arrow.prev {
+  left: 2rem;
+}
+
+.nav-arrow.next {
+  right: 2rem;
+}
+
+.project-indicator {
   font-size: 0.75rem;
   white-space: nowrap;
   font-weight: bold;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.control-btn.prev-btn .project-indicator {
-  right: calc(100% + 0.5rem);
-}
-
-.control-btn.next-btn .project-indicator {
-  left: calc(100% + 0.5rem);
 }
 
 .slide-counter {
-  font-size: 0.875rem;
-  min-width: 60px;
-  text-align: center;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.25rem;
   font-weight: bold;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.slide-counter .current {
+  font-size: 1.5rem;
+}
+
+.slide-counter .separator {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+}
+
+.slide-counter .total {
+  font-size: 1rem;
 }
 
 /* Modal de zoom de imagen */
@@ -319,14 +327,14 @@ body {
   object-fit: contain;
 }
 
-/* Panel About - Modal con velo */
+/* Panel About - Popup con velo */
 .about-panel {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.8);
   z-index: 100;
   overflow-y: auto;
   padding: 4rem;
@@ -334,7 +342,7 @@ body {
   visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 
@@ -344,9 +352,9 @@ body {
 }
 
 .about-close {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
   font-size: 2rem;
   line-height: 1;
   padding: 0.5rem;
@@ -360,8 +368,13 @@ body {
 
 .about-content {
   max-width: 600px;
-  margin: 0 auto;
-  background-color: transparent;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: #ffffff;
+  padding: 3rem;
+  border: 2px solid var(--border-color);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
 }
 
 .about-content h1 {
@@ -408,9 +421,9 @@ body {
   #sidebar {
     width: 100%;
     height: auto;
-    max-height: 50vh;
+    max-height: 25dvh;
     border-right: none;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -419,16 +432,16 @@ body {
 
   .sidebar-top {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
     margin-bottom: 0;
     z-index: 10;
   }
 
   .sidebar-bottom {
     position: absolute;
-    bottom: 1rem;
-    left: 1rem;
+    bottom: 0.75rem;
+    right: 0.75rem;
     margin-top: 0;
     z-index: 10;
   }
@@ -439,36 +452,38 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     gap: 0.5rem;
-    margin: 3rem 0;
-    padding: 0 1rem;
+    margin: 2.5rem 0;
+    padding: 0 0.5rem;
     -webkit-overflow-scrolling: touch;
+    max-height: calc(25dvh - 6rem);
   }
 
   .project-link {
     flex-shrink: 0;
     white-space: normal;
+    font-size: 0.875rem;
   }
 
   #slide-container {
     height: auto;
-    min-height: 50vh;
+    min-height: 75dvh;
     flex: 1;
   }
 
   .slide-content {
     flex-direction: column;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
     min-height: auto;
   }
 
   .slide-image-wrapper {
     max-width: 100%;
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   #slide-image {
-    max-height: 40vh;
+    max-height: 35dvh;
   }
 
   .slide-text-wrapper {
@@ -477,40 +492,71 @@ body {
     padding-left: 0;
     align-items: flex-start;
     text-align: left;
+    font-size: 0.875rem;
+  }
+
+  #slide-text {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
   }
 
   .slide-links {
     align-items: flex-start;
   }
 
-  .slide-controls {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    margin: 1rem auto;
-    justify-content: center;
+  .slide-links a {
+    font-size: 0.75rem;
   }
 
-  .control-btn .project-indicator {
-    font-size: 0.65rem;
+  .nav-arrow {
+    bottom: 1rem;
+    font-size: 1.5rem;
+    padding: 0.25rem;
   }
 
-  .control-btn.prev-btn .project-indicator {
-    right: calc(100% + 0.25rem);
+  .nav-arrow.prev {
+    left: 1rem;
   }
 
-  .control-btn.next-btn .project-indicator {
-    left: calc(100% + 0.25rem);
+  .nav-arrow.next {
+    right: 1rem;
+  }
+
+  .project-indicator {
+    font-size: 0.625rem;
+  }
+
+  .slide-counter {
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+  }
+
+  .slide-counter .current {
+    font-size: 1.25rem;
+  }
+
+  .slide-counter .separator {
+    font-size: 0.875rem;
+  }
+
+  .slide-counter .total {
+    font-size: 0.875rem;
   }
 
   .about-panel {
+    padding: 2rem 1rem;
+  }
+
+  .about-content {
     padding: 2rem 1.5rem;
+    max-height: 70vh;
   }
 
   .about-close {
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
   }
 }
 

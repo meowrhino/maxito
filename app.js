@@ -28,22 +28,22 @@ const elements = {
 const i18n = {
   es: {
     projectNames: {
-      'arboles-bailando': 'Árboles Bailando',
-      'forest-management-systems': 'Forest Management Systems',
-      'horizonte': 'Horizonte',
-      'raices-urbanas': 'Raíces Urbanas',
-      'memoria-vegetal': 'Memoria Vegetal',
-      'especies-invasoras': 'Especies Invasoras'
+      'arboles-bailando': 'árboles bailando',
+      'forest-management-systems': 'forest management systems',
+      'horizonte': 'horizonte',
+      'raices-urbanas': 'raíces urbanas',
+      'memoria-vegetal': 'memoria vegetal',
+      'especies-invasoras': 'especies invasoras'
     }
   },
   en: {
     projectNames: {
-      'arboles-bailando': 'Dancing Trees',
-      'forest-management-systems': 'Forest Management Systems',
-      'horizonte': 'Horizon',
-      'raices-urbanas': 'Urban Roots',
-      'memoria-vegetal': 'Plant Memory',
-      'especies-invasoras': 'Invasive Species'
+      'arboles-bailando': 'dancing trees',
+      'forest-management-systems': 'forest management systems',
+      'horizonte': 'horizon',
+      'raices-urbanas': 'urban roots',
+      'memoria-vegetal': 'plant memory',
+      'especies-invasoras': 'invasive species'
     }
   }
 };
@@ -52,13 +52,13 @@ const i18n = {
 async function loadData() {
   try {
     const response = await fetch('data.json');
-    if (!response.ok) throw new Error('Error loading data.json');
+    if (!response.ok) throw new Error('error loading data.json');
     state.data = await response.json();
     state.projects = Object.keys(state.data);
-    console.log('Data loaded:', state.projects);
+    console.log('data loaded:', state.projects);
     return true;
   } catch (error) {
-    console.error('Error loading data:', error);
+    console.error('error loading data:', error);
     return false;
   }
 }
@@ -134,8 +134,20 @@ function updateProjectIndicators() {
     const nextIndicator = document.createElement('span');
     nextIndicator.className = 'project-indicator';
     nextIndicator.textContent = nextProjectName;
-    elements.nextBtn.appendChild(nextIndicator);
+    elements.nextBtn.insertBefore(nextIndicator, elements.nextBtn.firstChild);
   }
+}
+
+// Actualizar contador de slides
+function updateSlideCounter() {
+  const projectSlug = state.projects[state.currentProjectIndex];
+  const slides = state.data[projectSlug];
+  
+  elements.slideCounter.innerHTML = `
+    <span class="current">${state.currentSlideIndex + 1}</span>
+    <span class="separator">/</span>
+    <span class="total">${slides.length}</span>
+  `;
 }
 
 // Renderizar slide actual con transición
@@ -150,7 +162,7 @@ async function renderSlide(withTransition = true) {
   if (withTransition) {
     state.isTransitioning = true;
     elements.slideContent.classList.add('transitioning');
-    await sleep(300); // Duración de la transición
+    await sleep(300);
   }
 
   // Actualizar imagen
@@ -182,13 +194,9 @@ async function renderSlide(withTransition = true) {
     elements.slideLinks.style.display = 'none';
   }
 
-  // Actualizar contador
-  elements.slideCounter.textContent = `${state.currentSlideIndex + 1}/${slides.length}`;
-
-  // Actualizar navegación
+  // Actualizar contador y navegación
+  updateSlideCounter();
   updateActiveProject();
-
-  // Actualizar indicadores de proyectos
   updateProjectIndicators();
 
   // Finalizar transición
@@ -197,7 +205,7 @@ async function renderSlide(withTransition = true) {
     state.isTransitioning = false;
   }
 
-  console.log(`Rendering: ${projectSlug} - Slide ${state.currentSlideIndex + 1}/${slides.length}`);
+  console.log(`rendering: ${projectSlug} - slide ${state.currentSlideIndex + 1}/${slides.length}`);
 }
 
 // Función auxiliar para esperar
@@ -220,10 +228,8 @@ function goPrev() {
   const slides = state.data[projectSlug];
 
   if (state.currentSlideIndex > 0) {
-    // Slide anterior en el mismo proyecto
     state.currentSlideIndex--;
   } else {
-    // Ir al último slide del proyecto anterior
     state.currentProjectIndex = (state.currentProjectIndex - 1 + state.projects.length) % state.projects.length;
     const prevProjectSlug = state.projects[state.currentProjectIndex];
     state.currentSlideIndex = state.data[prevProjectSlug].length - 1;
@@ -240,10 +246,8 @@ function goNext() {
   const slides = state.data[projectSlug];
 
   if (state.currentSlideIndex < slides.length - 1) {
-    // Siguiente slide en el mismo proyecto
     state.currentSlideIndex++;
   } else {
-    // Ir al primer slide del siguiente proyecto
     state.currentProjectIndex = (state.currentProjectIndex + 1) % state.projects.length;
     state.currentSlideIndex = 0;
   }
@@ -254,14 +258,12 @@ function goNext() {
 // Manejar navegación con teclado
 function handleKeyboard(e) {
   if (elements.aboutPanel.classList.contains('open')) {
-    // Si el about está abierto, solo ESC funciona
     if (e.key === 'Escape') {
       closeAbout();
     }
     return;
   }
 
-  // Si el modal de imagen está abierto, solo ESC funciona
   const imageModal = document.querySelector('.image-modal');
   if (imageModal && imageModal.classList.contains('open')) {
     if (e.key === 'Escape') {
@@ -313,7 +315,7 @@ async function changeLang(lang) {
   // Re-renderizar slide actual con transición
   await renderSlide(true);
 
-  console.log('Language changed to:', lang);
+  console.log('language changed to:', lang);
 }
 
 // Modal de zoom de imagen
@@ -322,9 +324,7 @@ function createImageModal() {
   modal.className = 'image-modal';
   modal.innerHTML = '<img src="" alt="">';
   document.body.appendChild(modal);
-
   modal.addEventListener('click', closeImageModal);
-
   return modal;
 }
 
@@ -333,8 +333,6 @@ function openImageModal(imageSrc, imageAlt) {
   const img = modal.querySelector('img');
   img.src = imageSrc;
   img.alt = imageAlt;
-  
-  // Forzar reflow para que la transición funcione
   modal.offsetHeight;
   modal.classList.add('open');
 }
@@ -354,7 +352,7 @@ function parseURL() {
   if (slug && state.projects.includes(slug)) {
     const index = state.projects.indexOf(slug);
     state.currentProjectIndex = index;
-    console.log('Starting with project from URL:', slug);
+    console.log('starting with project from URL:', slug);
   }
 }
 
@@ -362,13 +360,13 @@ function parseURL() {
 async function init() {
   const loaded = await loadData();
   if (!loaded) {
-    console.error('Failed to load data');
+    console.error('failed to load data');
     return;
   }
 
   parseURL();
   initProjectNav();
-  renderSlide(false); // Primera renderización sin transición
+  renderSlide(false);
 
   // Event listeners
   elements.prevBtn.addEventListener('click', goPrev);
@@ -376,7 +374,6 @@ async function init() {
   elements.aboutBtn.addEventListener('click', toggleAbout);
   elements.aboutClose.addEventListener('click', closeAbout);
   
-  // Click en imagen para zoom
   elements.slideImage.addEventListener('click', (e) => {
     e.stopPropagation();
     openImageModal(elements.slideImage.src, elements.slideImage.alt);
@@ -388,7 +385,7 @@ async function init() {
 
   window.addEventListener('keydown', handleKeyboard);
 
-  console.log('App initialized');
+  console.log('app initialized');
 }
 
 // Iniciar cuando el DOM esté listo
