@@ -12,8 +12,8 @@
   --sidebar-bg: #d4d0c8;
   --text-color: #000000;
   --border-color: #808080;
-  --active-color: #0a0;
-  --hover-color: #6b9bd1;
+  --muted-color: #555;
+  --active-color: #6b9bd1;
   --transition-speed: 0.3s;
 }
 
@@ -58,52 +58,46 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 
 .project-link {
   text-align: left;
   font-size: 1rem;
   text-decoration: none;
-  transition: all var(--transition-speed);
+  transition: color var(--transition-speed), font-weight var(--transition-speed);
   position: relative;
   padding-left: 1.5rem;
-}
-
-.project-link::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 4px 0 4px 7px;
-  border-color: transparent transparent transparent var(--hover-color);
-  opacity: 0;
-  transition: opacity var(--transition-speed);
 }
 
 .project-link.active {
   color: var(--active-color);
   font-weight: bold;
-}
-
-.project-link.active::before {
-  opacity: 1;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: translateY(-50%) translateX(0); }
-  50% { transform: translateY(-50%) translateX(3px); }
+  text-decoration: none;
 }
 
 .project-link:hover {
   text-decoration: underline;
+}
+
+.project-link.active:hover {
+  text-decoration: none;
+}
+
+/* Arrow indicator: positioned absolutely inside .sidebar-nav */
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 0 4px 7px;
+  border-color: transparent transparent transparent var(--active-color);
+  transition: top 0.35s ease;
+  pointer-events: none;
 }
 
 /* Sidebar controls (bottom: ← cat/en →) */
@@ -146,13 +140,14 @@ body {
 .nav-arrow {
   font-size: 1.5rem;
   padding: 0.25rem;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   font-weight: bold;
   line-height: 1;
+  color: var(--muted-color);
 }
 
 .nav-arrow:hover {
-  color: var(--hover-color);
+  color: var(--text-color);
 }
 
 /* Mobile footer (hidden on desktop) */
@@ -269,7 +264,7 @@ body {
 }
 
 .slide-thumb:hover {
-  border-color: var(--hover-color);
+  border-color: var(--text-color);
 }
 
 /* Slide links */
@@ -283,13 +278,14 @@ body {
 
 .slide-links a {
   font-size: 0.875rem;
-  color: inherit;
-  text-decoration: underline;
-  transition: color 0.2s ease;
 }
 
-.slide-links a:hover {
-  color: var(--hover-color);
+/* Slide footer (e.g. web link on about) */
+.slide-footer {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  text-align: center;
+  width: 100%;
 }
 
 /* Image zoom modal */
@@ -320,10 +316,9 @@ body {
   object-fit: contain;
 }
 
-/* Text-only slides (no image) */
+/* Text-only slides (no image): text takes full width */
 .slide-image-wrapper[style*="display: none"] + .slide-text-wrapper {
   width: 100%;
-  /* max-width: 600px; */
 }
 
 /* Hide empty wrappers */
@@ -352,6 +347,7 @@ body {
   }
 
   .sidebar-nav {
+    flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -361,18 +357,12 @@ body {
     display: none;
   }
 
-  .sidebar-nav {
-    flex: 1;
-    gap: 0.5rem;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
   .project-link {
     flex-shrink: 0;
     white-space: normal;
     font-size: 0.875rem;
-
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
 
   /* Main content fills between sidebar and footer */

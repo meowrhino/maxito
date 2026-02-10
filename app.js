@@ -15,6 +15,7 @@ const el = {
   slideImage: document.getElementById('slide-image'),
   slideText: document.getElementById('slide-text'),
   slideLinks: document.getElementById('slide-links'),
+  slideFooter: document.getElementById('slide-footer'),
   slideThumbs: document.getElementById('slide-thumbs'),
   slideContent: document.querySelector('.slide-content'),
   // Desktop controls (sidebar)
@@ -90,13 +91,35 @@ function initProjectNav() {
 }
 
 function updateActiveProject() {
-  el.projectNav.querySelectorAll('.project-link').forEach((link, i) => {
-    const isActive = i === state.currentProjectIndex;
-    link.classList.toggle('active', isActive);
-    if (isActive) {
-      link.scrollIntoView({ block: 'center', behavior: 'smooth' });
-    }
+  const links = el.projectNav.querySelectorAll('.project-link');
+  links.forEach((link, i) => {
+    link.classList.toggle('active', i === state.currentProjectIndex);
   });
+
+  // Move arrow indicator to active project
+  const activeLink = links[state.currentProjectIndex];
+  if (activeLink) {
+    moveNavIndicator(activeLink);
+    activeLink.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+}
+
+// Create or move the arrow indicator element
+function moveNavIndicator(targetLink) {
+  let indicator = el.projectNav.querySelector('.nav-indicator');
+  if (!indicator) {
+    indicator = document.createElement('div');
+    indicator.className = 'nav-indicator';
+    el.projectNav.appendChild(indicator);
+  }
+
+  // Position relative to projectNav's scroll container
+  const navRect = el.projectNav.getBoundingClientRect();
+  const linkRect = targetLink.getBoundingClientRect();
+  const scrollTop = el.projectNav.scrollTop;
+  const top = linkRect.top - navRect.top + scrollTop + linkRect.height / 2 - 4; // 4 = half arrow height
+
+  indicator.style.top = top + 'px';
 }
 
 function updateProjectNames() {
@@ -172,6 +195,22 @@ async function renderSlide(withTransition = true) {
     el.slideLinks.style.display = 'flex';
   } else {
     el.slideLinks.style.display = 'none';
+  }
+
+  // Slide footer (e.g. meowrhino link on about)
+  el.slideFooter.innerHTML = '';
+  if (slide.footer) {
+    const a = document.createElement('a');
+    a.href = slide.footer.url;
+    a.textContent = slide.footer.text;
+    if (slide.footer.url.startsWith('http')) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+    el.slideFooter.appendChild(a);
+    el.slideFooter.style.display = 'block';
+  } else {
+    el.slideFooter.style.display = 'none';
   }
 
   // About thumbnails
@@ -341,6 +380,12 @@ async function init() {
 
   // Keyboard
   window.addEventListener('keydown', handleKeyboard);
+
+  // Keep indicator synced when nav scrolls (mobile)
+  el.projectNav.addEventListener('scroll', () => {
+    const activeLink = el.projectNav.querySelector('.project-link.active');
+    if (activeLink) moveNavIndicator(activeLink);
+  });
 }
 
 if (document.readyState === 'loading') {

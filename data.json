@@ -23,7 +23,11 @@
           "text_en": "CV",
           "url": "data/CV.pdf"
         }
-      ]
+      ],
+      "footer": {
+        "text": "web: meowrhino.studio",
+        "url": "https://meowrhino.studio"
+      }
     }
   ],
   "god-to-great": [
