@@ -4,7 +4,7 @@ const state = {
   projects: [],
   currentProjectIndex: 0,
   currentSlideIndex: 0,
-  lang: 'es',
+  lang: 'cat',
   isTransitioning: false
 };
 
@@ -18,26 +18,25 @@ const elements = {
   slideContent: document.querySelector('.slide-content'),
   prevBtn: document.getElementById('prev-btn'),
   nextBtn: document.getElementById('next-btn'),
-  aboutBtn: document.getElementById('about-btn'),
-  aboutPanel: document.getElementById('about-panel'),
-  aboutClose: document.getElementById('about-close'),
   langBtns: document.querySelectorAll('.lang-btn')
 };
 
 // Textos multiidioma
 const i18n = {
-  es: {
+  cat: {
     projectNames: {
-      'arboles-bailando': 'árboles bailando',
-      'forest-management-systems': 'forest management systems',
-      'horizonte': 'horizonte',
-      'raices-urbanas': 'raíces urbanas',
-      'memoria-vegetal': 'memoria vegetal',
-      'especies-invasoras': 'especies invasoras'
+      'about': 'about',
+      'arboles-bailando': 'arbres ballant',
+      'forest-management-systems': 'sistemes de gestió forestal',
+      'horizonte': 'horitzó',
+      'raices-urbanas': 'arrels urbanes',
+      'memoria-vegetal': 'memòria vegetal',
+      'especies-invasoras': 'espècies invasores'
     }
   },
   en: {
     projectNames: {
+      'about': 'about',
       'arboles-bailando': 'dancing trees',
       'forest-management-systems': 'forest management systems',
       'horizonte': 'horizon',
@@ -93,13 +92,13 @@ function updateActiveProject() {
 // Obtener texto según idioma
 function getText(slide) {
   const key = `text_${state.lang}`;
-  return slide[key] || slide.text_es || slide.text_en || null;
+  return slide[key] || slide.text_cat || slide.text_en || null;
 }
 
 // Obtener texto de link según idioma
 function getLinkText(link) {
   const key = `text_${state.lang}`;
-  return link[key] || link.text_es || link.text_en || link.text || '';
+  return link[key] || link.text_cat || link.text_en || link.text || '';
 }
 
 // Actualizar contador de slides
@@ -130,8 +129,17 @@ async function renderSlide(withTransition = true) {
   }
 
   // Actualizar imagen
-  elements.slideImage.src = slide.image;
-  elements.slideImage.alt = getProjectName(projectSlug);
+  if (slide.image) {
+    elements.slideImage.src = slide.image;
+    elements.slideImage.alt = getProjectName(projectSlug);
+    elements.slideImage.style.display = 'block';
+    elements.slideImage.parentElement.style.display = 'flex';
+  } else {
+    elements.slideImage.src = '';
+    elements.slideImage.alt = '';
+    elements.slideImage.style.display = 'none';
+    elements.slideImage.parentElement.style.display = 'none';
+  }
 
   // Actualizar texto
   const text = getText(slide);
@@ -220,13 +228,6 @@ function goNext() {
 
 // Manejar navegación con teclado
 function handleKeyboard(e) {
-  if (elements.aboutPanel.classList.contains('open')) {
-    if (e.key === 'Escape') {
-      closeAbout();
-    }
-    return;
-  }
-
   const imageModal = document.querySelector('.image-modal');
   if (imageModal && imageModal.classList.contains('open')) {
     if (e.key === 'Escape') {
@@ -242,21 +243,7 @@ function handleKeyboard(e) {
     case 'ArrowRight':
       goNext();
       break;
-    case 'Escape':
-      closeAbout();
-      break;
   }
-}
-
-// Abrir/cerrar panel About
-function toggleAbout() {
-  elements.aboutPanel.classList.toggle('open');
-  elements.aboutBtn.classList.toggle('active');
-}
-
-function closeAbout() {
-  elements.aboutPanel.classList.remove('open');
-  elements.aboutBtn.classList.remove('active');
 }
 
 // Cambiar idioma con transición
@@ -334,16 +321,7 @@ async function init() {
   // Event listeners
   elements.prevBtn.addEventListener('click', goPrev);
   elements.nextBtn.addEventListener('click', goNext);
-  elements.aboutBtn.addEventListener('click', toggleAbout);
-  elements.aboutClose.addEventListener('click', closeAbout);
-  
-  // Cerrar About al clicar fuera del contenido
-  elements.aboutPanel.addEventListener('click', (e) => {
-    if (e.target === elements.aboutPanel) {
-      closeAbout();
-    }
-  });
-  
+
   elements.slideImage.addEventListener('click', (e) => {
     e.stopPropagation();
     openImageModal(elements.slideImage.src, elements.slideImage.alt);

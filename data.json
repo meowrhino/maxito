@@ -1,90 +1,100 @@
 {
+  "about": [
+    {
+      "image": null,
+      "text_cat": "Max Azemar és un artista visual i investigador que explora la intersecció entre natura, tecnologia i percepció. El seu treball se centra en la relació entre els éssers humans i el món natural, utilitzant mitjans com la fotografia, el vídeo i la instal·lació per crear experiències immersives que qüestionen les nostres percepcions de la realitat.",
+      "text_en": "Max Azemar is a visual artist and researcher exploring the intersection of nature, technology, and perception. His work focuses on the relationship between humans and the natural world, using mediums such as photography, video, and installation to create immersive experiences that question our perceptions of reality.",
+      "links": [
+        { "text_cat": "maxazemar@gmail.com", "text_en": "maxazemar@gmail.com", "url": "mailto:maxazemar@gmail.com" }
+      ]
+    }
+  ],
   "arboles-bailando": [
     {
       "image": "images/arbol-03.png",
-      "text_es": "Los árboles bailan cuando nadie los mira. Este proyecto explora el movimiento invisible de las formas orgánicas.",
+      "text_cat": "Els arbres ballen quan ningú els mira. Aquest projecte explora el moviment invisible de les formes orgàniques.",
       "text_en": "Trees dance when no one is watching. This project explores the invisible movement of organic forms.",
       "links": [
-        { "text_es": "Ver más", "text_en": "See more", "url": "#" }
+        { "text_cat": "Veure més", "text_en": "See more", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-01.png",
-      "text_es": null,
+      "text_cat": null,
       "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-05.png",
-      "text_es": "La melancolía del sauce.\n\nSus ramas caen como lágrimas suspendidas en el tiempo, creando cortinas de silencio.",
+      "text_cat": "La melangia del salze.\n\nLes seves branques cauen com llàgrimes suspeses en el temps, creant cortines de silenci.",
       "text_en": "The melancholy of the willow.\n\nIts branches fall like tears suspended in time, creating curtains of silence.",
       "links": [
-        { "text_es": "Documentación", "text_en": "Documentation", "url": "#" },
-        { "text_es": "Archivo", "text_en": "Archive", "url": "#" }
+        { "text_cat": "Documentació", "text_en": "Documentation", "url": "#" },
+        { "text_cat": "Arxiu", "text_en": "Archive", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-11.png",
-      "text_es": null,
+      "text_cat": null,
       "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-04.png",
-      "text_es": "El invierno desnuda la verdad de las estructuras. Cada rama es una decisión, cada bifurcación un camino no tomado.",
+      "text_cat": "L'hivern despulla la veritat de les estructures. Cada branca és una decisió, cada bifurcació un camí no pres.",
       "text_en": "Winter lays bare the truth of structures. Each branch is a decision, each fork a path not taken.",
       "links": [
-        { "text_es": "Contacto", "text_en": "Contact", "url": "mailto:maxazemar@gmail.com" }
+        { "text_cat": "Contacte", "text_en": "Contact", "url": "mailto:maxazemar@gmail.com" }
       ]
     }
   ],
   "forest-management-systems": [
     {
       "image": "images/arbol-06.png",
-      "text_es": "Forest Management Systems es una investigación sobre la gestión de ecosistemas urbanos y la relación entre naturaleza y control.",
+      "text_cat": "Forest Management Systems és una recerca sobre la gestió d'ecosistemes urbans i la relació entre natura i control.",
       "text_en": "Forest Management Systems is a research on urban ecosystem management and the relationship between nature and control.",
       "links": [
-        { "text_es": "Leer investigación", "text_en": "Read research", "url": "#" }
+        { "text_cat": "Llegir recerca", "text_en": "Read research", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-07.png",
-      "text_es": "El bonsái como metáfora del control.\n\nLa miniaturización de lo salvaje, la domesticación del tiempo.",
+      "text_cat": "El bonsai com a metàfora del control.\n\nLa miniaturització d'allò salvatge, la domesticació del temps.",
       "text_en": "The bonsai as a metaphor for control.\n\nThe miniaturization of the wild, the domestication of time.",
       "links": []
     },
     {
       "image": "images/arbol-12.png",
-      "text_es": null,
+      "text_cat": null,
       "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-13.png",
-      "text_es": "Las secuoyas nos recuerdan nuestra escala temporal. Ellas miden el tiempo en siglos, nosotros en décadas.",
+      "text_cat": "Les sequoies ens recorden la nostra escala temporal. Elles mesuren el temps en segles, nosaltres en dècades.",
       "text_en": "Redwoods remind us of our temporal scale. They measure time in centuries, we in decades.",
       "links": [
-        { "text_es": "Más info", "text_en": "More info", "url": "#" }
+        { "text_cat": "Més info", "text_en": "More info", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-02.png",
-      "text_es": null,
+      "text_cat": null,
       "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-08.png",
-      "text_es": "La palmera es un árbol fuera de lugar en Barcelona. Un símbolo de colonialismo botánico y deseo mediterráneo.",
+      "text_cat": "La palmera és un arbre fora de lloc a Barcelona. Un símbol de colonialisme botànic i desig mediterrani.",
       "text_en": "The palm tree is a tree out of place in Barcelona. A symbol of botanical colonialism and Mediterranean desire.",
       "links": [
-        { "text_es": "Artículo completo", "text_en": "Full article", "url": "#" },
-        { "text_es": "Galería", "text_en": "Gallery", "url": "#" }
+        { "text_cat": "Article complet", "text_en": "Full article", "url": "#" },
+        { "text_cat": "Galeria", "text_en": "Gallery", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-09.png",
-      "text_es": "Reducir un árbol a triángulos y rectángulos. La geometría como lenguaje universal, la abstracción como pérdida.",
+      "text_cat": "Reduir un arbre a triangles i rectangles. La geometria com a llenguatge universal, l'abstracció com a pèrdua.",
       "text_en": "Reducing a tree to triangles and rectangles. Geometry as universal language, abstraction as loss.",
       "links": []
     }
@@ -92,7 +102,7 @@
   "horizonte": [
     {
       "image": "images/arbol-10.png",
-      "text_es": null,
+      "text_cat": null,
       "text_en": null,
       "links": []
     }
@@ -100,21 +110,21 @@
   "raices-urbanas": [
     {
       "image": "images/arbol-01.png",
-      "text_es": "Raíces Urbanas documenta la relación entre el asfalto y las raíces de los árboles en la ciudad.",
+      "text_cat": "Arrels Urbanes documenta la relació entre l'asfalt i les arrels dels arbres a la ciutat.",
       "text_en": "Urban Roots documents the relationship between asphalt and tree roots in the city.",
       "links": [
-        { "text_es": "Ver proyecto", "text_en": "View project", "url": "#" }
+        { "text_cat": "Veure projecte", "text_en": "View project", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-06.png",
-      "text_es": null,
+      "text_cat": null,
       "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-12.png",
-      "text_es": "Los árboles rompen el pavimento buscando espacio. Una lucha silenciosa entre lo natural y lo construido.",
+      "text_cat": "Els arbres trenquen el paviment buscant espai. Una lluita silenciosa entre allò natural i allò construït.",
       "text_en": "Trees break through pavement seeking space. A silent struggle between the natural and the built.",
       "links": []
     }
@@ -122,15 +132,15 @@
   "memoria-vegetal": [
     {
       "image": "images/arbol-04.png",
-      "text_es": "Memoria Vegetal es un archivo de árboles que ya no existen. Fotografías de ausencias.",
+      "text_cat": "Memòria Vegetal és un arxiu d'arbres que ja no existeixen. Fotografies d'absències.",
       "text_en": "Plant Memory is an archive of trees that no longer exist. Photographs of absences.",
       "links": [
-        { "text_es": "Archivo completo", "text_en": "Full archive", "url": "#" }
+        { "text_cat": "Arxiu complet", "text_en": "Full archive", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-10.png",
-      "text_es": "Un árbol solitario en el horizonte.\n\nTestigo del paso del tiempo y las transformaciones del paisaje.",
+      "text_cat": "Un arbre solitari a l'horitzó.\n\nTestimoni del pas del temps i les transformacions del paisatge.",
       "text_en": "A solitary tree on the horizon.\n\nWitness to the passage of time and landscape transformations.",
       "links": []
     }
@@ -138,24 +148,24 @@
   "especies-invasoras": [
     {
       "image": "images/arbol-08.png",
-      "text_es": "Especies Invasoras cuestiona el concepto de lo nativo y lo foráneo en el contexto botánico urbano.",
+      "text_cat": "Espècies Invasores qüestiona el concepte d'allò nadiu i allò forà en el context botànic urbà.",
       "text_en": "Invasive Species questions the concept of native and foreign in the urban botanical context.",
       "links": [
-        { "text_es": "Leer más", "text_en": "Read more", "url": "#" }
+        { "text_cat": "Llegir més", "text_en": "Read more", "url": "#" }
       ]
     },
     {
       "image": "images/arbol-07.png",
-      "text_es": null,
+      "text_cat": null,
       "text_en": null,
       "links": []
     },
     {
       "image": "images/arbol-09.png",
-      "text_es": "¿Qué hace que un árbol pertenezca a un lugar? La geometría simplificada de la identidad botánica.",
+      "text_cat": "Què fa que un arbre pertanyi a un lloc? La geometria simplificada de la identitat botànica.",
       "text_en": "What makes a tree belong to a place? The simplified geometry of botanical identity.",
       "links": [
-        { "text_es": "Ensayo", "text_en": "Essay", "url": "#" }
+        { "text_cat": "Assaig", "text_en": "Essay", "url": "#" }
       ]
     }
   ]
