@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cat">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,22 +8,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Barra lateral de navegación -->
     <aside id="sidebar">
-        <div class="sidebar-top">
-            <div class="language-selector">
+        <nav id="project-nav" class="sidebar-nav"></nav>
+        <div class="sidebar-controls">
+            <button id="prev-btn" class="nav-arrow">←</button>
+            <div class="lang-switch">
                 <button class="lang-btn active" data-lang="cat">cat</button>
+                <span class="lang-sep">/</span>
                 <button class="lang-btn" data-lang="en">en</button>
             </div>
+            <button id="next-btn" class="nav-arrow">→</button>
         </div>
-
-        <nav id="project-nav" class="sidebar-nav">
-            <!-- Se llenará dinámicamente con JavaScript -->
-        </nav>
-
     </aside>
 
-    <!-- Contenedor principal de slides -->
     <main id="slide-container">
         <div class="slide-content">
             <div class="slide-image-wrapper">
@@ -35,14 +32,18 @@
                 <div id="slide-links" class="slide-links"></div>
             </div>
         </div>
-
-        <!-- Controles de navegación rediseñados -->
-        <div class="slide-controls">
-            <button id="prev-btn" class="nav-arrow prev">←</button>
-            <div id="slide-counter" class="slide-counter"></div>
-            <button id="next-btn" class="nav-arrow next">→</button>
-        </div>
     </main>
+
+    <!-- Mobile-only footer (mirrors sidebar-controls) -->
+    <footer id="mobile-footer">
+        <button id="prev-btn-mobile" class="nav-arrow">←</button>
+        <div class="lang-switch">
+            <button class="lang-btn-mobile active" data-lang="cat">cat</button>
+            <span class="lang-sep">/</span>
+            <button class="lang-btn-mobile" data-lang="en">en</button>
+        </div>
+        <button id="next-btn-mobile" class="nav-arrow">→</button>
+    </footer>
 
     <script src="app.js"></script>
 </body>

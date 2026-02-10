@@ -1,4 +1,4 @@
-// Estado de la aplicación
+// === State ===
 const state = {
   data: {},
   projects: [],
@@ -8,156 +8,157 @@ const state = {
   isTransitioning: false
 };
 
-// Elementos del DOM
-const elements = {
+// === DOM references ===
+const el = {
   slideContainer: document.getElementById('slide-container'),
   projectNav: document.getElementById('project-nav'),
   slideImage: document.getElementById('slide-image'),
   slideText: document.getElementById('slide-text'),
   slideLinks: document.getElementById('slide-links'),
   slideThumbs: document.getElementById('slide-thumbs'),
-  slideCounter: document.getElementById('slide-counter'),
   slideContent: document.querySelector('.slide-content'),
-  slideControls: document.querySelector('.slide-controls'),
+  // Desktop controls (sidebar)
   prevBtn: document.getElementById('prev-btn'),
   nextBtn: document.getElementById('next-btn'),
-  langBtns: document.querySelectorAll('.lang-btn')
+  langBtns: document.querySelectorAll('.lang-btn'),
+  // Mobile controls (footer)
+  prevBtnMobile: document.getElementById('prev-btn-mobile'),
+  nextBtnMobile: document.getElementById('next-btn-mobile'),
+  langBtnsMobile: document.querySelectorAll('.lang-btn-mobile')
 };
 
-// Cargar datos
+// === Data loading ===
 async function loadData() {
   try {
-    const response = await fetch('data.json');
-    if (!response.ok) throw new Error('error loading data.json');
-    state.data = await response.json();
+    const res = await fetch('data.json');
+    if (!res.ok) throw new Error('error loading data.json');
+    state.data = await res.json();
     state.projects = Object.keys(state.data);
-    console.log('data loaded:', state.projects);
     return true;
-  } catch (error) {
-    console.error('error loading data:', error);
+  } catch (err) {
+    console.error('error loading data:', err);
     return false;
   }
 }
 
-// Obtener titulo del proyecto según idioma (desde data.json)
+// === Helpers ===
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Get project title from the first slide's title_cat/title_en field
 function getProjectTitle(slug) {
   const slides = state.data[slug];
-  if (!slides || slides.length === 0) return slug;
-  const firstSlide = slides[0];
+  if (!slides || !slides.length) return slug;
+  const first = slides[0];
   const key = `title_${state.lang}`;
-  return firstSlide[key] || firstSlide.title_cat || firstSlide.title_en || slug;
+  return first[key] || first.title_cat || first.title_en || slug;
 }
 
-// Inicializar navegación de proyectos
-function initProjectNav() {
-  elements.projectNav.innerHTML = '';
-  state.projects.forEach((projectSlug, index) => {
-    const button = document.createElement('button');
-    button.className = 'project-link';
-    button.textContent = getProjectTitle(projectSlug);
-    button.dataset.index = index;
-    button.addEventListener('click', () => goToProject(index));
-    elements.projectNav.appendChild(button);
-  });
-  updateActiveProject();
-}
-
-// Actualizar proyecto activo en navegación
-function updateActiveProject() {
-  const links = elements.projectNav.querySelectorAll('.project-link');
-  links.forEach((link, index) => {
-    link.classList.toggle('active', index === state.currentProjectIndex);
-  });
-}
-
-// Obtener texto según idioma
+// Get text paragraphs (supports string or array)
 function getTextParagraphs(slide) {
   const key = `text_${state.lang}`;
-  const value = slide[key] || slide.text_cat || slide.text_en || null;
-  if (!value) return [];
-  return Array.isArray(value) ? value : [value];
+  const val = slide[key] || slide.text_cat || slide.text_en || null;
+  if (!val) return [];
+  return Array.isArray(val) ? val : [val];
 }
 
-// Obtener texto de link según idioma
+// Get link text with fallback
 function getLinkText(link) {
   const key = `text_${state.lang}`;
   return link[key] || link.text_cat || link.text_en || link.text || '';
 }
 
-// Actualizar contador de slides
-function updateSlideCounter() {
-  const projectSlug = state.projects[state.currentProjectIndex];
-  const slides = state.data[projectSlug];
-  // Contador oculto por ahora: cada proyecto tendra solo 1 slide.
-  if (!slides || slides.length <= 1) {
-    elements.slideCounter.textContent = '';
-    elements.slideCounter.style.display = 'none';
-    return;
-  }
-
-  elements.slideCounter.style.display = 'block';
-  elements.slideCounter.innerHTML = `
-    <span class="current">${state.currentSlideIndex + 1}</span>
-    <span class="separator">/</span>
-    <span class="total">${slides.length}</span>
-  `;
+// Sync active state on all lang buttons (desktop + mobile)
+function syncLangButtons() {
+  [...el.langBtns, ...el.langBtnsMobile].forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === state.lang);
+  });
 }
 
+// === Project navigation ===
+function initProjectNav() {
+  el.projectNav.innerHTML = '';
+  state.projects.forEach((slug, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'project-link';
+    btn.textContent = getProjectTitle(slug);
+    btn.addEventListener('click', () => goToProject(i));
+    el.projectNav.appendChild(btn);
+  });
+  updateActiveProject();
+}
+
+function updateActiveProject() {
+  el.projectNav.querySelectorAll('.project-link').forEach((link, i) => {
+    const isActive = i === state.currentProjectIndex;
+    link.classList.toggle('active', isActive);
+    if (isActive) {
+      link.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  });
+}
+
+function updateProjectNames() {
+  el.projectNav.querySelectorAll('.project-link').forEach((link, i) => {
+    link.textContent = getProjectTitle(state.projects[i]);
+  });
+}
+
+// === Vertical centering ===
 function updateVerticalCentering() {
-  if (!elements.slideContainer) return;
-  const containerHeight = elements.slideContainer.clientHeight;
-  const controlsHeight = elements.slideControls ? elements.slideControls.offsetHeight : 0;
-  const contentHeight = elements.slideContent.scrollHeight + controlsHeight;
-  elements.slideContainer.classList.toggle('centered', contentHeight < containerHeight);
+  if (!el.slideContainer) return;
+  const fits = el.slideContent.scrollHeight < el.slideContainer.clientHeight;
+  el.slideContainer.classList.toggle('centered', fits);
 }
 
-// Renderizar slide actual con transición
+// === Render ===
 async function renderSlide(withTransition = true) {
   if (state.isTransitioning) return;
 
-  const projectSlug = state.projects[state.currentProjectIndex];
-  const slides = state.data[projectSlug];
+  const slug = state.projects[state.currentProjectIndex];
+  const slides = state.data[slug];
   const slide = slides[state.currentSlideIndex];
 
-  // Iniciar transición
+  // Fade out
   if (withTransition) {
     state.isTransitioning = true;
-    elements.slideContent.classList.add('transitioning');
+    el.slideContent.classList.add('transitioning');
     await sleep(300);
   }
 
-  // Actualizar imagen
+  // Image
   if (slide.image) {
-    elements.slideImage.src = slide.image;
-    elements.slideImage.alt = getProjectTitle(projectSlug);
-    elements.slideImage.style.display = 'block';
-    elements.slideImage.parentElement.style.display = 'flex';
-    elements.slideImage.onload = updateVerticalCentering;
+    el.slideImage.src = slide.image;
+    el.slideImage.alt = getProjectTitle(slug);
+    el.slideImage.style.display = 'block';
+    el.slideImage.parentElement.style.display = 'flex';
+    el.slideImage.onload = updateVerticalCentering;
   } else {
-    elements.slideImage.src = '';
-    elements.slideImage.alt = '';
-    elements.slideImage.style.display = 'none';
-    elements.slideImage.parentElement.style.display = 'none';
+    el.slideImage.src = '';
+    el.slideImage.alt = '';
+    el.slideImage.style.display = 'none';
+    el.slideImage.parentElement.style.display = 'none';
   }
 
-  // Actualizar texto
+  // Text paragraphs
   const paragraphs = getTextParagraphs(slide);
-  if (paragraphs.length > 0) {
-    elements.slideText.innerHTML = '';
-    paragraphs.forEach((paragraph) => {
+  if (paragraphs.length) {
+    el.slideText.innerHTML = '';
+    paragraphs.forEach(text => {
       const p = document.createElement('p');
-      p.textContent = paragraph;
-      elements.slideText.appendChild(p);
+      p.textContent = text;
+      el.slideText.appendChild(p);
     });
-    elements.slideText.style.display = 'block';
+    el.slideText.style.display = 'block';
   } else {
-    elements.slideText.innerHTML = '';
-    elements.slideText.style.display = 'none';
+    el.slideText.innerHTML = '';
+    el.slideText.style.display = 'none';
   }
 
-  // Actualizar links
-  elements.slideLinks.innerHTML = '';
-  if (slide.links && slide.links.length > 0) {
+  // Links
+  el.slideLinks.innerHTML = '';
+  if (slide.links && slide.links.length) {
     slide.links.forEach(link => {
       const a = document.createElement('a');
       a.href = link.url;
@@ -165,159 +166,123 @@ async function renderSlide(withTransition = true) {
       if (link.url.startsWith('http')) {
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
-      } else {
-        a.target = '_self';
       }
-      elements.slideLinks.appendChild(a);
+      el.slideLinks.appendChild(a);
     });
-    elements.slideLinks.style.display = 'flex';
+    el.slideLinks.style.display = 'flex';
   } else {
-    elements.slideLinks.style.display = 'none';
+    el.slideLinks.style.display = 'none';
   }
 
-  // Miniaturas solo en About
-  if (projectSlug === 'about') {
-    const otherProjects = state.projects.filter((slug) => slug !== 'about');
-    elements.slideThumbs.innerHTML = '';
-    const columns = Math.max(1, Math.ceil(otherProjects.length / 2));
-    elements.slideThumbs.style.setProperty('--thumb-columns', columns);
-    otherProjects.forEach((slug) => {
-      const projectSlides = state.data[slug];
-      if (!projectSlides || projectSlides.length === 0) return;
-      const firstSlide = projectSlides[0];
-      if (!firstSlide.image) return;
+  // About thumbnails
+  renderThumbs(slug);
 
-      const button = document.createElement('button');
-      button.className = 'slide-thumb';
-      button.type = 'button';
-      button.dataset.slug = slug;
-      button.setAttribute('aria-label', getProjectTitle(slug));
-      button.addEventListener('click', () => {
-        const index = state.projects.indexOf(slug);
-        if (index >= 0) goToProject(index);
-      });
-
-      const img = document.createElement('img');
-      img.src = firstSlide.image;
-      img.alt = getProjectTitle(slug);
-      button.appendChild(img);
-      elements.slideThumbs.appendChild(button);
-    });
-
-    if (elements.slideThumbs.children.length > 0) {
-      elements.slideThumbs.style.display = 'grid';
-    } else {
-      elements.slideThumbs.style.display = 'none';
-    }
-  } else {
-    elements.slideThumbs.innerHTML = '';
-    elements.slideThumbs.style.display = 'none';
-  }
-
-  // Actualizar contador y navegación
-  updateSlideCounter();
+  // Update sidebar
   updateActiveProject();
   requestAnimationFrame(updateVerticalCentering);
 
-  // Finalizar transición
+  // Fade in
   if (withTransition) {
-    elements.slideContent.classList.remove('transitioning');
+    el.slideContent.classList.remove('transitioning');
     state.isTransitioning = false;
   }
-
-  console.log(`rendering: ${projectSlug} - slide ${state.currentSlideIndex + 1}/${slides.length}`);
 }
 
-// Función auxiliar para esperar
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+// Render project thumbnails (only on About page)
+function renderThumbs(currentSlug) {
+  if (currentSlug !== 'about') {
+    el.slideThumbs.innerHTML = '';
+    el.slideThumbs.style.display = 'none';
+    return;
+  }
+
+  const others = state.projects.filter(s => s !== 'about');
+  el.slideThumbs.innerHTML = '';
+  el.slideThumbs.style.setProperty('--thumb-columns', Math.max(1, Math.ceil(others.length / 2)));
+
+  others.forEach(slug => {
+    const slides = state.data[slug];
+    if (!slides || !slides.length || !slides[0].image) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'slide-thumb';
+    btn.setAttribute('aria-label', getProjectTitle(slug));
+    btn.addEventListener('click', () => {
+      const idx = state.projects.indexOf(slug);
+      if (idx >= 0) goToProject(idx);
+    });
+
+    const img = document.createElement('img');
+    img.src = slides[0].image;
+    img.alt = getProjectTitle(slug);
+    btn.appendChild(img);
+    el.slideThumbs.appendChild(btn);
+  });
+
+  el.slideThumbs.style.display = el.slideThumbs.children.length ? 'grid' : 'none';
 }
 
-// Navegar a proyecto específico
-function goToProject(projectIndex) {
-  state.currentProjectIndex = projectIndex;
+// === Navigation ===
+function goToProject(index) {
+  state.currentProjectIndex = index;
   state.currentSlideIndex = 0;
   renderSlide();
 }
 
-// Navegar a slide anterior
 function goPrev() {
   if (state.isTransitioning) return;
-
-  const projectSlug = state.projects[state.currentProjectIndex];
-  const slides = state.data[projectSlug];
+  const slug = state.projects[state.currentProjectIndex];
+  const slides = state.data[slug];
 
   if (state.currentSlideIndex > 0) {
     state.currentSlideIndex--;
   } else {
+    // Wrap to previous project's last slide
     state.currentProjectIndex = (state.currentProjectIndex - 1 + state.projects.length) % state.projects.length;
-    const prevProjectSlug = state.projects[state.currentProjectIndex];
-    state.currentSlideIndex = state.data[prevProjectSlug].length - 1;
+    const prevSlug = state.projects[state.currentProjectIndex];
+    state.currentSlideIndex = state.data[prevSlug].length - 1;
   }
-
   renderSlide();
 }
 
-// Navegar a slide siguiente
 function goNext() {
   if (state.isTransitioning) return;
-
-  const projectSlug = state.projects[state.currentProjectIndex];
-  const slides = state.data[projectSlug];
+  const slug = state.projects[state.currentProjectIndex];
+  const slides = state.data[slug];
 
   if (state.currentSlideIndex < slides.length - 1) {
     state.currentSlideIndex++;
   } else {
+    // Wrap to next project's first slide
     state.currentProjectIndex = (state.currentProjectIndex + 1) % state.projects.length;
     state.currentSlideIndex = 0;
   }
-
   renderSlide();
 }
 
-// Manejar navegación con teclado
+// === Language ===
+async function changeLang(lang) {
+  if (state.lang === lang || state.isTransitioning) return;
+  state.lang = lang;
+  syncLangButtons();
+  updateProjectNames();
+  await renderSlide(true);
+}
+
+// === Keyboard ===
 function handleKeyboard(e) {
-  const imageModal = document.querySelector('.image-modal');
-  if (imageModal && imageModal.classList.contains('open')) {
-    if (e.key === 'Escape') {
-      closeImageModal();
-    }
+  // If image modal is open, only handle Escape
+  const modal = document.querySelector('.image-modal');
+  if (modal && modal.classList.contains('open')) {
+    if (e.key === 'Escape') closeImageModal();
     return;
   }
 
-  switch (e.key) {
-    case 'ArrowLeft':
-      goPrev();
-      break;
-    case 'ArrowRight':
-      goNext();
-      break;
-  }
+  if (e.key === 'ArrowLeft') goPrev();
+  if (e.key === 'ArrowRight') goNext();
 }
 
-// Cambiar idioma con transición
-async function changeLang(lang) {
-  if (state.lang === lang || state.isTransitioning) return;
-
-  state.lang = lang;
-  elements.langBtns.forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-
-  // Actualizar nombres de proyectos en navegación
-  const links = elements.projectNav.querySelectorAll('.project-link');
-  links.forEach((link, index) => {
-    const projectSlug = state.projects[index];
-    link.textContent = getProjectTitle(projectSlug);
-  });
-
-  // Re-renderizar slide actual con transición
-  await renderSlide(true);
-
-  console.log('language changed to:', lang);
-}
-
-// Modal de zoom de imagen
+// === Image zoom modal ===
 function createImageModal() {
   const modal = document.createElement('div');
   modal.className = 'image-modal';
@@ -327,65 +292,57 @@ function createImageModal() {
   return modal;
 }
 
-function openImageModal(imageSrc, imageAlt) {
+function openImageModal(src, alt) {
   const modal = document.querySelector('.image-modal') || createImageModal();
   const img = modal.querySelector('img');
-  img.src = imageSrc;
-  img.alt = imageAlt;
-  modal.offsetHeight;
+  img.src = src;
+  img.alt = alt;
+  modal.offsetHeight; // force reflow
   modal.classList.add('open');
 }
 
 function closeImageModal() {
   const modal = document.querySelector('.image-modal');
-  if (modal) {
-    modal.classList.remove('open');
-  }
+  if (modal) modal.classList.remove('open');
 }
 
-// Parsear URL para slug inicial
+// === URL parsing ===
 function parseURL() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
-  
+  const slug = new URLSearchParams(window.location.search).get('slug');
   if (slug && state.projects.includes(slug)) {
-    const index = state.projects.indexOf(slug);
-    state.currentProjectIndex = index;
-    console.log('starting with project from URL:', slug);
+    state.currentProjectIndex = state.projects.indexOf(slug);
   }
 }
 
-// Inicializar aplicación
+// === Init ===
 async function init() {
   const loaded = await loadData();
-  if (!loaded) {
-    console.error('failed to load data');
-    return;
-  }
+  if (!loaded) return;
 
   parseURL();
   initProjectNav();
   renderSlide(false);
 
-  // Event listeners
-  elements.prevBtn.addEventListener('click', goPrev);
-  elements.nextBtn.addEventListener('click', goNext);
+  // Desktop controls
+  el.prevBtn.addEventListener('click', goPrev);
+  el.nextBtn.addEventListener('click', goNext);
+  el.langBtns.forEach(btn => btn.addEventListener('click', () => changeLang(btn.dataset.lang)));
 
-  elements.slideImage.addEventListener('click', (e) => {
+  // Mobile controls
+  el.prevBtnMobile.addEventListener('click', goPrev);
+  el.nextBtnMobile.addEventListener('click', goNext);
+  el.langBtnsMobile.forEach(btn => btn.addEventListener('click', () => changeLang(btn.dataset.lang)));
+
+  // Image click → zoom
+  el.slideImage.addEventListener('click', (e) => {
     e.stopPropagation();
-    openImageModal(elements.slideImage.src, elements.slideImage.alt);
+    openImageModal(el.slideImage.src, el.slideImage.alt);
   });
 
-  elements.langBtns.forEach(btn => {
-    btn.addEventListener('click', () => changeLang(btn.dataset.lang));
-  });
-
+  // Keyboard
   window.addEventListener('keydown', handleKeyboard);
-
-  console.log('app initialized');
 }
 
-// Iniciar cuando el DOM esté listo
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
