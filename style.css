@@ -198,7 +198,7 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   cursor: pointer;
 }
 
@@ -217,7 +217,7 @@ body {
 /* Slide text */
 .slide-text-wrapper {
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
