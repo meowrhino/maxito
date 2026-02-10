@@ -10,12 +10,15 @@ const state = {
 
 // Elementos del DOM
 const elements = {
+  slideContainer: document.getElementById('slide-container'),
   projectNav: document.getElementById('project-nav'),
   slideImage: document.getElementById('slide-image'),
   slideText: document.getElementById('slide-text'),
   slideLinks: document.getElementById('slide-links'),
+  slideThumbs: document.getElementById('slide-thumbs'),
   slideCounter: document.getElementById('slide-counter'),
   slideContent: document.querySelector('.slide-content'),
+  slideControls: document.querySelector('.slide-controls'),
   prevBtn: document.getElementById('prev-btn'),
   nextBtn: document.getElementById('next-btn'),
   langBtns: document.querySelectorAll('.lang-btn')
@@ -100,6 +103,14 @@ function updateSlideCounter() {
   `;
 }
 
+function updateVerticalCentering() {
+  if (!elements.slideContainer) return;
+  const containerHeight = elements.slideContainer.clientHeight;
+  const controlsHeight = elements.slideControls ? elements.slideControls.offsetHeight : 0;
+  const contentHeight = elements.slideContent.scrollHeight + controlsHeight;
+  elements.slideContainer.classList.toggle('centered', contentHeight < containerHeight);
+}
+
 // Renderizar slide actual con transición
 async function renderSlide(withTransition = true) {
   if (state.isTransitioning) return;
@@ -121,6 +132,7 @@ async function renderSlide(withTransition = true) {
     elements.slideImage.alt = getProjectTitle(projectSlug);
     elements.slideImage.style.display = 'block';
     elements.slideImage.parentElement.style.display = 'flex';
+    elements.slideImage.onload = updateVerticalCentering;
   } else {
     elements.slideImage.src = '';
     elements.slideImage.alt = '';
@@ -163,9 +175,49 @@ async function renderSlide(withTransition = true) {
     elements.slideLinks.style.display = 'none';
   }
 
+  // Miniaturas solo en About
+  if (projectSlug === 'about') {
+    const otherProjects = state.projects.filter((slug) => slug !== 'about');
+    elements.slideThumbs.innerHTML = '';
+    const columns = Math.max(1, Math.ceil(otherProjects.length / 2));
+    elements.slideThumbs.style.setProperty('--thumb-columns', columns);
+    otherProjects.forEach((slug) => {
+      const projectSlides = state.data[slug];
+      if (!projectSlides || projectSlides.length === 0) return;
+      const firstSlide = projectSlides[0];
+      if (!firstSlide.image) return;
+
+      const button = document.createElement('button');
+      button.className = 'slide-thumb';
+      button.type = 'button';
+      button.dataset.slug = slug;
+      button.setAttribute('aria-label', getProjectTitle(slug));
+      button.addEventListener('click', () => {
+        const index = state.projects.indexOf(slug);
+        if (index >= 0) goToProject(index);
+      });
+
+      const img = document.createElement('img');
+      img.src = firstSlide.image;
+      img.alt = getProjectTitle(slug);
+      button.appendChild(img);
+      elements.slideThumbs.appendChild(button);
+    });
+
+    if (elements.slideThumbs.children.length > 0) {
+      elements.slideThumbs.style.display = 'grid';
+    } else {
+      elements.slideThumbs.style.display = 'none';
+    }
+  } else {
+    elements.slideThumbs.innerHTML = '';
+    elements.slideThumbs.style.display = 'none';
+  }
+
   // Actualizar contador y navegación
   updateSlideCounter();
   updateActiveProject();
+  requestAnimationFrame(updateVerticalCentering);
 
   // Finalizar transición
   if (withTransition) {
