@@ -150,6 +150,9 @@ async function renderSlide(withTransition = true) {
     await sleep(300);
   }
 
+  // Reset scroll to top
+  el.slideContainer.scrollTop = 0;
+
   // Image
   if (slide.image) {
     el.slideImage.src = slide.image;
