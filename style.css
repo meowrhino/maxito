@@ -152,15 +152,16 @@ body {
 }
 
 .slide-content {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 2rem;
   padding: 3rem;
   position: relative;
   opacity: 1;
   transition: opacity var(--transition-speed) ease-in-out;
-  min-height: calc(100vh - 100px);
 }
 
 .slide-content.transitioning {
@@ -168,11 +169,11 @@ body {
 }
 
 .slide-image-wrapper {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 60%;
+  width: 100%;
+  max-width: 900px;
   cursor: pointer;
 }
 
@@ -189,13 +190,13 @@ body {
 }
 
 .slide-text-wrapper {
-  width: 40%;
-  max-width: 400px;
-  padding-left: 3rem;
+  width: 100%;
+  max-width: 900px;
+  padding-left: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+  align-items: flex-start;
+  text-align: left;
 }
 
 #slide-text {
@@ -206,10 +207,18 @@ body {
   transition: opacity var(--transition-speed) ease-in-out;
 }
 
+#slide-text p {
+  margin: 0 0 1rem;
+}
+
+#slide-text p:last-child {
+  margin-bottom: 0;
+}
+
 .slide-links {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 0.5rem;
   transition: opacity var(--transition-speed) ease-in-out;
 }
@@ -225,14 +234,22 @@ body {
 }
 
 /* Controles de navegación */
+.slide-controls {
+  width: 100%;
+  max-width: 900px;
+  margin: 1rem auto 2.5rem;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
 .nav-arrow {
-  position: absolute;
-  bottom: 2rem;
   font-size: 2rem;
   padding: 0.5rem;
   transition: all 0.2s ease;
   font-weight: bold;
-  z-index: 50;
 }
 
 .nav-arrow:hover {
@@ -240,21 +257,9 @@ body {
   transform: scale(1.1);
 }
 
-.nav-arrow.prev {
-  left: 2rem;
-}
-
-.nav-arrow.next {
-  right: 2rem;
-}
-
 .slide-counter {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
   font-size: 1.25rem;
   font-weight: bold;
-  z-index: 50;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -395,23 +400,17 @@ body {
     font-size: 0.75rem;
   }
 
+  .slide-controls {
+    margin: 1rem auto 2rem;
+    padding: 0 1rem;
+  }
+
   .nav-arrow {
-    bottom: 1rem;
     font-size: 1.5rem;
     padding: 0.25rem;
   }
 
-  .nav-arrow.prev {
-    left: 1rem;
-  }
-
-  .nav-arrow.next {
-    right: 1rem;
-  }
-
   .slide-counter {
-    top: 1rem;
-    right: 1rem;
     font-size: 1rem;
   }
 

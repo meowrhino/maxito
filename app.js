@@ -21,32 +21,6 @@ const elements = {
   langBtns: document.querySelectorAll('.lang-btn')
 };
 
-// Textos multiidioma
-const i18n = {
-  cat: {
-    projectNames: {
-      'about': 'about',
-      'arboles-bailando': 'arbres ballant',
-      'forest-management-systems': 'sistemes de gestió forestal',
-      'horizonte': 'horitzó',
-      'raices-urbanas': 'arrels urbanes',
-      'memoria-vegetal': 'memòria vegetal',
-      'especies-invasoras': 'espècies invasores'
-    }
-  },
-  en: {
-    projectNames: {
-      'about': 'about',
-      'arboles-bailando': 'dancing trees',
-      'forest-management-systems': 'forest management systems',
-      'horizonte': 'horizon',
-      'raices-urbanas': 'urban roots',
-      'memoria-vegetal': 'plant memory',
-      'especies-invasoras': 'invasive species'
-    }
-  }
-};
-
 // Cargar datos
 async function loadData() {
   try {
@@ -62,23 +36,27 @@ async function loadData() {
   }
 }
 
+// Obtener titulo del proyecto según idioma (desde data.json)
+function getProjectTitle(slug) {
+  const slides = state.data[slug];
+  if (!slides || slides.length === 0) return slug;
+  const firstSlide = slides[0];
+  const key = `title_${state.lang}`;
+  return firstSlide[key] || firstSlide.title_cat || firstSlide.title_en || slug;
+}
+
 // Inicializar navegación de proyectos
 function initProjectNav() {
   elements.projectNav.innerHTML = '';
   state.projects.forEach((projectSlug, index) => {
     const button = document.createElement('button');
     button.className = 'project-link';
-    button.textContent = getProjectName(projectSlug);
+    button.textContent = getProjectTitle(projectSlug);
     button.dataset.index = index;
     button.addEventListener('click', () => goToProject(index));
     elements.projectNav.appendChild(button);
   });
   updateActiveProject();
-}
-
-// Obtener nombre del proyecto según idioma
-function getProjectName(slug) {
-  return i18n[state.lang].projectNames[slug] || slug;
 }
 
 // Actualizar proyecto activo en navegación
@@ -90,9 +68,11 @@ function updateActiveProject() {
 }
 
 // Obtener texto según idioma
-function getText(slide) {
+function getTextParagraphs(slide) {
   const key = `text_${state.lang}`;
-  return slide[key] || slide.text_cat || slide.text_en || null;
+  const value = slide[key] || slide.text_cat || slide.text_en || null;
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
 }
 
 // Obtener texto de link según idioma
@@ -105,7 +85,14 @@ function getLinkText(link) {
 function updateSlideCounter() {
   const projectSlug = state.projects[state.currentProjectIndex];
   const slides = state.data[projectSlug];
-  
+  // Contador oculto por ahora: cada proyecto tendra solo 1 slide.
+  if (!slides || slides.length <= 1) {
+    elements.slideCounter.textContent = '';
+    elements.slideCounter.style.display = 'none';
+    return;
+  }
+
+  elements.slideCounter.style.display = 'block';
   elements.slideCounter.innerHTML = `
     <span class="current">${state.currentSlideIndex + 1}</span>
     <span class="separator">/</span>
@@ -131,7 +118,7 @@ async function renderSlide(withTransition = true) {
   // Actualizar imagen
   if (slide.image) {
     elements.slideImage.src = slide.image;
-    elements.slideImage.alt = getProjectName(projectSlug);
+    elements.slideImage.alt = getProjectTitle(projectSlug);
     elements.slideImage.style.display = 'block';
     elements.slideImage.parentElement.style.display = 'flex';
   } else {
@@ -142,12 +129,17 @@ async function renderSlide(withTransition = true) {
   }
 
   // Actualizar texto
-  const text = getText(slide);
-  if (text) {
-    elements.slideText.textContent = text;
+  const paragraphs = getTextParagraphs(slide);
+  if (paragraphs.length > 0) {
+    elements.slideText.innerHTML = '';
+    paragraphs.forEach((paragraph) => {
+      const p = document.createElement('p');
+      p.textContent = paragraph;
+      elements.slideText.appendChild(p);
+    });
     elements.slideText.style.display = 'block';
   } else {
-    elements.slideText.textContent = '';
+    elements.slideText.innerHTML = '';
     elements.slideText.style.display = 'none';
   }
 
@@ -259,7 +251,7 @@ async function changeLang(lang) {
   const links = elements.projectNav.querySelectorAll('.project-link');
   links.forEach((link, index) => {
     const projectSlug = state.projects[index];
-    link.textContent = getProjectName(projectSlug);
+    link.textContent = getProjectTitle(projectSlug);
   });
 
   // Re-renderizar slide actual con transición
