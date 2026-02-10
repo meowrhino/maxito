@@ -13,8 +13,16 @@
         "My projects expand artistic research through tools such as performative lectures, installations, and actions linked to specific contexts. Based on an extensive first-person research process, I propose anecdotal situations that use absurdity to generate debate and highlight certain issues that challenge or concern me. Although I trust in ambiguous and dispersed processes, I strive to share each project in a way that is easy to understand."
       ],
       "links": [
-        { "text_cat": "bio", "text_en": "bio", "url": "https://becarios.fundacionlacaixa.org/en/web/guest/fellows/max-enric-azemar-i-carnicero-B006289" },
-        { "text_cat": "CV", "text_en": "CV", "url": "data/CV.pdf" }
+        {
+          "text_cat": "bio",
+          "text_en": "bio",
+          "url": "https://becarios.fundacionlacaixa.org/en/web/guest/fellows/max-enric-azemar-i-carnicero-B006289"
+        },
+        {
+          "text_cat": "CV",
+          "text_en": "CV",
+          "url": "data/CV.pdf"
+        }
       ]
     }
   ],
@@ -42,8 +50,16 @@
         "El filòsof Michael Marder explica que, des de la modernitat, el foc s’ha dividit en dues forces. Assegura que la Il·lustració va separar simbòlicament la llum freda de la raó —que només brilla, però no crema— i la calor sense llum: l’encarnació del mal, el terrorisme, allò insensat, absurd o gratuït. Tot i això, sosté que el foc suposa una unitat que engloba i transcendeix aquesta dualitat: un esdeveniment en què teoria i pràctica convergeixen. Malgrat que Los Chunguitos s’entestin a recordar-nos aquell aforisme que diu que «Quien juega con fuego, con fuego se quema», aquesta recerca vol demostrar que qui juga amb foc no només es crema, sinó que també brilla."
       ],
       "links": [
-        { "text_cat": "diapositives", "text_en": "slides", "url": "data/Foc_E3K_compartir.pdf" },
-        { "text_cat": "És foc una flama que no crema?", "text_en": "Is fire a flame that does not burn?", "url": "https://estructuras3000.com/proyecto.html?slug=flama-no-crema&lang=ca" }
+        {
+          "text_cat": "diapositives",
+          "text_en": "slides",
+          "url": "data/Foc_E3K_compartir.pdf"
+        },
+        {
+          "text_cat": "És foc una flama que no crema?",
+          "text_en": "Is fire a flame that does not burn?",
+          "url": "https://estructuras3000.com/proyecto.html?slug=flama-no-crema&lang=ca"
+        }
       ]
     }
   ],
@@ -61,9 +77,249 @@
         "This research expands without establishing hierarchies between different theoretical studies in the humanities — Deleuze, Calvino, Dümpelmann — scientific research in the field of urban arboriculture — Wohlleben, Drénou, Hallé — and artistic representations in which the tree acquires a special meaning — Perejaume, Abramović, McCarthy, etc. The format of the publication is inspired by the notebooks used by tour guides. There are two ways of approaching the book: as a reader — also reading the “presenter’s notes” — or as an attendee at one of the presentations, where only the images are shown, accompanied by a guided walking tour."
       ],
       "links": [
-        { "text_cat": "Publicació", "text_en": "Publication", "url": "data/EQNEUA_IMPRIMIR.pdf" },
-        { "text_cat": "Article d’Iván Pérez-Lorenzo a l’IBB", "text_en": "Article by Iván Pérez-Lorenzo at IBB", "url": "https://www.ibb.csic.es/ca/2023/05/el-que-no-es-un-arbre/" },
-        { "text_cat": "Enllaç de la Presentació del llibre a Ja! Llibreria, a la Capella", "text_en": "Link to the book presentation at Ja! Llibreria, at La Capella", "url": "https://www.lacapella.barcelona/ca/programacio/activitats/presentacio-del-llibre-el-que-no-es-un-arbre-de-max-azemar-en-el-marc-de-ja" }
+        {
+          "text_cat": "Publicació",
+          "text_en": "Publication",
+          "url": "data/EQNEUA_IMPRIMIR.pdf"
+        },
+        {
+          "text_cat": "Article d’Iván Pérez-Lorenzo a l’IBB",
+          "text_en": "Article by Iván Pérez-Lorenzo at IBB",
+          "url": "https://www.ibb.csic.es/ca/2023/05/el-que-no-es-un-arbre/"
+        },
+        {
+          "text_cat": "Enllaç de la Presentació del llibre a Ja! Llibreria, a la Capella",
+          "text_en": "Link to the book presentation at Ja! Llibreria, at La Capella",
+          "url": "https://www.lacapella.barcelona/ca/programacio/activitats/presentacio-del-llibre-el-que-no-es-un-arbre-de-max-azemar-en-el-marc-de-ja"
+        }
+      ]
+    }
+  ],
+  "busco-pis": [
+    {
+      "image": "img/4.BUSCOPIS.webp",
+      "title_cat": "BUSCO PIS",
+      "title_en": "LOOKING FOR A ROOM",
+      "text_cat": [
+        "En un intent desesperat de trobar una habitació de lloguer a Barcelona, escric un currículum vitae basat en la història de les habitacions on he viscut, en lloc de la meva trajectòria laboral. Em presento a totes les entrevistes com a company de pis amb aquest document per trencar el gel. Tot i que la idea es va fer viral i em van entrevistar a la televisió i a la ràdio, no em va ajudar a trobar cap habitació."
+      ],
+      "text_en": [
+        "In a desperate attempt to find a room to rent in Barcelona, I write a curriculum vitae based on the history of the rooms I have lived in, instead of my work trajectory. I present myself at every interview as a potential flatmate with this document to break the ice. Although the idea went viral and I was interviewed on television and radio, it didn’t help me find a room."
+      ],
+      "links": [
+        {
+          "text_cat": "Entrevista a betevé",
+          "text_en": "Interview on betevé",
+          "url": "https://beteve.cat/basics/buscar-pis-barcelona-dificultat-extrema-curriculum/"
+        },
+        {
+          "text_cat": "Entrevista a Planta baixa",
+          "text_en": "Interview on Planta baixa",
+          "url": "https://www.3cat.cat/3cat/casting-per-trobar-pis/video/6181937/"
+        },
+        {
+          "text_cat": "Article a 3Cat Info",
+          "text_en": "Article on 3Cat Info",
+          "url": "https://www.3cat.cat/3catinfo/castings-per-trobar-un-pis-de-lloguer-cada-cop-mes-requisits/noticia/3194549/"
+        },
+        {
+          "text_cat": "Entrevista a 21 Ràdio",
+          "text_en": "Interview on 21 Ràdio",
+          "url": "https://www.21radio.cat/la-magnifica-idea-de-fer-un-cv-per-buscar-companys-de-pis/"
+        },
+        {
+          "text_cat": "Piulada",
+          "text_en": "Tweet",
+          "url": "https://x.com/maxazcc/status/1582749703170838528"
+        }
+      ]
+    }
+  ],
+  "getting-by": [
+    {
+      "image": "img/5.GETTING.webp",
+      "title_cat": "GETTING BY",
+      "title_en": "GETTING BY",
+      "text_cat": [
+        "L’eslògan “Your life is a startup” suggereix que les nostres vides estan molt a prop del fracàs, ja que més de nou de cada deu startups fracassen durant els anys posteriors a la seva creació. Distribueixo diversos cactus San Pedro als espais compartits de l’Escola Massana amb l’objectiu de reduir el possible risc de lipoatròfia semicircular al qual estaven exposats els usuaris del nou edifici, dissenyat per Carme Pinós. La majoria dels cactus van acabar morint al cap d’uns mesos.",
+        "Aquest és un projecte de recerca sobre la relació entre treball, vida i art, a través de l’anàlisi en primera persona de l’emprenedoria i l’esperit empresarial. Getting by: emprèn amb èxit la pràctica creativa se centra a explorar la cultura del projecte i les seves relacions amb la vida entesa com un projecte de treball, així com a analitzar l’imaginari emprenedor i les zones de contacte entre el geni emprenedor i el rol de l’artista contemporani.",
+        "La investigació es va presentar en forma de conferència, construïda a partir de diapositives de feines i cursos de formació laboral que havia fet paral·lelament al grau universitari, incloent-hi materials de diversos cursos d’emprenedoria als quals vaig assistir amb l’objectiu de fundar una startup que mai no va acabar de veure la llum."
+      ],
+      "text_en": [
+        "The slogan “Your life is a startup” suggests that our lives are precariously close to failure, as more than nine out of ten startups fail in the years following their creation. I distributed several San Pedro cacti throughout the shared spaces of Escola Massana with the goal of reducing the potential risk of semicircular lipoatrophy faced by users of the new building, designed by Carme Pinós. Most of the cacti ended up dying after a few months.",
+        "This is a research project on the relationship between work, life, and art, approached through first-person analysis of entrepreneurship and the entrepreneurial spirit. Getting By: Successfully Undertaking Creative Practice focuses on exploring project culture and its relationship with life understood as a work project, as well as analyzing the entrepreneurial imagination and the intersections between entrepreneurial genius and the role of the contemporary artist.",
+        "The research was presented as a lecture, built from slides documenting jobs and professional training courses I took alongside my university studies, including materials from various entrepreneurship courses I attended with the aim of founding a startup that ultimately never came to fruition."
+      ],
+      "links": [
+        {
+          "text_cat": "Diapositives",
+          "text_en": "Slides",
+          "url": "data/TFG_Presentacio_compartir.pdf"
+        },
+        {
+          "text_cat": "Document del projecte",
+          "text_en": "Project document",
+          "url": "data/TFG_Gettingby_compartir.pdf"
+        },
+        {
+          "text_cat": "Projecte McDonaldsWorksforMe",
+          "text_en": "McDonaldsWorksforMe project",
+          "url": "https://github.com/maxazc/sociotech/tree/master/projecte"
+        }
+      ]
+    }
+  ],
+  "ncb": [
+    {
+      "image": "img/6.NCB.webp",
+      "title_cat": "NCB",
+      "title_en": "NCB",
+      "text_cat": [
+        "Ed Sheeran és un fan incondicional de la ciutat de Barcelona: fins i tot té la Sagrada Família tatuada al braç. És una llàstima que la cançó que li dedica a la ciutat no tingui cap videoclip oficial. Per això, proposo un videoclip de la cançó “Barcelona” d’Ed Sheeran, format per un conjunt de vídeos de gavines devorant coloms als carrers de la ciutat comptal. El cantant encara no ha acceptat oficialment el videoclip.",
+        "Donat que tot reflex distorsiona la realitat —fins i tot el mirall més fiable emet una versió invertida—, vaig explorar la imatge distorsionada de Barcelona. Aquest videoclip és un dels resultats. En la cançó “Barcelona”, Ed Sheeran ens anima a beure sangria i a ballar davant de la basílica, però obvia la imatge de l’altra Barcelona: la de les gavines devorant coloms. El videoclip proposat consta de fragments gravats per 17 turistes que, possiblement atrets primer per la fantasia projectada per l’artista pop, es van endur un record grotesc de la ciutat i van penjar els vídeos a YouTube."
+      ],
+      "text_en": [
+        "Ed Sheeran is an unconditional fan of the city of Barcelona: he even has the Sagrada Família tattooed on his arm. It’s a shame that the song he dedicates to the city doesn’t have an official music video. Therefore, I propose a music video for Ed Sheeran’s song “Barcelona”, made up of a series of videos showing seagulls devouring pigeons on the streets of the Catalan capital. The singer has not officially approved the video yet.",
+        "Since every reflection distorts reality—even the most reliable mirror produces a reversed version—I explored a distorted image of Barcelona. This music video is one of the results. In the song “Barcelona”, Ed Sheeran encourages us to drink sangria and dance in front of the basilica, but he omits the image of the other Barcelona: the one with seagulls devouring pigeons. The proposed video consists of clips recorded by 17 tourists who, possibly first attracted by the fantasy projected by the pop artist, left with a grotesque souvenir of the city and uploaded the videos to YouTube."
+      ],
+      "links": [
+        {
+          "text_cat": "Exposició Apertus 02 a Àngels Barcelona",
+          "text_en": "Apertus 02 exhibition at Àngels Barcelona",
+          "url": "http://angelsbarcelona.com/en/project/apertus-02-noitcelfer-reflection/61"
+        },
+        {
+          "text_cat": "Publicació Apertus 02: | Reflection Reflection Escola Massana + Han Nefkens Foundation 2018",
+          "text_en": "Apertus 02 publication: Reflection Reflection, Escola Massana + Han Nefkens Foundation 2018",
+          "url": "https://www.escolamassana.cat/ca/apertus-02-noitcefler-reflection_60655.pdf"
+        },
+        {
+          "text_cat": "Enllaç al videoclip",
+          "text_en": "Link to the music video",
+          "url": "https://www.youtube.com/watch?v=OyGyjN9h5YM"
+        }
+      ]
+    }
+  ],
+  "cara-pils": [
+    {
+      "image": "img/7. CARA PILS.webp",
+      "title_cat": "CARA PILS",
+      "title_en": "CARA PILS",
+      "text_cat": [
+        "L’autoritat de turisme de Flandes i Brussel·les em va concedir una beca per promoure la regió. Utilitzo tots els mitjans destinats a la promoció turística que tenia al meu abast per oferir la meva versió de la identitat nacional belga, culminant en diverses visites guiades furtives a la Grand Place, on presento una alternativa al turisme inequívoc, lúdic i despolititzat.",
+        "El blog oficial de l’oficina de turisme es va transformar en una eina de legitimació per incloure nous “significats” del patrimoni turístic belga: és a dir, per valorar atractius culturals sense interès econòmic per part de les institucions, però amb molta importància social, com la cervesa més barata del mercat, el costum de decorar els finestrals o la similitud metafòrica de la identitat nacional belga amb les patates fregides. Els articles d’aquest blog es van agrupar en una guia turística que era idèntica visualment a la guia oficial i que es va distribuir a les diferents oficines de turisme de la regió."
+      ],
+      "text_en": [
+        "The tourism authority of Flanders and Brussels granted me a scholarship to promote the region. I use all the promotional tourism resources at my disposal to offer my version of Belgian national identity, culminating in several intrusive guided tours of the Grand Place, where I present an alternative to unequivocal, playful, and depoliticized tourism.",
+        "The official blog of the tourism office was transformed into a legitimizing tool to include new “meanings” of Belgian tourist heritage: that is, to highlight cultural attractions that hold no economic interest for institutions but carry significant social importance, such as the cheapest beer on the market, the custom of decorating windows, or the metaphorical similarity between Belgian national identity and French fries. The articles on this blog were compiled into a tourist guide that was visually identical to the official guide and self distributed to the region’s various tourist offices."
+      ],
+      "links": [
+        {
+          "text_cat": "Blog oficina de turisme Flandes i Brussel·les",
+          "text_en": "Flanders and Brussels Tourism Office Blog",
+          "url": "https://www.erasmusenflandes.com/author/max/"
+        },
+        {
+          "text_cat": "Blog Vensterbank Decoratie",
+          "text_en": "Vensterbank Decoratie Blog",
+          "url": "https://vensterbankdecoratie.tumblr.com/"
+        },
+        {
+          "text_cat": "Article a la Viquipèdia sobre Cara Pils",
+          "text_en": "Wikipedia Article about Cara Pils",
+          "url": "https://ca.wikipedia.org/wiki/Cara_Pils"
+        }
+      ]
+    }
+  ],
+  "propietat-intellectual": [
+    {
+      "image": "img/8.propietat.webp",
+      "title_cat": "PROPIETAT INTEL·LECTUAL",
+      "title_en": "INTELLECTUAL PROPERTY",
+      "text_cat": [
+        "Vaig convèncer l’oficina de propietat intel·lectual de Barcelona perquè acceptés el registre del meu cos, de manera que fos catalogat públicament com una escultura orgànica, evolutiva i exempta. Mesos més tard, el registrador em va enviar una extensa carta on argumentava per què el genoma humà no és registrable.",
+        "Aquest gest explora el reconeixement de l’autoria sobre el meu cos, la meva imatge i la meva identitat, alhora que atribueix drets i deures diferents dels de qualsevol altre cos humà. D’altra banda, amb aquesta acció investigo quins són els requisits que exigeix el sistema burocràtic per accedir al règim d’identificació d’una obra d’art."
+      ],
+      "text_en": [
+        "I convinced the Intellectual Property Office of Barcelona to accept the registration of my body, so that it would be publicly cataloged as an organic, evolving, and exempt sculpture. Months later, the registrar sent me a lengthy letter explaining why the human genome is not registrable.",
+        "This gesture explores the recognition of authorship over my body, my image, and my identity, while assigning rights and duties different from those of any other human body. At the same time, through this action I investigate the requirements demanded by the bureaucratic system to access the identification regime of a work of art."
+      ],
+      "links": []
+    }
+  ],
+  "grup-d-estudi": [
+    {
+      "image": "img/9. GDE.webp",
+      "title_cat": "GRUP D’ESTUDI",
+      "title_en": "GRUP D’ESTUDI",
+      "text_cat": [
+        "Grup d’Estudi és un col·lectiu que es preocupa de la tasca de catalogar i proposar noves maneres de presentar produccions artístiques en públic, i que defensa una mobilitat absoluta, tant pel que fa a l’adhesió al grup com en relació amb els seus membres.",
+        "Sala Grup d’Estudi (Estiu 2020) – Transformem l’espai2 d’Àngels Barcelona en un laboratori de comissariat instantani. Oferim un programa de residències flash amb una pernoctació real dins la galeria. L’espai expositiu s’omple d’activitats frenètiques durant tot l’estiu. ÀNGELS BARCELONA",
+        "Exhibition View (Juliol 2020) – Publiquem un llibre que funciona com una exposició: recollim obres d’artistes que ens interessen i condicionem la lectura del lector cap a un sentit que desconeixem. Cada presentació del llibre esdevé un esdeveniment performatiu on es reprodueix una obra inclosa dins la publicació. BECA PRODUCCIÓ LA CAIXA",
+        "PARA K KIERES SABER ESO (Maig 2021) – Programem un cicle de conferències de coneixements específics i nínxols, reproduint un format propi de Paraiso Conceptual a Mèxic. Els ponents expliquen com fer bombolles de sabó gegants, com utilitzar fraudulentament un bitllet de metro, com cridar per manifestar-se. LA VIRREINA",
+        "Sala Grup d’Estudi Rosa Magrané – Translladem el mobiliari de la sala on es reuneix el club excursionista de Reus a l’espai expositiu del Centre de Lectura de Reus. L’agrupació excursionista es veu obligada a reunir-se a l’espai expositiu. CENTRE LECTURA REUS",
+        "Marxandatge Grup d’Estudi (Novembre 2021) – Sortejem una línia de marxandatge única creada per a l’ocasió: de cada objecte promocional sobre Grup d’Estudi només hi ha una unitat. Un animador apàtic, disfressat de cranc ermità, entrega el premi representant la mascota del grup. MACBA",
+        "Exhibition View Control Wars (Maig 2022) – Proposem un workshop amb forma de joc de rol sobre el sistema artístic. A partir del projecte de codi obert Control Wars de Becoming, convidem els participants a jugar adoptant el paper de diferents agents del món de l’art. INDEX STOCKHOLM",
+        "Carpa Grup d’Estudi (Desembre 2022) – Presentem la publicació Exhibition View reproduint el format de la carpa dels reis: els assistents poden seure a la falda dels membres de Grup d’Estudi i demanar el llibre signat. S’envia una fotografia de record impresa en alta qualitat a cada assistent. FUNDACIÓ BROSSA",
+        "Èxit through the Ale-Hop (Juliol 2023) – Organitzem una visita guiada al concorregut MOCO Museum en clau de benchmarking per entendre les claus de l’èxit d’aquest museu comercial i aplicar les seves estratègies a la Fundació Brossa. Acabem la visita guiada forçant els assistents dins de la tenda Ale-Hop, que sembla formar part físicament del MOCO. FUNDACIÓ BROSSA i MOCO MUSEUM",
+        "La possibilitat de no haver sigut. Contrarrelat (Octubre 2023) – Convidem una consultora especialitzada a la taula comissarial sobre decolonialitat per poder crear un certificat que garanteixi que aquesta institució no és racista. Durant la roda de premsa, convidem una periodista que qüestiona el relat de l’exposició. SANTA MÒNICA",
+        "INTERFERENCIAS (Gener 2024) – Intervenim les xarxes de la revista digital Exibart i assagem diferents mètodes de màrqueting online deslleial: ClickBait, Criptoestafa, Thirst trap, un sorteig… Acabem comprant seguidors que dupliquen els de la revista i poden demostrar numèricament l’èxit de la nostra intervenció. EXIBART",
+        "Boo! Cheer! Fund! (Juny 2024) – Contractem una animadora de públic per reaccionar a la presentació del col·lectiu durant unes “Jornades Professionals de Presentació de Col·lectius i Projectes Emergents”. Els assistents es veuen empesos a aplaudir, riure o escridassar-nos segons el nostre gust. ART NOU",
+        "Caixa sorpresa Grup d’Estudi (Novembre 2025) – Practiquem maneres alternatives de comissariar un cicle d’exposicions a partir de la idea d’una caixa sorpresa (surprise cube): la institució i el públic desconeixen el contingut de l’exposició fins al dia de la inauguració, obrim convocatòries que repensen els mètodes de selecció i programem activitats de mediació conduïdes per agents aliens al món de l’art. LA CAPELLA",
+        "Instagram de Grup d’Estudi"
+      ],
+      "text_en": [
+        "Grup d’Estudi is a collective focused on cataloging and proposing new ways to present artistic productions to the public, advocating for complete mobility—both in terms of joining the group and in relation to its members.",
+        "Sala Grup d’Estudi (Summer 2020) – We transformed espai2 at Àngels Barcelona into a laboratory for instant curating. We offered a program of flash residencies with an actual overnight stay inside the gallery. The exhibition space was filled with frenetic activities throughout the summer. ÀNGELS BARCELONA",
+        "Exhibition View (July 2020) – We published a book that functions as an exhibition: we collected works by artists that interest us and guided the reader’s interpretation toward a meaning we do not know. Each book presentation became a performative event where one of the works included in the publication was reproduced. BECA PRODUCCIÓ LA CAIXA",
+        "PARA K KIERES SABER ESO (May 2021) – We programmed a series of lectures on specific and niche knowledge, reproducing a format typical of Paraiso Conceptual in Mexico. Speakers explained how to make giant soap bubbles, how to fraudulently use a metro ticket, and how to shout in protests. LA VIRREINA",
+        "Sala Grup d’Estudi Rosa Magrané – We moved the furniture from the meeting room of the Reus hiking club to the exhibition space of the Centre de Lectura de Reus. The hiking club was forced to hold its meeting in the exhibition space. CENTRE LECTURA REUS",
+        "Merchandising Grup d’Estudi (November 2021) – We raffled a unique line of merchandise created for the occasion: there was only one unit of each promotional object about Grup d’Estudi. An apathetic entertainer, dressed as a hermit crab, delivered the prize representing the group’s mascot. MACBA",
+        "Exhibition View Control Wars (May 2022) – We proposed a workshop in the form of a role-playing game about the art system. Based on Becoming’s open-source project Control Wars, participants were invited to play as different agents within the art world. INDEX STOCKHOLM",
+        "Carpa Grup d’Estudi (December 2022) – We presented the Exhibition View publication replicating the format of the Three Kings’ tent: attendees could sit on the laps of Grup d’Estudi members and request a signed book. A high-quality printed souvenir photograph was sent to each participant. FUNDACIÓ BROSSA",
+        "Èxit through the Ale-Hop (July 2023) – We organized a guided tour of the popular MOCO Museum as a benchmarking exercise to understand the keys to the success of this commercial museum and apply its strategies to Fundació Brossa. The guided tour ended by forcing attendees into the Ale-Hop store, which seems physically part of the MOCO. FUNDACIÓ BROSSA i MOCO MUSEUM",
+        "The Possibility of Not Having Been. Counter-Narrative (October 2023) – We invited a consultancy specialized in decoloniality to the curatorial table to create a certificate guaranteeing that this institution is not racist. During the press conference, a journalist questioned the exhibition’s narrative. SANTA MÒNICA",
+        "INTERFERENCIAS (January 2024) – We intervened in the social networks of the digital magazine Exibart and tested different methods of unfair online marketing: ClickBait, crypto scam, Thirst trap, a giveaway… We ended up buying followers, doubling the magazine’s numbers, and numerically demonstrating the success of our intervention. EXIBART",
+        "Boo! Cheer! Fund! (June 2024) – We hired a crowd entertainer to react to the collective’s presentation during the “Professional Days for Presenting Collectives and Emerging Projects.” Attendees were compelled to applaud, laugh, or boo according to our wishes. ART NOU",
+        "Surprise Box Grup d’Estudi (November 2025) – We experimented with alternative ways to curate a series of exhibitions based on the idea of a surprise box: neither the institution nor the public knew the content of the exhibition until the opening day. We launched calls that rethink selection methods and programmed mediation activities led by agents outside the art world. LA CAPELLA",
+        "Grup d’Estudi Instagram"
+      ],
+      "links": [
+        { "text_cat": "ÀNGELS BARCELONA", "text_en": "ÀNGELS BARCELONA", "url": "http://angelsbarcelona.com/en/program/grup-destudi-art-nou-2021/267" },
+        { "text_cat": "BECA PRODUCCIÓ LA CAIXA", "text_en": "BECA PRODUCCIÓ LA CAIXA", "url": "http://angelsbarcelona.com/en/artists/grup-destudi/projects/exhibition-view/1264" },
+        { "text_cat": "LA VIRREINA", "text_en": "LA VIRREINA", "url": "https://ajuntament.barcelona.cat/lavirreina/es/actividades/para-k-kieres-saber-eso/523" },
+        { "text_cat": "CENTRE LECTURA REUS", "text_en": "CENTRE LECTURA REUS", "url": "https://www.facebook.com/aureliruiztorres/posts/10224492650137359/" },
+        { "text_cat": "MACBA", "text_en": "MACBA", "url": "https://www.macba.cat/es/actividades/distensions-1-sandy-moldavia-y-nestor-ceniceros/" },
+        { "text_cat": "INDEX STOCKHOLM", "text_en": "INDEX STOCKHOLM", "url": "https://indexfoundation.se/talks-and-events/open-workshop-exhibition-view-control-wars" },
+        { "text_cat": "FUNDACIÓ BROSSA", "text_en": "FUNDACIÓ BROSSA", "url": "https://drive.google.com/drive/folders/163PZz0HsQSbgr-jHYtKkGrm9XarCEzTU?usp=drive_link" },
+        { "text_cat": "FUNDACIÓ BROSSA i MOCO MUSEUM", "text_en": "FUNDACIÓ BROSSA and MOCO MUSEUM", "url": "https://www.instagram.com/stories/highlights/17933850728699730/" },
+        { "text_cat": "SANTA MÒNICA", "text_en": "SANTA MÒNICA", "url": "https://www.santamonica.cat/ca/exposicions-i-activitats/exposicions/2023/la-possibilitat-denohaversigut" },
+        { "text_cat": "EXIBART", "text_en": "EXIBART", "url": "https://www.instagram.com/p/C3-WQqcqd8G/" },
+        { "text_cat": "ART NOU", "text_en": "ART NOU", "url": "https://www.macba.cat/ca/activitats/i-jornades-professionals-de-presentacio-de-collectius-i-projectes-emergents/" },
+        { "text_cat": "LA CAPELLA", "text_en": "LA CAPELLA", "url": "https://www.tea-tron.com/lacapella/blog/2025/10/28/caixa-sorpresa-grup-destudi/" },
+        { "text_cat": "Instagram de Grup d’Estudi", "text_en": "Grup d’Estudi Instagram", "url": "https://www.instagram.com/grupdestudi/" }
+      ]
+    }
+  ],
+  "other-trash-stop-theatre": [
+    {
+      "image": "img/10. OTHER TRASH.webp",
+      "title_cat": "OTHER TRASH – STOP THEATRE",
+      "title_en": "OTHER TRASH – STOP THEATRE",
+      "text_cat": [
+        "Comissariem una exposició on es convidava companyies teatrals a crear obres visuals i artistes visuals a construir un escenari per a les performances.",
+        "Com a part del Programa d’Investigació Curatorial de la Fundació Joan Brossa – Centre de les Arts Lliures, juntament amb Luca Calderó i Salva Ojeda, vam utilitzar l’espai com un laboratori experimental per explorar la performativitat de les coses a partir de la consigna d’anar “més enllà del teatre”. I si l’exposició sortís d’una capsa de kleenex? Com perceps una obra que no és sobre un pedestal sinó damunt d’una barra d’striptease? Per què l’única manera d’escoltar una instal·lació és tancar-te al lavabo? Com podria ser una visita guiada conduïda per un raper improvisador del metro?"
+      ],
+      "text_en": [
+        "We curated an exhibition that invited theatre companies to create visual works and visual artists to build a stage for the performances.",
+        "As part of the Curatorial Research Program of the Fundació Joan Brossa – Centre de les Arts Lliures, together with Luca Calderó and Salva Ojeda, we used the space as an experimental laboratory to explore the performativity of things under the premise of going “beyond theatre.” What if the exhibition came out of a Kleenex box? How do you perceive a work that is not on a pedestal but on a stripper pole? Why is the only way to listen to an installation by locking yourself in the bathroom? What would a guided tour led by an improvising subway rapper look like?"
+      ],
+      "links": [
+        { "text_cat": "Galeria d’imatges d’Aina Canyelles", "text_en": "Image gallery by Aina Canyelles", "url": "https://www.flickr.com/photos/fundaciobrossa/page3" },
+        { "text_cat": "Web de la Fundació Brossa", "text_en": "Fundació Brossa website", "url": "https://fundaciojoanbrossa.cat/arxiu-exposicions/pic2023/" },
+        { "text_cat": "Full de sala", "text_en": "Press kit / info sheet", "url": "data/Other_Trash_Stop_Theatre_Sala.gif" }
       ]
     }
   ]
