@@ -146,6 +146,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   position: relative;
   background-color: var(--bg-color);
   overflow-y: auto;

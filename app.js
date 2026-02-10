@@ -150,7 +150,12 @@ async function renderSlide(withTransition = true) {
       const a = document.createElement('a');
       a.href = link.url;
       a.textContent = getLinkText(link);
-      a.target = link.url.startsWith('http') ? '_blank' : '_self';
+      if (link.url.startsWith('http')) {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      } else {
+        a.target = '_self';
+      }
       elements.slideLinks.appendChild(a);
     });
     elements.slideLinks.style.display = 'flex';
