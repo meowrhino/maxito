@@ -46,5 +46,25 @@
         { "text_cat": "És foc una flama que no crema?", "text_en": "Is fire a flame that does not burn?", "url": "https://estructuras3000.com/proyecto.html?slug=flama-no-crema&lang=ca" }
       ]
     }
+  ],
+  "el-que-no-es-un-arbre": [
+    {
+      "image": "img/3.ARBRE_ AinaCanyelles.webp",
+      "title_cat": "EL QUE NO ES UN ARBRE",
+      "title_en": "WHAT IS NOT A TREE",
+      "text_cat": [
+        "El primer capítol de les guies botàniques sobre arbres sovint inclou un intent de definir què és un arbre: una tasca que, segons el biòleg Francis Hallé, hauria de ser encomanada als filòsofs. Mitjançant una publicació en forma de conferència de diapositives portàtil, presento una recerca sobre les metàfores arbòries i exposo arguments que expliquen per què la majoria són obsoletes.",
+        "Aquesta recerca s’amplia sense establir jerarquies entre diferents estudis teòrics en l’àmbit de les humanitats —Deleuze, Calvino, Dümpelmann—, la recerca científica en el camp de l’arboricultura urbana —Wohlleben, Drénou, Hallé— i representacions artístiques en què l’arbre adquireix un significat especial —Perejaume, Abramović, McCarthy, etc. El format de la publicació s’inspira en els quaderns utilitzats pels guies turístics. Hi ha dues maneres d’apropar-se al llibre: com a lector —llegint també les “notes del presentador”— o com a assistent a una de les presentacions, on només es veuen les imatges, acompanyades d’una visita guiada a peu."
+      ],
+      "text_en": [
+        "The first chapter of botanical guides about trees often includes an attempt to define what a tree is: a task that, according to the biologist Francis Hallé, should be entrusted to philosophers. Through a publication in the form of a portable slide-lecture, I present research on arboreal metaphors and lay out arguments explaining why most of them are obsolete.",
+        "This research expands without establishing hierarchies between different theoretical studies in the humanities — Deleuze, Calvino, Dümpelmann — scientific research in the field of urban arboriculture — Wohlleben, Drénou, Hallé — and artistic representations in which the tree acquires a special meaning — Perejaume, Abramović, McCarthy, etc. The format of the publication is inspired by the notebooks used by tour guides. There are two ways of approaching the book: as a reader — also reading the “presenter’s notes” — or as an attendee at one of the presentations, where only the images are shown, accompanied by a guided walking tour."
+      ],
+      "links": [
+        { "text_cat": "Publicació", "text_en": "Publication", "url": "data/EQNEUA_IMPRIMIR.pdf" },
+        { "text_cat": "Article d’Iván Pérez-Lorenzo a l’IBB", "text_en": "Article by Iván Pérez-Lorenzo at IBB", "url": "https://www.ibb.csic.es/ca/2023/05/el-que-no-es-un-arbre/" },
+        { "text_cat": "Enllaç de la Presentació del llibre a Ja! Llibreria, a la Capella", "text_en": "Link to the book presentation at Ja! Llibreria, at La Capella", "url": "https://www.lacapella.barcelona/ca/programacio/activitats/presentacio-del-llibre-el-que-no-es-un-arbre-de-max-azemar-en-el-marc-de-ja" }
+      ]
+    }
   ]
 }
