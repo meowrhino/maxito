@@ -89,6 +89,8 @@ body {
 
 .project-group-gap {
   height: 1rem;
+  min-height: 1rem;
+  flex: 0 0 1rem;
   pointer-events: none;
   user-select: none;
 }

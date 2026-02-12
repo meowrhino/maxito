@@ -11,7 +11,7 @@ const state = {
 const SEO = {
   siteName: 'Max Azemar',
   baseUrl: 'https://maxazemar.com',
-  defaultDescription: 'Portfolio de Max Azemar: proyectos de arte, investigacion y practicas performativas entre arte y vida.',
+  defaultDescription: 'Portfolio of Max Azemar: art projects, research, and performative practices between art and life.',
   defaultImage: 'img/1.webp'
 };
 
@@ -125,7 +125,7 @@ function getProjectDescription(slug) {
 function buildQueryString(slug, lang = state.lang) {
   const params = new URLSearchParams();
   if (slug && slug !== 'about') params.set('slug', slug);
-  if (lang === 'en') params.set('lang', 'en');
+  if (lang === 'cat') params.set('lang', 'cat');
   return params.toString();
 }
 
@@ -156,7 +156,7 @@ function syncURLAndSEO(slug, slide) {
   if (el.metaCanonical) el.metaCanonical.href = canonicalURL;
   if (el.altCa) el.altCa.href = caURL;
   if (el.altEn) el.altEn.href = enURL;
-  if (el.altXDefault) el.altXDefault.href = caURL;
+  if (el.altXDefault) el.altXDefault.href = enURL;
   if (el.metaOgLocale) el.metaOgLocale.content = state.lang === 'en' ? 'en_US' : 'ca_ES';
   if (el.metaOgTitle) el.metaOgTitle.content = title;
   if (el.metaOgDescription) el.metaOgDescription.content = description;
