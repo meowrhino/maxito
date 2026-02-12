@@ -2,6 +2,7 @@
   "about": [
     {
       "image": null,
+      "group": 1,
       "title_cat": "ABOUT",
       "title_en": "ABOUT",
       "text_cat": [
@@ -33,6 +34,7 @@
   "god-to-great": [
     {
       "image": "img/1.webp",
+      "group": 2,
       "title_cat": "GOD TO GREAT",
       "title_en": "GOD TO GREAT",
       "text_cat": "Aquests dies estic treballant sobre l’ambició, l’aspiracionalitat i altres coses que es deixen enrrere.",
@@ -43,6 +45,7 @@
   "qui-juga-amb-foc": [
     {
       "image": "img/2.webp",
+      "group": 2,
       "title_cat": "QUI JUGA AMB FOC",
       "title_en": "WHO PLAYS WITH FIRE",
       "text_en": [
@@ -70,8 +73,9 @@
   "el-que-no-es-un-arbre": [
     {
       "image": "img/3.webp",
-      "title_cat": "EL QUE NO ES UN ARBRE",
-      "title_en": "WHAT IS NOT A TREE",
+      "group": 2,
+      "title_cat": "EQNEUA",
+      "title_en": "EQNEUA",
       "text_cat": [
         "El primer capítol de les guies botàniques sobre arbres sovint inclou un intent de definir què és un arbre: una tasca que, segons el biòleg Francis Hallé, hauria de ser encomanada als filòsofs. Mitjançant una publicació en forma de conferència de diapositives portàtil, presento una recerca sobre les metàfores arbòries i exposo arguments que expliquen per què la majoria són obsoletes.",
         "Aquesta recerca s’amplia sense establir jerarquies entre diferents estudis teòrics en l’àmbit de les humanitats —Deleuze, Calvino, Dümpelmann—, la recerca científica en el camp de l’arboricultura urbana —Wohlleben, Drénou, Hallé— i representacions artístiques en què l’arbre adquireix un significat especial —Perejaume, Abramović, McCarthy, etc. El format de la publicació s’inspira en els quaderns utilitzats pels guies turístics. Hi ha dues maneres d’apropar-se al llibre: com a lector —llegint també les “notes del presentador”— o com a assistent a una de les presentacions, on només es veuen les imatges, acompanyades d’una visita guiada a peu."
@@ -102,6 +106,7 @@
   "busco-pis": [
     {
       "image": "img/4.webp",
+      "group": 2,
       "title_cat": "BUSCO PIS",
       "title_en": "LOOKING FOR A ROOM",
       "text_cat": [
@@ -142,6 +147,7 @@
   "getting-by": [
     {
       "image": "img/5.webp",
+      "group": 2,
       "title_cat": "GETTING BY",
       "title_en": "GETTING BY",
       "text_cat": [
@@ -176,6 +182,7 @@
   "ncb": [
     {
       "image": "img/6.webp",
+      "group": 2,
       "title_cat": "NCB",
       "title_en": "NCB",
       "text_cat": [
@@ -208,6 +215,7 @@
   "cara-pils": [
     {
       "image": "img/7.webp",
+      "group": 2,
       "title_cat": "CARA PILS",
       "title_en": "CARA PILS",
       "text_cat": [
@@ -240,8 +248,9 @@
   "propietat-intellectual": [
     {
       "image": "img/8.webp",
-      "title_cat": "PROPIETAT INTEL·LECTUAL",
-      "title_en": "INTELLECTUAL PROPERTY",
+      "group": 2,
+      "title_cat": "CORPORATE",
+      "title_en": "CORPORATE",
       "text_cat": [
         "Vaig convèncer l’oficina de propietat intel·lectual de Barcelona perquè acceptés el registre del meu cos, de manera que fos catalogat públicament com una escultura orgànica, evolutiva i exempta. Mesos més tard, el registrador em va enviar una extensa carta on argumentava per què el genoma humà no és registrable.",
         "Aquest gest explora el reconeixement de l’autoria sobre el meu cos, la meva imatge i la meva identitat, alhora que atribueix drets i deures diferents dels de qualsevol altre cos humà. D’altra banda, amb aquesta acció investigo quins són els requisits que exigeix el sistema burocràtic per accedir al règim d’identificació d’una obra d’art."
@@ -256,6 +265,7 @@
   "grup-d-estudi": [
     {
       "image": "img/9.webp",
+      "group": 3,
       "title_cat": "GRUP D’ESTUDI",
       "title_en": "GRUP D’ESTUDI",
       "text_cat": [
@@ -296,8 +306,9 @@
   "other-trash-stop-theatre": [
     {
       "image": "img/10.webp",
-      "title_cat": "OTHER TRASH – STOP THEATRE",
-      "title_en": "OTHER TRASH – STOP THEATRE",
+      "group": 3,
+      "title_cat": "OTHER TRASH",
+      "title_en": "OTHER TRASH",
       "text_cat": [
         "Comissariem una exposició on es convidava companyies teatrals a crear obres visuals i artistes visuals a construir un escenari per a les performances.",
         "Com a part del Programa d’Investigació Curatorial de la Fundació Joan Brossa – Centre de les Arts Lliures, juntament amb Luca Calderó i Salva Ojeda, vam utilitzar l’espai com un laboratori experimental per explorar la performativitat de les coses a partir de la consigna d’anar “més enllà del teatre”. I si l’exposició sortís d’una capsa de kleenex? Com perceps una obra que no és sobre un pedestal sinó damunt d’una barra d’striptease? Per què l’única manera d’escoltar una instal·lació és tancar-te al lavabo? Com podria ser una visita guiada conduïda per un raper improvisador del metro?"

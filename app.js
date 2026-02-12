@@ -77,6 +77,13 @@ function getProjectTitle(slug) {
   return first[key] || first.title_cat || first.title_en || slug;
 }
 
+function getProjectGroup(slug) {
+  const slides = state.data[slug];
+  if (!slides || !slides.length) return 2;
+  const group = Number(slides[0].group);
+  return group >= 1 && group <= 3 ? group : 2;
+}
+
 // Get text paragraphs (supports string or array)
 function getTextParagraphs(slide) {
   const key = `text_${state.lang}`;
@@ -179,12 +186,23 @@ function syncLangButtons() {
 // === Project navigation ===
 function initProjectNav() {
   el.projectNav.innerHTML = '';
+  let previousGroup = null;
   state.projects.forEach((slug, i) => {
+    const currentGroup = getProjectGroup(slug);
+    if (previousGroup !== null && currentGroup !== previousGroup) {
+      const gap = document.createElement('div');
+      gap.className = 'project-group-gap';
+      gap.setAttribute('aria-hidden', 'true');
+      gap.textContent = ' ';
+      el.projectNav.appendChild(gap);
+    }
+
     const btn = document.createElement('button');
     btn.className = 'project-link';
     btn.textContent = getProjectTitle(slug);
     btn.addEventListener('click', () => goToProject(i));
     el.projectNav.appendChild(btn);
+    previousGroup = currentGroup;
   });
   updateActiveProject();
 }

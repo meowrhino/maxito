@@ -87,6 +87,12 @@ body {
   text-decoration: none;
 }
 
+.project-group-gap {
+  height: 1rem;
+  pointer-events: none;
+  user-select: none;
+}
+
 /* Arrow indicator: positioned absolutely inside .sidebar-nav */
 .nav-indicator {
   position: absolute;
@@ -138,10 +144,10 @@ body {
 
 /* Navigation arrows */
 .nav-arrow {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 0.25rem;
   transition: color 0.2s ease;
-  font-weight: bold;
+  font-weight: 300;
   line-height: 1;
   color: var(--muted-color);
 }
