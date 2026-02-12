@@ -288,14 +288,6 @@ body {
   font-size: 0.875rem;
 }
 
-/* Slide footer (e.g. web link on about) */
-.slide-footer {
-  margin-top: 2rem;
-  font-size: 0.75rem;
-  text-align: center;
-  width: 100%;
-}
-
 /* Image zoom modal */
 .image-modal {
   position: fixed;

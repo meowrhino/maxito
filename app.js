@@ -22,7 +22,6 @@ const el = {
   slideImage: document.getElementById('slide-image'),
   slideText: document.getElementById('slide-text'),
   slideLinks: document.getElementById('slide-links'),
-  slideFooter: document.getElementById('slide-footer'),
   slideThumbs: document.getElementById('slide-thumbs'),
   slideContent: document.querySelector('.slide-content'),
   // Desktop controls (sidebar)
@@ -213,12 +212,16 @@ function updateActiveProject() {
     link.classList.toggle('active', i === state.currentProjectIndex);
   });
 
-  // Move arrow indicator to active project
   const activeLink = links[state.currentProjectIndex];
   if (activeLink) {
     moveNavIndicator(activeLink);
     activeLink.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
+}
+
+function syncNavIndicator() {
+  const activeLink = el.projectNav.querySelector('.project-link.active');
+  if (activeLink) moveNavIndicator(activeLink);
 }
 
 // Create or move the arrow indicator element
@@ -312,20 +315,6 @@ async function renderSlide(withTransition = true) {
     el.slideLinks.style.display = 'flex';
   } else {
     el.slideLinks.style.display = 'none';
-  }
-
-  // Slide footer (e.g. meowrhino link on about)
-  el.slideFooter.innerHTML = '';
-  if (slide.footer) {
-    const a = document.createElement('a');
-    a.href = slide.footer.url;
-    a.textContent = slide.footer.text;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    el.slideFooter.appendChild(a);
-    el.slideFooter.style.display = 'block';
-  } else {
-    el.slideFooter.style.display = 'none';
   }
 
   // About thumbnails
@@ -505,9 +494,12 @@ async function init() {
 
   // Keep indicator synced when nav scrolls (mobile)
   el.projectNav.addEventListener('scroll', () => {
-    const activeLink = el.projectNav.querySelector('.project-link.active');
-    if (activeLink) moveNavIndicator(activeLink);
+    syncNavIndicator();
   });
+
+  // Keep indicator aligned after viewport changes
+  window.addEventListener('resize', syncNavIndicator);
+  window.addEventListener('orientationchange', syncNavIndicator);
 }
 
 if (document.readyState === 'loading') {

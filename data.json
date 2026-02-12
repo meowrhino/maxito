@@ -23,12 +23,13 @@
           "text_cat": "CV",
           "text_en": "CV",
           "url": "data/CV.pdf"
+        },
+        {
+          "text_cat": "web: meowrhino.studio",
+          "text_en": "web: meowrhino.studio",
+          "url": "https://meowrhino.studio"
         }
-      ],
-      "footer": {
-        "text": "web: meowrhino.studio",
-        "url": "https://meowrhino.studio"
-      }
+      ]
     }
   ],
   "god-to-great": [
@@ -47,7 +48,7 @@
       "image": "img/2.webp",
       "group": 2,
       "title_cat": "QUI JUGA AMB FOC",
-      "title_en": "WHO PLAYS WITH FIRE",
+      "title_en": "QUI JUGA AMB FOC",
       "text_en": [
         "Performative lectures usually operate at a midpoint between two poles: the boring academic lecture and the demagogic TED Talk. That is why I want to introduce a third, destabilizing pole: the contemporary fakir. During a lecture in which I talk about fire, I perform fakir tricks: I spit fire from my mouth, set myself on fire, and the scenography burns.",
         "The philosopher Michael Marder explains that, since modernity, fire has been split into two forces. He argues that the Enlightenment symbolically separated the cold light of reason—which shines but does not burn—from heat without light: the embodiment of evil, terrorism, that which is senseless, absurd, or gratuitous. Nevertheless, he maintains that fire represents a unity that encompasses and transcends this duality: an event in which theory and practice converge. Even though Los Chunguitos insist on reminding us of the aphorism that says, “Those who play with fire get burned,” this research aims to show that those who play with fire not only get burned, but also shine."
@@ -108,7 +109,7 @@
       "image": "img/4.webp",
       "group": 2,
       "title_cat": "BUSCO PIS",
-      "title_en": "LOOKING FOR A ROOM",
+      "title_en": "BUSCO PIS",
       "text_cat": [
         "En un intent desesperat de trobar una habitació de lloguer a Barcelona, escric un currículum vitae basat en la història de les habitacions on he viscut, en lloc de la meva trajectòria laboral. Em presento a totes les entrevistes com a company de pis amb aquest document per trencar el gel. Tot i que la idea es va fer viral i em van entrevistar a la televisió i a la ràdio, no em va ajudar a trobar cap habitació."
       ],
