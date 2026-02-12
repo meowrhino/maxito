@@ -4,7 +4,7 @@ const state = {
   projects: [],
   currentProjectIndex: 0,
   currentSlideIndex: 0,
-  lang: 'cat',
+  lang: 'en',
   isTransitioning: false
 };
 
@@ -89,6 +89,15 @@ function getTextParagraphs(slide) {
 function getLinkText(link) {
   const key = `text_${state.lang}`;
   return link[key] || link.text_cat || link.text_en || link.text || '';
+}
+
+function createLinkElement(link) {
+  const a = document.createElement('a');
+  a.href = link.url;
+  a.textContent = getLinkText(link);
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  return a;
 }
 
 function truncateText(text, maxLength = 160) {
@@ -263,7 +272,11 @@ async function renderSlide(withTransition = true) {
     el.slideText.innerHTML = '';
     paragraphs.forEach(text => {
       const p = document.createElement('p');
-      p.textContent = text;
+      p.innerHTML = text;
+      p.querySelectorAll('a').forEach(a => {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      });
       el.slideText.appendChild(p);
     });
     el.slideText.style.display = 'block';
@@ -276,14 +289,7 @@ async function renderSlide(withTransition = true) {
   el.slideLinks.innerHTML = '';
   if (slide.links && slide.links.length) {
     slide.links.forEach(link => {
-      const a = document.createElement('a');
-      a.href = link.url;
-      a.textContent = getLinkText(link);
-      if (link.url.startsWith('http')) {
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-      }
-      el.slideLinks.appendChild(a);
+      el.slideLinks.appendChild(createLinkElement(link));
     });
     el.slideLinks.style.display = 'flex';
   } else {
@@ -296,10 +302,8 @@ async function renderSlide(withTransition = true) {
     const a = document.createElement('a');
     a.href = slide.footer.url;
     a.textContent = slide.footer.text;
-    if (slide.footer.url.startsWith('http')) {
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-    }
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
     el.slideFooter.appendChild(a);
     el.slideFooter.style.display = 'block';
   } else {
