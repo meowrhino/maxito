@@ -8,6 +8,13 @@ const state = {
   isTransitioning: false
 };
 
+const SEO = {
+  siteName: 'Max Azemar',
+  baseUrl: 'https://maxazemar.com',
+  defaultDescription: 'Portfolio de Max Azemar: proyectos de arte, investigacion y practicas performativas entre arte y vida.',
+  defaultImage: 'img/1.webp'
+};
+
 // === DOM references ===
 const el = {
   slideContainer: document.getElementById('slide-container'),
@@ -25,7 +32,21 @@ const el = {
   // Mobile controls (footer)
   prevBtnMobile: document.getElementById('prev-btn-mobile'),
   nextBtnMobile: document.getElementById('next-btn-mobile'),
-  langBtnsMobile: document.querySelectorAll('.lang-btn-mobile')
+  langBtnsMobile: document.querySelectorAll('.lang-btn-mobile'),
+  metaDescription: document.getElementById('meta-description'),
+  metaCanonical: document.getElementById('meta-canonical'),
+  altCa: document.getElementById('alt-ca'),
+  altEn: document.getElementById('alt-en'),
+  altXDefault: document.getElementById('alt-x-default'),
+  metaOgLocale: document.getElementById('meta-og-locale'),
+  metaOgTitle: document.getElementById('meta-og-title'),
+  metaOgDescription: document.getElementById('meta-og-description'),
+  metaOgUrl: document.getElementById('meta-og-url'),
+  metaOgImage: document.getElementById('meta-og-image'),
+  metaOgImageAlt: document.getElementById('meta-og-image-alt'),
+  metaTwitterTitle: document.getElementById('meta-twitter-title'),
+  metaTwitterDescription: document.getElementById('meta-twitter-description'),
+  metaTwitterImage: document.getElementById('meta-twitter-image')
 };
 
 // === Data loading ===
@@ -68,6 +89,75 @@ function getTextParagraphs(slide) {
 function getLinkText(link) {
   const key = `text_${state.lang}`;
   return link[key] || link.text_cat || link.text_en || link.text || '';
+}
+
+function truncateText(text, maxLength = 160) {
+  const clean = (text || '').replace(/\s+/g, ' ').trim();
+  if (clean.length <= maxLength) return clean;
+  return clean.slice(0, maxLength - 3).trimEnd() + '...';
+}
+
+function getProjectDescription(slug) {
+  const slides = state.data[slug] || [];
+  for (const slide of slides) {
+    const [firstParagraph] = getTextParagraphs(slide);
+    if (firstParagraph) return truncateText(firstParagraph);
+  }
+  return SEO.defaultDescription;
+}
+
+function buildQueryString(slug, lang = state.lang) {
+  const params = new URLSearchParams();
+  if (slug && slug !== 'about') params.set('slug', slug);
+  if (lang === 'en') params.set('lang', 'en');
+  return params.toString();
+}
+
+function toAbsoluteURL(path) {
+  if (!path) return `${SEO.baseUrl}/${SEO.defaultImage}`;
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  const normalized = path.replace(/^\/+/, '');
+  return `${SEO.baseUrl}/${normalized}`;
+}
+
+function syncURLAndSEO(slug, slide) {
+  const query = buildQueryString(slug);
+  const caQuery = buildQueryString(slug, 'cat');
+  const enQuery = buildQueryString(slug, 'en');
+  const relativeURL = `${window.location.pathname}${query ? `?${query}` : ''}`;
+  const canonicalURL = `${SEO.baseUrl}/${query ? `?${query}` : ''}`;
+  const caURL = `${SEO.baseUrl}/${caQuery ? `?${caQuery}` : ''}`;
+  const enURL = `${SEO.baseUrl}/${enQuery ? `?${enQuery}` : ''}`;
+  const projectTitle = getProjectTitle(slug);
+  const title = SEO.siteName;
+  const description = getProjectDescription(slug);
+  const imageURL = toAbsoluteURL(slide?.image || SEO.defaultImage);
+
+  document.documentElement.lang = state.lang === 'en' ? 'en' : 'ca';
+  document.title = title;
+
+  if (el.metaDescription) el.metaDescription.content = description;
+  if (el.metaCanonical) el.metaCanonical.href = canonicalURL;
+  if (el.altCa) el.altCa.href = caURL;
+  if (el.altEn) el.altEn.href = enURL;
+  if (el.altXDefault) el.altXDefault.href = caURL;
+  if (el.metaOgLocale) el.metaOgLocale.content = state.lang === 'en' ? 'en_US' : 'ca_ES';
+  if (el.metaOgTitle) el.metaOgTitle.content = title;
+  if (el.metaOgDescription) el.metaOgDescription.content = description;
+  if (el.metaOgUrl) el.metaOgUrl.content = canonicalURL;
+  if (el.metaOgImage) el.metaOgImage.content = imageURL;
+  if (el.metaOgImageAlt) el.metaOgImageAlt.content = projectTitle;
+  if (el.metaTwitterTitle) el.metaTwitterTitle.content = title;
+  if (el.metaTwitterDescription) el.metaTwitterDescription.content = description;
+  if (el.metaTwitterImage) el.metaTwitterImage.content = imageURL;
+
+  try {
+    if (window.location.search !== (query ? `?${query}` : '')) {
+      window.history.replaceState({ slug, lang: state.lang }, '', relativeURL);
+    }
+  } catch (err) {
+    console.warn('could not sync URL', err);
+  }
 }
 
 // Sync active state on all lang buttons (desktop + mobile)
@@ -218,6 +308,7 @@ async function renderSlide(withTransition = true) {
 
   // About thumbnails
   renderThumbs(slug);
+  syncURLAndSEO(slug, slide);
 
   // Update sidebar
   updateActiveProject();
@@ -350,9 +441,14 @@ function closeImageModal() {
 
 // === URL parsing ===
 function parseURL() {
-  const slug = new URLSearchParams(window.location.search).get('slug');
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
+  const lang = params.get('lang');
   if (slug && state.projects.includes(slug)) {
     state.currentProjectIndex = state.projects.indexOf(slug);
+  }
+  if (lang === 'en' || lang === 'cat') {
+    state.lang = lang;
   }
 }
 
@@ -362,6 +458,7 @@ async function init() {
   if (!loaded) return;
 
   parseURL();
+  syncLangButtons();
   initProjectNav();
   renderSlide(false);
 
