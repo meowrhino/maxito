@@ -95,6 +95,11 @@ body {
   user-select: none;
 }
 
+/* Sidebar toggle – hidden on desktop */
+.sidebar-toggle {
+  display: none;
+}
+
 /* Arrow indicator: positioned absolutely inside .sidebar-nav */
 .nav-indicator {
   position: absolute;
@@ -341,9 +346,16 @@ body {
     max-height: 20dvh;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    padding: 1rem;
+    padding: 1rem 1rem 0.4rem;
     flex: 0 0 auto;
     overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  /* Expanded sidebar: simple blind animation */
+  #sidebar.expanded {
+    max-height: 100dvh;
+    overflow-y: auto;
   }
 
   .sidebar-nav {
@@ -355,6 +367,39 @@ body {
   /* Hide desktop controls in sidebar on mobile */
   .sidebar-controls {
     display: none;
+  }
+
+  /* Sidebar toggle chevron */
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin-top: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    line-height: 1;
+    color: var(--muted-color);
+    flex-shrink: 0;
+  }
+
+  .sidebar-toggle .toggle-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  #sidebar.expanded .sidebar-toggle .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Reduce group gaps on mobile */
+  .project-group-gap {
+    height: 0.5rem;
+    min-height: 0.5rem;
+    flex: 0 0 0.5rem;
   }
 
   .project-link {

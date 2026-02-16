@@ -28,6 +28,9 @@ const el = {
   prevBtn: document.getElementById('prev-btn'),
   nextBtn: document.getElementById('next-btn'),
   langBtns: document.querySelectorAll('.lang-btn'),
+  // Sidebar toggle (mobile expand)
+  sidebar: document.getElementById('sidebar'),
+  sidebarToggle: document.getElementById('sidebar-toggle'),
   // Mobile controls (footer)
   prevBtnMobile: document.getElementById('prev-btn-mobile'),
   nextBtnMobile: document.getElementById('next-btn-mobile'),
@@ -370,6 +373,7 @@ function renderThumbs(currentSlug) {
 function goToProject(index) {
   state.currentProjectIndex = index;
   state.currentSlideIndex = 0;
+  el.sidebar.classList.remove('expanded');
   renderSlide();
 }
 
@@ -482,6 +486,11 @@ async function init() {
   el.prevBtnMobile.addEventListener('click', goPrev);
   el.nextBtnMobile.addEventListener('click', goNext);
   el.langBtnsMobile.forEach(btn => btn.addEventListener('click', () => changeLang(btn.dataset.lang)));
+
+  // Sidebar toggle (mobile expand/collapse)
+  el.sidebarToggle.addEventListener('click', () => {
+    el.sidebar.classList.toggle('expanded');
+  });
 
   // Image click → zoom
   el.slideImage.addEventListener('click', (e) => {
