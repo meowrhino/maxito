@@ -15,6 +15,9 @@ const SEO = {
   defaultImage: 'img/1.webp'
 };
 
+const SAFE_LINK_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:']);
+const ALLOWED_INLINE_TAGS = new Set(['a', 'em', 'strong', 'b', 'i', 'br']);
+
 // === DOM references ===
 const el = {
   slideContainer: document.getElementById('slide-container'),
@@ -100,9 +103,72 @@ function getLinkText(link) {
   return link[key] || link.text_cat || link.text_en || link.text || '';
 }
 
+function stripHTMLTags(value) {
+  return String(value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function getSafeLinkURL(url) {
+  if (typeof url !== 'string') return null;
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+  try {
+    const parsed = new URL(trimmed, window.location.origin);
+    return SAFE_LINK_PROTOCOLS.has(parsed.protocol) ? trimmed : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+function appendSanitizedInlineHTML(target, value) {
+  const template = document.createElement('template');
+  template.innerHTML = String(value || '');
+  const fragment = document.createDocumentFragment();
+
+  function sanitizeNode(node, parent) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      parent.appendChild(document.createTextNode(node.textContent || ''));
+      return;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+    const tag = node.tagName.toLowerCase();
+    if (!ALLOWED_INLINE_TAGS.has(tag)) {
+      node.childNodes.forEach(child => sanitizeNode(child, parent));
+      return;
+    }
+
+    if (tag === 'a') {
+      const safeHref = getSafeLinkURL(node.getAttribute('href') || '');
+      if (!safeHref) {
+        node.childNodes.forEach(child => sanitizeNode(child, parent));
+        return;
+      }
+      const a = document.createElement('a');
+      a.href = safeHref;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      node.childNodes.forEach(child => sanitizeNode(child, a));
+      parent.appendChild(a);
+      return;
+    }
+
+    const clean = document.createElement(tag);
+    node.childNodes.forEach(child => sanitizeNode(child, clean));
+    parent.appendChild(clean);
+  }
+
+  template.content.childNodes.forEach(node => sanitizeNode(node, fragment));
+  target.appendChild(fragment);
+}
+
 function createLinkElement(link) {
+  const safeURL = getSafeLinkURL(link?.url);
+  if (!safeURL) {
+    console.warn('blocked unsafe link URL:', link?.url);
+    return null;
+  }
   const a = document.createElement('a');
-  a.href = link.url;
+  a.href = safeURL;
   a.textContent = getLinkText(link);
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
@@ -119,7 +185,7 @@ function getProjectDescription(slug) {
   const slides = state.data[slug] || [];
   for (const slide of slides) {
     const [firstParagraph] = getTextParagraphs(slide);
-    if (firstParagraph) return truncateText(firstParagraph);
+    if (firstParagraph) return truncateText(stripHTMLTags(firstParagraph));
   }
   return SEO.defaultDescription;
 }
@@ -227,6 +293,12 @@ function syncNavIndicator() {
   if (activeLink) moveNavIndicator(activeLink);
 }
 
+function setSidebarExpanded(expanded) {
+  el.sidebar.classList.toggle('expanded', expanded);
+  el.sidebarToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  el.sidebarToggle.setAttribute('aria-label', expanded ? 'Collapse projects' : 'Expand projects');
+}
+
 // Create or move the arrow indicator element
 function moveNavIndicator(targetLink) {
   let indicator = el.projectNav.querySelector('.nav-indicator');
@@ -296,11 +368,7 @@ async function renderSlide(withTransition = true) {
     el.slideText.innerHTML = '';
     paragraphs.forEach(text => {
       const p = document.createElement('p');
-      p.innerHTML = text;
-      p.querySelectorAll('a').forEach(a => {
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-      });
+      appendSanitizedInlineHTML(p, text);
       el.slideText.appendChild(p);
     });
     el.slideText.style.display = 'block';
@@ -312,10 +380,14 @@ async function renderSlide(withTransition = true) {
   // Links
   el.slideLinks.innerHTML = '';
   if (slide.links && slide.links.length) {
+    let renderedLinks = 0;
     slide.links.forEach(link => {
-      el.slideLinks.appendChild(createLinkElement(link));
+      const a = createLinkElement(link);
+      if (!a) return;
+      el.slideLinks.appendChild(a);
+      renderedLinks++;
     });
-    el.slideLinks.style.display = 'flex';
+    el.slideLinks.style.display = renderedLinks ? 'flex' : 'none';
   } else {
     el.slideLinks.style.display = 'none';
   }
@@ -371,9 +443,10 @@ function renderThumbs(currentSlug) {
 
 // === Navigation ===
 function goToProject(index) {
+  if (state.isTransitioning) return;
   state.currentProjectIndex = index;
   state.currentSlideIndex = 0;
-  el.sidebar.classList.remove('expanded');
+  setSidebarExpanded(false);
   renderSlide();
 }
 
@@ -488,8 +561,9 @@ async function init() {
   el.langBtnsMobile.forEach(btn => btn.addEventListener('click', () => changeLang(btn.dataset.lang)));
 
   // Sidebar toggle (mobile expand/collapse)
+  setSidebarExpanded(el.sidebar.classList.contains('expanded'));
   el.sidebarToggle.addEventListener('click', () => {
-    el.sidebar.classList.toggle('expanded');
+    setSidebarExpanded(!el.sidebar.classList.contains('expanded'));
   });
 
   // Image click → zoom

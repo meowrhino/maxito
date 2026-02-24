@@ -359,7 +359,6 @@ body {
   /* Expanded sidebar: simple blind animation */
   #sidebar.expanded {
     max-height: 100dvh;
-    overflow-y: auto;
   }
 
   .sidebar-nav {

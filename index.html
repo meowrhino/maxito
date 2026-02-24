@@ -49,17 +49,17 @@
 <body>
     <aside id="sidebar">
         <nav id="project-nav" class="sidebar-nav"></nav>
-        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Expand projects">
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Expand projects" aria-expanded="false">
             <span class="toggle-icon">&#9662;</span>
         </button>
         <div class="sidebar-controls">
-            <button id="prev-btn" class="nav-arrow">&lt;</button>
+            <button id="prev-btn" class="nav-arrow" aria-label="Previous slide">&lt;</button>
             <div class="lang-switch">
                 <button class="lang-btn" data-lang="cat">cat</button>
                 <span class="lang-sep">/</span>
                 <button class="lang-btn active" data-lang="en">en</button>
             </div>
-            <button id="next-btn" class="nav-arrow">&gt;</button>
+            <button id="next-btn" class="nav-arrow" aria-label="Next slide">&gt;</button>
         </div>
     </aside>
 
@@ -78,13 +78,13 @@
 
     <!-- Mobile-only footer (mirrors sidebar-controls) -->
     <footer id="mobile-footer">
-        <button id="prev-btn-mobile" class="nav-arrow">&lt;</button>
+        <button id="prev-btn-mobile" class="nav-arrow" aria-label="Previous slide">&lt;</button>
         <div class="lang-switch">
             <button class="lang-btn-mobile" data-lang="cat">cat</button>
             <span class="lang-sep">/</span>
             <button class="lang-btn-mobile active" data-lang="en">en</button>
         </div>
-        <button id="next-btn-mobile" class="nav-arrow">&gt;</button>
+        <button id="next-btn-mobile" class="nav-arrow" aria-label="Next slide">&gt;</button>
     </footer>
 
     <script src="app.js"></script>

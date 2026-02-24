@@ -8,7 +8,7 @@ Portfolio personal de Max Azemar. Una web minimalista que fusiona conceptos de n
 - **Diseño minimal:** Estética limpia y sin distracciones, enfocada en el contenido.
 - **Responsive:** Adaptado para desktop y móvil.
 - **Acceso directo:** Usa `?slug=nombre-del-proyecto` para acceder directamente a un proyecto.
-- **Multiidioma:** Preparado para español e inglés.
+- **Multiidioma:** Preparado para catalán e inglés.
 
 ## Estructura del Proyecto
 
@@ -18,7 +18,7 @@ maxito/
 ├── style.css           # Estilos minimalistas
 ├── app.js              # Lógica de la aplicación
 ├── data.json           # Datos de proyectos y slides
-├── images/             # Imágenes de los proyectos
+├── img/                # Imágenes de los proyectos
 └── manus/              # Documentación del proceso
     ├── ROADMAP.md
     └── TODO.md
