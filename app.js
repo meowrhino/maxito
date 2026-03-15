@@ -190,11 +190,11 @@ function getProjectDescription(slug) {
   return SEO.defaultDescription;
 }
 
-function buildQueryString(slug, lang = state.lang) {
-  const params = new URLSearchParams();
-  if (slug && slug !== 'about') params.set('slug', slug);
-  if (lang === 'cat') params.set('lang', 'cat');
-  return params.toString();
+function buildPath(slug, lang = state.lang) {
+  if (!slug || slug === 'about') {
+    return lang === 'cat' ? '/cat' : '/';
+  }
+  return `/${lang}/${slug}`;
 }
 
 function toAbsoluteURL(path) {
@@ -205,13 +205,12 @@ function toAbsoluteURL(path) {
 }
 
 function syncURLAndSEO(slug, slide) {
-  const query = buildQueryString(slug);
-  const caQuery = buildQueryString(slug, 'cat');
-  const enQuery = buildQueryString(slug, 'en');
-  const relativeURL = `${window.location.pathname}${query ? `?${query}` : ''}`;
-  const canonicalURL = `${SEO.baseUrl}/${query ? `?${query}` : ''}`;
-  const caURL = `${SEO.baseUrl}/${caQuery ? `?${caQuery}` : ''}`;
-  const enURL = `${SEO.baseUrl}/${enQuery ? `?${enQuery}` : ''}`;
+  const path = buildPath(slug);
+  const caPath = buildPath(slug, 'cat');
+  const enPath = buildPath(slug, 'en');
+  const canonicalURL = SEO.baseUrl + path;
+  const caURL = SEO.baseUrl + caPath;
+  const enURL = SEO.baseUrl + enPath;
   const projectTitle = getProjectTitle(slug);
   const title = SEO.siteName;
   const description = getProjectDescription(slug);
@@ -236,8 +235,8 @@ function syncURLAndSEO(slug, slide) {
   if (el.metaTwitterImage) el.metaTwitterImage.content = imageURL;
 
   try {
-    if (window.location.search !== (query ? `?${query}` : '')) {
-      window.history.replaceState({ slug, lang: state.lang }, '', relativeURL);
+    if (window.location.pathname !== path) {
+      window.history.replaceState({ slug, lang: state.lang }, '', path);
     }
   } catch (err) {
     console.warn('could not sync URL', err);
@@ -529,10 +528,26 @@ function closeImageModal() {
 
 // === URL parsing ===
 function parseURL() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
-  const lang = params.get('lang');
-  if (slug && state.projects.includes(slug)) {
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  let lang = null;
+  let slug = null;
+
+  if (segments.length === 1) {
+    if (segments[0] === 'en' || segments[0] === 'cat') {
+      lang = segments[0];
+    } else if (state.projects.includes(segments[0])) {
+      slug = segments[0];
+    }
+  } else if (segments.length >= 2) {
+    if (segments[0] === 'en' || segments[0] === 'cat') {
+      lang = segments[0];
+      if (state.projects.includes(segments[1])) {
+        slug = segments[1];
+      }
+    }
+  }
+
+  if (slug) {
     state.currentProjectIndex = state.projects.indexOf(slug);
   }
   if (lang === 'en' || lang === 'cat') {
