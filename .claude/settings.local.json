@@ -1,7 +1,32 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.albertbonay.com)"
+      "WebFetch(domain:www.albertbonay.com)",
+      "Bash(find /Users/manu/Documents/GitHub/maxito -type f \\\\\\( -name \"*.js\" -o -name \"*.json\" -o -name \"*.html\" \\\\\\) ! -path \"*/.git/*\" ! -path \"*/node_modules/*\" -exec wc -l {} +)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(mkdir -p /tmp/maxito-clean-urls)",
+      "Bash(cp /Users/manu/Documents/GitHub/maxito/app.js /Users/manu/Documents/GitHub/maxito/index.html /Users/manu/Documents/GitHub/maxito/404.html /Users/manu/Documents/GitHub/maxito/sitemap.xml /tmp/maxito-clean-urls/)",
+      "Read(//private/tmp/**)",
+      "Bash(zip -r /Users/manu/Documents/GitHub/maxito/clean-urls-update.zip maxito-clean-urls/)",
+      "Bash(sudo ls:*)",
+      "Bash(cp -r /Users/manu/Desktop/manuweb/data/eastereggs /Users/manu/Documents/GitHub/maxito/data/eastereggs)",
+      "Bash(cp -r /Users/manu/Desktop/manuweb/data/svg /Users/manu/Documents/GitHub/maxito/data/svg)",
+      "Bash(cp /Users/manu/Desktop/manuweb/img/*-640.webp /Users/manu/Documents/GitHub/maxito/img/)",
+      "Bash(cp /Users/manu/Desktop/manuweb/img/*-1200.webp /Users/manu/Documents/GitHub/maxito/img/)",
+      "Bash(find data:*)",
+      "Bash(grep -E '\\\\.webp$')",
+      "Bash(bash)",
+      "Bash(node -e \"const data = require\\(''''./data.json''''\\); console.log\\(JSON.stringify\\(data, null, 2\\)\\)\")",
+      "Bash(cd /Users/manu/Documents/GitHub/maxito grep -o '\\\\.[a-z0-9\\\\-]*' style.css)",
+      "Bash(while read:*)",
+      "Bash(do if:*)",
+      "Bash(then echo:*)",
+      "Bash(cd /Users/manu/Documents/GitHub/maxito grep -n \"isTransitioning\" app.js)",
+      "Bash(zip -r /Users/manu/Desktop/maxito.zip app.js style.css index.html 404.html data.json data/ img/ sitemap.xml robots.txt CNAME -x \"*.git*\" -x \"manus/*\" -x \".claude/*\" -x \"*.DS_Store\" -x \"README.md\")",
+      "Bash(rm /Users/manu/Desktop/maxito.zip)",
+      "Bash(zip -j /Users/manu/Desktop/maxito.zip /Users/manu/Documents/GitHub/maxito/app.js /Users/manu/Documents/GitHub/maxito/index.html)"
     ]
   }
 }
