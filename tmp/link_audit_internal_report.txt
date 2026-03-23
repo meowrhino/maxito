@@ -1,0 +1,61 @@
+ALL_LINKS_COUNT       59
+INTERNAL_MISSING_COUNT       59
+data.json:"url": "data/CV.pdf"
+data.json:"url": "https://becarios.fundacionlacaixa.org/en/web/guest/fellows/max-enric-azemar-i-carnicero-B006289"
+data.json:"url": "https://meowrhino.studio"
+data.json:data-open-tabs='https://www.3cat.cat/3cat/casting-per-trobar-pis/video/6181937/'
+data.json:data-open-tabs='https://x.com/maxazcc/status/1582749703170838528'
+data.json:href='data/EQNEUA_IMPRIMIR.pdf'
+data.json:href='data/Foc_E3K_compartir.pdf'
+data.json:href='data/Other_Trash_Stop_Theatre_Sala.gif'
+data.json:href='data/TFG_Gettingby_compartir.pdf'
+data.json:href='data/TFG_Presentacio_compartir.pdf'
+data.json:href='data/top 10 slides web provisional.pdf'
+data.json:href='http://angelsbarcelona.com/en/artists/grup-destudi/projects/exhibition-view/1264'
+data.json:href='http://angelsbarcelona.com/en/program/grup-destudi-art-nou-2021/267'
+data.json:href='https://ainacanyellesllado.com/'
+data.json:href='https://ajuntament.barcelona.cat/lavirreina/es/actividades/para-k-kieres-saber-eso/523'
+data.json:href='https://bbonaventura.com/'
+data.json:href='https://beteve.cat/basics/buscar-pis-barcelona-dificultat-extrema-curriculum/'
+data.json:href='https://ca.wikipedia.org/wiki/Cara_Pils'
+data.json:href='https://cup.columbia.edu/book/pyropolitics/9783838219721/'
+data.json:href='https://drive.google.com/drive/folders/163PZz0HsQSbgr-jHYtKkGrm9XarCEzTU?usp=drive_link'
+data.json:href='https://drive.google.com/drive/folders/1umIo_GBIKtt0H764rdZM6yvsWLPiJsWy?usp=drive_link'
+data.json:href='https://drive.google.com/file/d/1_T6PgWN8s-sziXIfMq1WLcBYTUf41lV_/view?usp=drive_link'
+data.json:href='https://estructuras3000.com/proyecto.html?slug=flama-no-crema&lang=ca'
+data.json:href='https://fr.wikipedia.org/wiki/Francis_Hall%C3%A9'
+data.json:href='https://fundaciojoanbrossa.cat/arxiu-exposicions/pic2023/'
+data.json:href='https://github.com/maxazc/sociotech/tree/master/projecte'
+data.json:href='https://hangar.org/es/luca-caldero/'
+data.json:href='https://indexfoundation.se/talks-and-events/open-workshop-exhibition-view-control-wars'
+data.json:href='https://inputparty.nl/wp-content/uploads/2019/02/gander-ryan-loose-associations.pdf'
+data.json:href='https://nedediciones.com/tienda/huellas-y-senales/piropolitica-en-un-mundo-en-llamas/'
+data.json:href='https://on.soundcloud.com/Dxh7TtoI5WII7nnLXI'
+data.json:href='https://saladartjove.cat/es/curadors-archive/salva-g-ojeda/'
+data.json:href='https://silviolorusso.com/wordpress/wp-content/uploads/2019/10/ENTREPRECARIAT_silvio-lorusso_eng_lo.pdf'
+data.json:href='https://vensterbankdecoratie.tumblr.com/'
+data.json:href='https://www.21radio.cat/la-magnifica-idea-de-fer-un-cv-per-buscar-companys-de-pis/'
+data.json:href='https://www.3cat.cat/3catinfo/castings-per-trobar-un-pis-de-lloguer-cada-cop-mes-requisits/noticia/3194549/'
+data.json:href='https://www.erasmusenflandes.com/author/max/'
+data.json:href='https://www.escolamassana.cat/ca/apertus-02-noitcefler-reflection_60655.pdf'
+data.json:href='https://www.facebook.com/aureliruiztorres/posts/10224492650137359/'
+data.json:href='https://www.flickr.com/photos/fundaciobrossa/page3'
+data.json:href='https://www.ibb.csic.es/ca/2023/05/el-que-no-es-un-arbre/'
+data.json:href='https://www.instagram.com/aumontardit/'
+data.json:href='https://www.instagram.com/grupdestudi/'
+data.json:href='https://www.instagram.com/p/C3-WQqcqd8G/'
+data.json:href='https://www.instagram.com/stories/highlights/17933850728699730/'
+data.json:href='https://www.lacapella.barcelona/ca/programacio/activitats/presentacio-del-llibre-el-que-no-es-un-arbre-de-max-azemar-en-el-marc-de-ja'
+data.json:href='https://www.macba.cat/ca/activitats/i-jornades-professionals-de-presentacio-de-collectius-i-projectes-emergents/'
+data.json:href='https://www.macba.cat/es/actividades/distensions-1-sandy-moldavia-y-nestor-ceniceros/'
+data.json:href='https://www.santamonica.cat/ca/exposicions-i-activitats/exposicions/2023/la-possibilitat-denohaversigut'
+data.json:href='https://www.tea-tron.com/lacapella/blog/2025/10/28/caixa-sorpresa-grup-destudi/'
+data.json:href='https://www.youtube.com/watch?v=6UsIcDivsls&list=RD6UsIcDivsls&start_radio=1'
+data.json:href='https://www.youtube.com/watch?v=OyGyjN9h5YM'
+data.json:href='https://yalebooks.yale.edu/book/9780300225785/seeing-trees/'
+index.html:"url": "https://maxazemar.com/"
+index.html:href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>"
+index.html:href="https://maxazemar.com/"
+index.html:href="https://maxazemar.com/cat"
+index.html:href="https://maxazemar.com/en"
+index.html:href="style.css"

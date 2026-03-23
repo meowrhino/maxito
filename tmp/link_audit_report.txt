@@ -1,0 +1,6 @@
+URL_COUNT       46
+BAD_COUNT        2
+BAD_URLS_START
+403 https://becarios.fundacionlacaixa.org/en/web/guest/fellows/max-enric-azemar-i-carnicero-B006289
+000 https://www.21radio.cat/la-magnifica-idea-de-fer-un-cv-per-buscar-companys-de-pis/
+BAD_URLS_END

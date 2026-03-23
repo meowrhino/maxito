@@ -4,11 +4,7 @@ Portfolio personal de Max Azemar. Una web minimalista que fusiona conceptos de n
 
 ## Características
 
-- **Navegación por slides:** Explora proyectos navegando entre slides, similar a una presentación.
-- **Diseño minimal:** Estética limpia y sin distracciones, enfocada en el contenido.
-- **Responsive:** Adaptado para desktop y móvil.
-- **Acceso directo:** Usa `?slug=nombre-del-proyecto` para acceder directamente a un proyecto.
-- **Multiidioma:** Preparado para catalán e inglés.
+-- **Acceso directo:** Usa `/project/nombre-del-proyecto/cat` o `/project/nombre-del-proyecto/en` para acceder directamente a un proyecto.
 
 ## Estructura del Proyecto
 
