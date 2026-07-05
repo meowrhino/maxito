@@ -322,116 +322,11 @@ function enhanceFocShineTriggers(container, slug) {
 
   const shinePattern = state.lang === 'cat' ? /\bbrilla\b/gi : /\bshine(?:s)?\b/gi;
   const burnedPattern = state.lang === 'cat' ? /\bcrema\b|\bcremat\b|\bcremada\b/gi : /\bburned\b/gi;
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  const textNodes = [];
-  let current = walker.nextNode();
-  while (current) {
-    textNodes.push(current);
-    current = walker.nextNode();
-  }
 
-  // First pass: count total occurrences
-  let totalBurnedOccurrences = 0;
-  let totalShineOccurrences = 0;
-  
-  textNodes.forEach(node => {
-    if (!node.parentElement || node.parentElement.closest('a, .shine-trigger, .burned-trigger')) return;
-    const original = node.textContent || '';
-    if (!shinePattern.test(original) && !burnedPattern.test(original)) {
-      shinePattern.lastIndex = 0;
-      burnedPattern.lastIndex = 0;
-      return;
-    }
-    shinePattern.lastIndex = 0;
-    burnedPattern.lastIndex = 0;
-
-    const combinedPattern = new RegExp(`${shinePattern.source}|${burnedPattern.source}`, 'gi');
-    let match = combinedPattern.exec(original);
-    while (match) {
-      const matchedText = match[0];
-      const normalized = matchedText.toLowerCase();
-      const isBurnedWord = normalized === 'burned' || normalized === 'crema' || normalized === 'cremat' || normalized === 'cremada';
-      const isShineWord = !isBurnedWord && shinePattern.test(matchedText);
-      shinePattern.lastIndex = 0;
-
-      if (isBurnedWord) {
-        totalBurnedOccurrences += 1;
-      } else if (isShineWord) {
-        totalShineOccurrences += 1;
-      }
-      match = combinedPattern.exec(original);
-    }
-  });
-
-  // Second pass: create triggers on last occurrences
-  let burnedOccurrence = 0;
-  let shineOccurrence = 0;
-
-  textNodes.forEach(node => {
-    if (!node.parentElement || node.parentElement.closest('a, .shine-trigger, .burned-trigger')) return;
-    const original = node.textContent || '';
-    if (!shinePattern.test(original) && !burnedPattern.test(original)) {
-      shinePattern.lastIndex = 0;
-      burnedPattern.lastIndex = 0;
-      return;
-    }
-    shinePattern.lastIndex = 0;
-    burnedPattern.lastIndex = 0;
-
-    const combinedPattern = new RegExp(`${shinePattern.source}|${burnedPattern.source}`, 'gi');
-
-    const frag = document.createDocumentFragment();
-    let last = 0;
-    let match = combinedPattern.exec(original);
-    while (match) {
-      const matchedText = match[0];
-      const normalized = matchedText.toLowerCase();
-      const isBurnedWord = normalized === 'burned' || normalized === 'crema' || normalized === 'cremat' || normalized === 'cremada';
-      const isShineWord = !isBurnedWord && shinePattern.test(matchedText);
-      shinePattern.lastIndex = 0;
-
-      if (match.index > last) {
-        frag.appendChild(document.createTextNode(original.slice(last, match.index)));
-      }
-
-      if (isBurnedWord) {
-        burnedOccurrence += 1;
-        if (burnedOccurrence === totalBurnedOccurrences) {
-          const trigger = document.createElement('a');
-          trigger.href = '#';
-          trigger.className = 'burned-trigger';
-          trigger.textContent = matchedText;
-          trigger.setAttribute('aria-label', matchedText);
-          frag.appendChild(trigger);
-        } else {
-          frag.appendChild(document.createTextNode(matchedText));
-        }
-      } else if (isShineWord) {
-        shineOccurrence += 1;
-        if (shineOccurrence === totalShineOccurrences) {
-          const trigger = document.createElement('a');
-          trigger.href = '#';
-          trigger.className = 'shine-trigger';
-          trigger.textContent = matchedText;
-          trigger.setAttribute('aria-label', matchedText);
-          frag.appendChild(trigger);
-        } else {
-          frag.appendChild(document.createTextNode(matchedText));
-        }
-      } else {
-        frag.appendChild(document.createTextNode(matchedText));
-      }
-
-      last = match.index + match[0].length;
-      match = combinedPattern.exec(original);
-    }
-
-    if (last < original.length) {
-      frag.appendChild(document.createTextNode(original.slice(last)));
-    }
-
-    node.parentNode.replaceChild(frag, node);
-  });
+  wrapLastMatchPerRule(container, [
+    { pattern: shinePattern, className: 'shine-trigger' },
+    { pattern: burnedPattern, className: 'burned-trigger' }
+  ], 'a, .shine-trigger, .burned-trigger');
 }
 
 function escapeRegExp(value) {
@@ -443,51 +338,12 @@ function enhanceAboutSpecificContextsTrigger(container, slug) {
 
   const phrase = state.lang === 'cat' ? 'contextos específics' : 'specific contexts';
   const pattern = new RegExp(escapeRegExp(phrase), 'gi');
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  const textNodes = [];
-  let node = walker.nextNode();
 
-  while (node) {
-    textNodes.push(node);
-    node = walker.nextNode();
-  }
-
-  textNodes.forEach(textNode => {
-    if (!textNode.parentElement || textNode.parentElement.closest('a, .about-context-trigger')) return;
-    const original = textNode.textContent || '';
-    if (!pattern.test(original)) {
-      pattern.lastIndex = 0;
-      return;
-    }
-    pattern.lastIndex = 0;
-
-    const frag = document.createDocumentFragment();
-    let last = 0;
-    let match = pattern.exec(original);
-
-    while (match) {
-      const start = match.index;
-      const end = start + match[0].length;
-      if (start > last) {
-        frag.appendChild(document.createTextNode(original.slice(last, start)));
-      }
-
-      const trigger = document.createElement('a');
-      trigger.href = '#';
-      trigger.className = 'about-context-trigger';
-      trigger.textContent = match[0];
-      trigger.setAttribute('aria-label', match[0]);
-      frag.appendChild(trigger);
-
-      last = end;
-      match = pattern.exec(original);
-    }
-
-    if (last < original.length) {
-      frag.appendChild(document.createTextNode(original.slice(last)));
-    }
-
-    textNode.parentNode.replaceChild(frag, textNode);
+  wrapPatternMatches(container, {
+    pattern,
+    className: 'about-context-trigger',
+    mode: 'all',
+    excludeSelector: 'a, .about-context-trigger'
   });
 }
 
@@ -536,6 +392,122 @@ function getAboutRevealMappings() {
     { phrase: 'arts student', type: 'link', url: 'https://www.newschool.edu/parsons/mfa-fine-arts/' },
     { phrase: 'train driver', type: 'image', image: 'metro' }
   ];
+}
+
+function collectTextNodes(container) {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let current = walker.nextNode();
+  while (current) {
+    textNodes.push(current);
+    current = walker.nextNode();
+  }
+  return textNodes;
+}
+
+function wrapPatternMatches(container, { pattern, className, mode = 'first', excludeSelector }) {
+  const textNodes = collectTextNodes(container);
+  const globalPattern = pattern.global ? pattern : new RegExp(pattern.source, `${pattern.flags}g`);
+
+  for (const node of textNodes) {
+    if (!node.parentElement || node.parentElement.closest(excludeSelector)) continue;
+    const original = node.textContent || '';
+    if (!globalPattern.test(original)) continue;
+    globalPattern.lastIndex = 0;
+
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    let match = globalPattern.exec(original);
+
+    while (match) {
+      if (match.index > last) {
+        frag.appendChild(document.createTextNode(original.slice(last, match.index)));
+      }
+
+      const trigger = document.createElement('a');
+      trigger.href = '#';
+      trigger.className = className;
+      trigger.textContent = match[0];
+      trigger.setAttribute('aria-label', match[0]);
+      frag.appendChild(trigger);
+
+      last = match.index + match[0].length;
+      match = mode === 'all' ? globalPattern.exec(original) : null;
+    }
+
+    if (last < original.length) {
+      frag.appendChild(document.createTextNode(original.slice(last)));
+    }
+
+    node.parentNode.replaceChild(frag, node);
+
+    if (mode === 'first') return;
+  }
+}
+
+function wrapLastMatchPerRule(container, rules, excludeSelector) {
+  const textNodes = collectTextNodes(container);
+  const combinedPattern = new RegExp(rules.map(rule => `(${rule.pattern.source})`).join('|'), 'gi');
+  const ruleForMatch = (match) => rules.findIndex((rule, i) => match[i + 1] !== undefined);
+
+  // Two passes are required because "last occurrence" per rule can only be known
+  // once every text node has been scanned.
+  const totals = rules.map(() => 0);
+  textNodes.forEach(node => {
+    if (!node.parentElement || node.parentElement.closest(excludeSelector)) return;
+    const original = node.textContent || '';
+    let match = combinedPattern.exec(original);
+    while (match) {
+      const ruleIndex = ruleForMatch(match);
+      if (ruleIndex !== -1) totals[ruleIndex] += 1;
+      match = combinedPattern.exec(original);
+    }
+  });
+
+  const seen = rules.map(() => 0);
+  textNodes.forEach(node => {
+    if (!node.parentElement || node.parentElement.closest(excludeSelector)) return;
+    const original = node.textContent || '';
+    if (!combinedPattern.test(original)) return;
+    combinedPattern.lastIndex = 0;
+
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    let match = combinedPattern.exec(original);
+    while (match) {
+      const matchedText = match[0];
+      const ruleIndex = ruleForMatch(match);
+
+      if (match.index > last) {
+        frag.appendChild(document.createTextNode(original.slice(last, match.index)));
+      }
+
+      if (ruleIndex !== -1) {
+        seen[ruleIndex] += 1;
+        if (seen[ruleIndex] === totals[ruleIndex]) {
+          const trigger = document.createElement('a');
+          trigger.href = '#';
+          trigger.className = rules[ruleIndex].className;
+          trigger.textContent = matchedText;
+          trigger.setAttribute('aria-label', matchedText);
+          frag.appendChild(trigger);
+        } else {
+          frag.appendChild(document.createTextNode(matchedText));
+        }
+      } else {
+        frag.appendChild(document.createTextNode(matchedText));
+      }
+
+      last = match.index + match[0].length;
+      match = combinedPattern.exec(original);
+    }
+
+    if (last < original.length) {
+      frag.appendChild(document.createTextNode(original.slice(last)));
+    }
+
+    node.parentNode.replaceChild(frag, node);
+  });
 }
 
 function replaceFirstPhraseWithNode(container, phrase, createNode) {
@@ -652,126 +624,38 @@ function spawnNcbTattooPhoto() {
 function enhanceGdePaintTriggers(container, slug) {
   if (slug !== GDE_PAINT_TARGET_SLUG || !container) return;
 
-  const pattern = /Grup d[’']Estudi/gi;
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  const textNodes = [];
-  let current = walker.nextNode();
-  while (current) {
-    textNodes.push(current);
-    current = walker.nextNode();
-  }
-
-  for (const node of textNodes) {
-    if (!node.parentElement || node.parentElement.closest('a, .gde-paint-trigger')) continue;
-    const original = node.textContent || '';
-    if (!pattern.test(original)) continue;
-    pattern.lastIndex = 0;
-
-    const frag = document.createDocumentFragment();
-    let last = 0;
-    const match = pattern.exec(original);
-    if (!match) continue;
-
-    if (match.index > last) {
-      frag.appendChild(document.createTextNode(original.slice(last, match.index)));
-    }
-
-    const trigger = document.createElement('a');
-    trigger.href = '#';
-    trigger.className = 'gde-paint-trigger';
-    trigger.textContent = match[0];
-    trigger.setAttribute('aria-label', match[0]);
-    frag.appendChild(trigger);
-
-    last = match.index + match[0].length;
-
-    if (last < original.length) {
-      frag.appendChild(document.createTextNode(original.slice(last)));
-    }
-
-    node.parentNode.replaceChild(frag, node);
-    break;
-  }
+  wrapPatternMatches(container, {
+    pattern: /Grup d[’']Estudi/gi,
+    className: 'gde-paint-trigger',
+    mode: 'first',
+    excludeSelector: 'a, .gde-paint-trigger'
+  });
 }
 
 function enhanceNcbTattooTrigger(container, slug) {
   if (slug !== NCB_TARGET_SLUG || !container) return;
 
   const pattern = state.lang === 'cat' ? /Sagrada Família tatuada/ : /Sagrada Família tattooed/;
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  let node = walker.nextNode();
 
-  while (node) {
-    if (!node.parentElement || node.parentElement.closest('a, .ncb-tattoo-trigger')) {
-      node = walker.nextNode();
-      continue;
-    }
-
-    const original = node.textContent || '';
-    const match = original.match(pattern);
-    if (!match || match.index === undefined) {
-      node = walker.nextNode();
-      continue;
-    }
-
-    const start = match.index;
-    const end = start + match[0].length;
-    const frag = document.createDocumentFragment();
-
-    if (start > 0) frag.appendChild(document.createTextNode(original.slice(0, start)));
-
-    const trigger = document.createElement('a');
-    trigger.href = '#';
-    trigger.className = 'ncb-tattoo-trigger';
-    trigger.textContent = match[0];
-    trigger.setAttribute('aria-label', match[0]);
-    frag.appendChild(trigger);
-
-    if (end < original.length) frag.appendChild(document.createTextNode(original.slice(end)));
-
-    node.parentNode.replaceChild(frag, node);
-    return;
-  }
+  wrapPatternMatches(container, {
+    pattern,
+    className: 'ncb-tattoo-trigger',
+    mode: 'first',
+    excludeSelector: 'a, .ncb-tattoo-trigger'
+  });
 }
 
 function enhanceCaraPilsPlayfulTrigger(container, slug) {
   if (slug !== CARAPILS_TARGET_SLUG || !container) return;
 
   const pattern = state.lang === 'cat' ? /\blúdic\b|\bludic\b/i : /\bplayful\b/i;
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  let node = walker.nextNode();
 
-  while (node) {
-    if (!node.parentElement || node.parentElement.closest('a, .carapils-playful-trigger')) {
-      node = walker.nextNode();
-      continue;
-    }
-
-    const original = node.textContent || '';
-    const match = original.match(pattern);
-    if (!match || match.index === undefined) {
-      node = walker.nextNode();
-      continue;
-    }
-
-    const frag = document.createDocumentFragment();
-    const start = match.index;
-    const end = start + match[0].length;
-
-    if (start > 0) frag.appendChild(document.createTextNode(original.slice(0, start)));
-
-    const trigger = document.createElement('a');
-    trigger.href = '#';
-    trigger.className = 'carapils-playful-trigger';
-    trigger.textContent = original.slice(start, end);
-    trigger.setAttribute('aria-label', trigger.textContent);
-    frag.appendChild(trigger);
-
-    if (end < original.length) frag.appendChild(document.createTextNode(original.slice(end)));
-
-    node.parentNode.replaceChild(frag, node);
-    return;
-  }
+  wrapPatternMatches(container, {
+    pattern,
+    className: 'carapils-playful-trigger',
+    mode: 'first',
+    excludeSelector: 'a, .carapils-playful-trigger'
+  });
 }
 
 function resetGodBlueState() {
@@ -1552,13 +1436,6 @@ function getProjectDescription(slug) {
     if (firstParagraph) return truncateText(stripHTMLTags(firstParagraph));
   }
   return SEO.defaultDescription;
-}
-
-function buildQueryString(slug, lang = state.lang) {
-  const params = new URLSearchParams();
-  if (slug && slug !== 'about') params.set('slug', slug);
-  if (lang === 'cat') params.set('lang', 'cat');
-  return params.toString();
 }
 
 function buildPath(slug, lang = state.lang) {
