@@ -4,7 +4,7 @@ Portfolio personal de Max Azemar. Una web minimalista que fusiona conceptos de n
 
 ## Características
 
--- **Acceso directo:** Usa `/project/nombre-del-proyecto/cat` o `/project/nombre-del-proyecto/en` para acceder directamente a un proyecto.
+-- **Acceso directo:** Usa `/en/nombre-del-proyecto` o `/cat/nombre-del-proyecto` para acceder directamente a un proyecto.
 
 ## Estructura del Proyecto
 
@@ -14,10 +14,8 @@ maxito/
 ├── style.css           # Estilos minimalistas
 ├── app.js              # Lógica de la aplicación
 ├── data.json           # Datos de proyectos y slides
-├── img/                # Imágenes de los proyectos
-└── manus/              # Documentación del proceso
-    ├── ROADMAP.md
-    └── TODO.md
+├── data/                # PDFs y assets de easter eggs
+└── img/                # Imágenes de los proyectos
 ```
 
 ## Uso
