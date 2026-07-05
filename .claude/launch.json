@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "maxito",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.cjs"],
+      "port": 8766
+    }
+  ]
+}
