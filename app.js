@@ -32,6 +32,10 @@ const GDE_PIXEL_SIZE = 1;
 const GOD_TARGET_SLUG = 'god';
 const ABOUT_TARGET_SLUG = 'about';
 const NCB_TARGET_SLUG = 'ncb';
+// Max time to wait for a new slide image to decode before fading back in.
+// Prevents the <img> from briefly painting the previous project's bitmap
+// during the fade-in, while still capping the wait for slow/broken images.
+const IMAGE_DECODE_TIMEOUT_MS = 1000;
 const carapilsCurtainState = {
   docClickHandler: null
 };
@@ -1813,6 +1817,7 @@ async function renderSlide(withTransition = true) {
 
   // Image
   el.slideImage.classList.toggle('foc-image-large', slug === 'foc');
+  let imageReady = null;
   if (slide.image) {
     const responsive = getResponsiveImageSources(slide.image);
     el.slideImage.src = responsive.src;
@@ -1825,6 +1830,12 @@ async function renderSlide(withTransition = true) {
     el.slideImage.style.display = 'block';
     el.slideImage.parentElement.style.display = 'flex';
     el.slideImage.onload = updateVerticalCentering;
+    // Start decoding the new bitmap now so we can wait for it before the
+    // fade-in (see below). Without this, the <img> keeps showing the
+    // previous project's image until the new one decodes.
+    if (typeof el.slideImage.decode === 'function') {
+      imageReady = el.slideImage.decode().catch(() => {});
+    }
   } else {
     el.slideImage.src = '';
     el.slideImage.srcset = '';
@@ -1884,8 +1895,15 @@ async function renderSlide(withTransition = true) {
   updateActiveProject();
   requestAnimationFrame(updateVerticalCentering);
 
-  // Fade in
+  // Fade in — wait for the new image to actually decode first, otherwise the
+  // <img> keeps painting the previous project's bitmap during the fade-in
+  // (looks like it briefly returns to the previous project before showing the
+  // right one). Capped by IMAGE_DECODE_TIMEOUT_MS so a slow/broken image can
+  // never freeze navigation.
   if (withTransition) {
+    if (imageReady) {
+      await Promise.race([imageReady, sleep(IMAGE_DECODE_TIMEOUT_MS)]);
+    }
     el.slideContent.classList.remove('transitioning');
     state.isTransitioning = false;
   }
