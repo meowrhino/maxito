@@ -1444,7 +1444,7 @@ function getProjectDescription(slug) {
 
 function buildPath(slug, lang = state.lang) {
   const safeLang = lang === 'cat' ? 'cat' : 'en';
-  if (!slug || slug === 'about') return `/${safeLang}`;
+  if (!slug || slug === 'about') return safeLang === 'en' ? '/' : `/${safeLang}`;
   const safeSlug = encodeURIComponent(slug);
   return `/${safeLang}/${safeSlug}`;
 }
