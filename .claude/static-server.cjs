@@ -1,9 +1,10 @@
 // Minimal static file server for local preview (no deps).
+// Serves dist/, the site as published: run `node build/build.mjs` first.
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '..', 'dist');
 const port = Number(process.env.PORT) || 8766;
 
 const types = {
@@ -21,10 +22,10 @@ http.createServer((req, res) => {
     if (!err && stat.isDirectory()) filePath = path.join(filePath, 'index.html');
     fs.readFile(filePath, (err2, data) => {
       if (err2) {
-        // SPA fallback to index.html (clean URL routing /[lang]/[slug])
-        fs.readFile(path.join(root, 'index.html'), (err3, fallback) => {
+        // Like GitHub Pages: unknown address -> 404.html with a 404
+        fs.readFile(path.join(root, '404.html'), (err3, fallback) => {
           if (err3) { res.writeHead(404); res.end('Not found'); return; }
-          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.writeHead(404, { 'Content-Type': 'text/html' });
           res.end(fallback);
         });
         return;

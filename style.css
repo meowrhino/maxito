@@ -71,6 +71,7 @@ body {
 .project-link {
   text-align: left;
   font-size: 1rem;
+  color: inherit; /* links since 2026-10-16, styled like the old buttons */
   text-decoration: none;
   transition: color var(--transition-speed), font-weight var(--transition-speed);
   position: relative;

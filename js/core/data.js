@@ -168,11 +168,11 @@ export function getProjectDescription(slug) {
   return SEO.defaultDescription;
 }
 
+// Same addresses as build/build.mjs: /, /god/, /ca/, /ca/god/
 export function buildPath(slug, lang = state.lang) {
-  const safeLang = lang === 'cat' ? 'cat' : 'en';
-  if (!slug || slug === 'about') return safeLang === 'en' ? '/' : `/${safeLang}`;
-  const safeSlug = encodeURIComponent(slug);
-  return `/${safeLang}/${safeSlug}`;
+  const prefix = lang === 'cat' ? '/ca' : '';
+  if (!slug || slug === 'about') return `${prefix}/`;
+  return `${prefix}/${encodeURIComponent(slug)}/`;
 }
 
 export function toAbsoluteURL(path) {

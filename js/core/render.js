@@ -65,7 +65,7 @@ export function syncURLAndSEO(slug, slide) {
   const caURL = `${SEO.baseUrl}${buildPath(slug, 'cat')}`;
   const enURL = `${SEO.baseUrl}${buildPath(slug, 'en')}`;
   const projectTitle = getProjectTitle(slug);
-  const title = SEO.siteName;
+  const title = slug === 'about' ? SEO.siteName : `${projectTitle} — ${SEO.siteName}`;
   const description = getProjectDescription(slug);
   const imageURL = toAbsoluteURL(slide?.image || SEO.defaultImage);
 
@@ -118,11 +118,12 @@ export function initProjectNav() {
       el.projectNav.appendChild(gap);
     }
 
-    const btn = document.createElement('button');
-    btn.className = 'project-link';
-    btn.textContent = getProjectTitle(slug);
-    btn.addEventListener('click', () => goToProject(i));
-    el.projectNav.appendChild(btn);
+    const link = document.createElement('a');
+    link.className = 'project-link';
+    link.href = buildPath(slug);
+    link.textContent = getProjectTitle(slug);
+    link.addEventListener('click', (event) => followInPlace(event, i));
+    el.projectNav.appendChild(link);
     previousGroup = currentGroup;
   });
   updateActiveProject();
@@ -177,6 +178,7 @@ export function moveNavIndicator(targetLink) {
 export function updateProjectNames() {
   el.projectNav.querySelectorAll('.project-link').forEach((link, i) => {
     link.textContent = getProjectTitle(state.projects[i]);
+    link.href = buildPath(state.projects[i]);
   });
 }
 
@@ -326,13 +328,11 @@ export function renderThumbs(currentSlug) {
     const slides = state.data[slug];
     if (!slides || !slides.length || !slides[0].image) return;
 
-    const btn = document.createElement('button');
+    const btn = document.createElement('a');
     btn.className = 'slide-thumb';
+    btn.href = buildPath(slug);
     btn.setAttribute('aria-label', getProjectTitle(slug));
-    btn.addEventListener('click', () => {
-      const idx = state.projects.indexOf(slug);
-      if (idx >= 0) goToProject(idx);
-    });
+    btn.addEventListener('click', (event) => followInPlace(event, state.projects.indexOf(slug)));
 
     const img = document.createElement('img');
     const responsive = getResponsiveImageSources(slides[0].image);
@@ -350,6 +350,14 @@ export function renderThumbs(currentSlug) {
 }
 
 // === Navigation ===
+// Nav links are real addresses (for search engines and cmd-click), but a
+// plain click changes the slide in place, as before.
+function followInPlace(event, index) {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  if (index >= 0) goToProject(index);
+}
+
 export function goToProject(index) {
   if (state.isTransitioning) return;
   state.currentProjectIndex = index;
@@ -455,12 +463,13 @@ export function closeImageModal() {
 export function parseURL() {
   const segments = window.location.pathname.split('/').filter(Boolean);
 
-  // Clean URL: /:lang or /:lang/:slug
-  if (segments.length >= 1 && (segments[0] === 'en' || segments[0] === 'cat')) {
-    state.lang = segments[0] === 'cat' ? 'cat' : 'en';
-    if (segments[1] && state.projects.includes(segments[1])) {
-      state.currentProjectIndex = state.projects.indexOf(segments[1]);
-    }
+  // /, /:slug/, /ca/, /ca/:slug/ (see buildPath)
+  if (segments[0] === 'ca') {
+    state.lang = 'cat';
+    segments.shift();
+  }
+  if (segments[0] && state.projects.includes(segments[0])) {
+    state.currentProjectIndex = state.projects.indexOf(segments[0]);
     return;
   }
 

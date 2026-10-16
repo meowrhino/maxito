@@ -2,3 +2,8 @@
 Thumbs.db
 *.log
 node_modules/
+
+# La web generada: la escribe `node build/build.mjs` y la publica la Action
+dist/
+# Las imágenes para compartir (ffmpeg): las hace el build
+.cache/

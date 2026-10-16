@@ -4,13 +4,14 @@ Portfolio personal de Max Azemar. Una web minimalista que fusiona conceptos de n
 
 ## Características
 
--- **Acceso directo:** Usa `/en/nombre-del-proyecto` o `/cat/nombre-del-proyecto` para acceder directamente a un proyecto.
+- **Una dirección por página:** `/god/` (inglés) y `/ca/god/` (catalán); el about es `/` y `/ca/`. Cada una es un HTML de verdad, con su contenido, su title y su og:image. Las de antes (`/en/god`, `/cat/god`) redirigen.
 
 ## Estructura del Proyecto
 
 ```
 maxito/
-├── index.html          # Estructura principal
+├── index.html          # La plantilla de todas las páginas
+├── build/build.mjs     # data.json + index.html -> dist/ (una página por dirección)
 ├── style.css           # Estilos minimalistas
 ├── app.js              # Lógica de la aplicación
 ├── data.json           # Datos de proyectos y slides
@@ -25,7 +26,8 @@ maxito/
    git clone https://github.com/meowrhino/maxito.git
    ```
 
-2. Abre `index.html` en tu navegador o despliega en un servidor web.
+2. `node build/build.mjs` escribe la web en `dist/` (no se commitea; con ffmpeg, también las og:image). Para verla: `node .claude/static-server.cjs` → http://localhost:8766.
+   Al hacer push a `main`, la Action (`.github/workflows/deploy.yml`) la construye y la publica en GitHub Pages.
 
 3. Para añadir nuevos proyectos, edita `data.json` siguiendo la estructura existente.
 
