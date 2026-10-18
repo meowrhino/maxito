@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "CARA PILS",
+  "text": {
+    "en": [
+      "The tourism authority of Flanders and Brussels granted me a scholarship to promote the region. I use all the promotional tourism resources at my disposal to offer my version of Belgian national identity, culminating in several intrusive guided tours of the Grand Place, where I present an alternative to unequivocal, playful, and depoliticized tourism.",
+      "The <a href='https://www.erasmusenflandes.com/author/max/'>official blog of the tourism office</a> was transformed into a legitimizing tool to include new “meanings” of Belgian tourist heritage: that is, to highlight cultural attractions that hold no economic interest for institutions but carry significant social importance, such as <a href='https://ca.wikipedia.org/wiki/Cara_Pils'>the cheapest beer on the market</a>, the custom of <a href='https://vensterbankdecoratie.tumblr.com/'>decorating windows</a>, or the metaphorical similarity between Belgian national identity and French fries. The articles on this blog were compiled into a tourist guide that was visually identical to the official guide and self distributed to the region’s various tourist offices."
+    ],
+    "ca": [
+      "L’autoritat de turisme de Flandes i Brussel·les em va concedir una beca per promoure la regió. Utilitzo tots els mitjans destinats a la promoció turística que tenia al meu abast per oferir la meva versió de la identitat nacional belga, culminant en diverses visites guiades furtives a la Grand Place, on presento una alternativa al turisme inequívoc, lúdic i despolititzat.",
+      "El <a href='https://www.erasmusenflandes.com/author/max/'>blog oficial de l’oficina de turisme</a> es va transformar en una eina de legitimació per incloure nous “significats” del patrimoni turístic belga: és a dir, per valorar atractius culturals sense interès econòmic per part de les institucions, però amb molta importància social, com <a href='https://ca.wikipedia.org/wiki/Cara_Pils'>la cervesa més barata del mercat</a>, el costum de <a href='https://vensterbankdecoratie.tumblr.com/'>decorar els finestrals</a> o la similitud metafòrica de la identitat nacional belga amb les patates fregides. Els articles d’aquest blog es van agrupar en una guia turística que era idèntica visualment a la guia oficial i que es va distribuir a les diferents oficines de turisme de la regió."
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

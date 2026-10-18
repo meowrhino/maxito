@@ -1,0 +1,19 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "OTHER TRASH",
+  "text": {
+    "en": [
+      "We curated an exhibition that invited theatre companies to create visual works and visual artists to build a stage for the performances.",
+      "As part of the Curatorial Research Program of the <a href='https://fundaciojoanbrossa.cat/arxiu-exposicions/pic2023/'>Fundació Joan Brossa</a> – Centre de les Arts Lliures, together with <a href='https://hangar.org/es/luca-caldero/'>Luca Calderó</a> and <a href='https://saladartjove.cat/es/curadors-archive/salva-g-ojeda/'>Salva Ojeda</a>, we used the space as an experimental laboratory to explore the performativity of things under the premise of going “beyond theatre.” What if the <a href='data/Other_Trash_Stop_Theatre_Sala.gif'>info sheet</a> came out of a Kleenex box? How do you perceive a work that is not on a pedestal but on a stripper pole? Why is the only way to listen to an installation by locking yourself in the bathroom? What would a guided tour led by an <a href='https://drive.google.com/drive/folders/16rpSKmmVQyknljz7FQJYrvXFUYXeTGLu'>improvising subway rapper</a> look like?",
+      "Photo gallery by <a href='https://www.flickr.com/photos/fundaciobrossa/page3'>Aina Canyelles</a> and <a href='https://drive.google.com/drive/folders/1umIo_GBIKtt0H764rdZM6yvsWLPiJsWy?usp=drive_link'>Helena Roig</a>."
+    ],
+    "ca": [
+      "Comissariem una exposició on es convidava companyies teatrals a crear obres visuals i artistes visuals a construir un escenari per a les performances.",
+      "Com a part del Programa d’Investigació Curatorial de la <a href='https://fundaciojoanbrossa.cat/arxiu-exposicions/pic2023/'>Fundació Joan Brossa</a> – Centre de les Arts Lliures, juntament amb <a href='https://hangar.org/es/luca-caldero/'>Luca Calderó</a> i <a href='https://saladartjove.cat/es/curadors-archive/salva-g-ojeda/'>Salva Ojeda</a>, vam utilitzar l’espai com un laboratori experimental per explorar la performativitat de les coses a partir de la consigna d’anar “més enllà del teatre”. I si el <a href='data/Other_Trash_Stop_Theatre_Sala.gif'>full de sala</a> sortís d’una capsa de kleenex? Com perceps una obra que no és sobre un pedestal sinó damunt d’una barra d’striptease? Per què l’única manera d’escoltar una instal·lació és tancar-te al lavabo? Com podria ser una visita guiada conduïda per un <a href='https://drive.google.com/file/d/1_T6PgWN8s-sziXIfMq1WLcBYTUf41lV_/view?usp=drive_link'>raper improvisador</a> del metro?",
+      "Galeria de fotos de <a href='https://www.flickr.com/photos/fundaciobrossa/page3'>Aina Canyelles</a> i <a href='https://drive.google.com/drive/folders/1umIo_GBIKtt0H764rdZM6yvsWLPiJsWy?usp=drive_link'>Helena Roig</a>."
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "BUSCO PIS",
+  "text": {
+    "en": [
+      "In a desperate attempt to find a room to rent in Barcelona, I write a curriculum vitae based on the history of the rooms I have lived in, instead of my work trajectory. I present myself at every interview as a potential flatmate with this document to break the ice. Although <a href='https://www.3cat.cat/3catinfo/castings-per-trobar-un-pis-de-lloguer-cada-cop-mes-requisits/noticia/3194549/' data-open-tabs='https://x.com/maxazcc/status/1582749703170838528'>the idea went viral</a> and I was interviewed on <a href='https://beteve.cat/basics/buscar-pis-barcelona-dificultat-extrema-curriculum/' data-open-tabs='https://www.3cat.cat/3cat/casting-per-trobar-pis/video/6181937/'>television</a> and <a href='https://www.21radio.cat/la-magnifica-idea-de-fer-un-cv-per-buscar-companys-de-pis/'>radio</a>, it didn't help me find a room."
+    ],
+    "ca": [
+      "En un intent desesperat de trobar una habitació de lloguer a Barcelona, escric un currículum vitae basat en la història de les habitacions on he viscut, en lloc de la meva trajectòria laboral. Em presento a totes les entrevistes com a company de pis amb aquest document per trencar el gel. Tot i que <a href='https://www.3cat.cat/3catinfo/castings-per-trobar-un-pis-de-lloguer-cada-cop-mes-requisits/noticia/3194549/' data-open-tabs='https://x.com/maxazcc/status/1582749703170838528'>la idea es va fer viral</a> i em van entrevistar a <a href='https://beteve.cat/basics/buscar-pis-barcelona-dificultat-extrema-curriculum/' data-open-tabs='https://www.3cat.cat/3cat/casting-per-trobar-pis/video/6181937/'>la televisió</a> i a <a href='https://www.21radio.cat/la-magnifica-idea-de-fer-un-cv-per-buscar-companys-de-pis/'>la ràdio</a>, no em va ajudar a trobar cap habitació."
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/site.json",
+  "title": "Max Azemar",
+  "url": "https://maxazemar.com",
+  "description": "Portfolio of Max Azemar: art projects, research, and performative practices between art and life.",
+  "lists": {
+    "about": { "projects": ["about"] },
+    "work": { "projects": ["god", "foc", "arbre", "pis", "gettingby", "ncb", "carapils", "corporate"] },
+    "collective": { "projects": ["gde", "trash"] }
+  }
+}

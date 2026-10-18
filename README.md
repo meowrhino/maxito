@@ -6,36 +6,53 @@ Portfolio personal de Max Azemar. Una web minimalista que fusiona conceptos de n
 
 - **Una dirección por página:** `/god/` (inglés) y `/ca/god/` (catalán); el about es `/` y `/ca/`. Cada una es un HTML de verdad, con su contenido, su title y su og:image. Las de antes (`/en/god`, `/cat/god`) redirigen.
 
-## Estructura del Proyecto
+## Estructura
 
 ```
 maxito/
-├── index.html          # La plantilla de todas las páginas
-├── build/build.mjs     # data.json + index.html -> dist/ (una página por dirección)
-├── style.css           # Estilos minimalistas
-├── app.js              # Lógica de la aplicación
-├── data.json           # Datos de proyectos y slides
-├── data/                # PDFs y assets de easter eggs
-└── img/                # Imágenes de los proyectos
+├── data/site.json          el nombre, el dominio y el menú: "lists" (about, work, collective), en orden
+├── data/                   también los PDF y los easter eggs (eastereggs/, svg/)
+├── projects/<slug>/        un proyecto, una carpeta: project.json + img/1.webp… (imgToWeb)
+├── schema/                 qué campos lleva cada JSON (VS Code, el build y la vista previa)
+├── index.html              la plantilla de todas las páginas, y la vista previa con Live Server
+├── build/build.mjs         data/ + projects/ + index.html → dist/ (una página por dirección)
+├── app.js, js/core/        el JS de siempre (render, estado); js/effects/, los easter eggs
+├── js/core/house.js        la forma de la casa → la forma que entiende el JS (lo usan el navegador y el build)
+├── js/core/validar.js      el JSON Schema sin dependencias (de JAMstack), mensajes en catalán
+├── style.css
+├── GUIA.md                 para Max · TRASPASO.md · CLAUDE.md (si el build falla)
+└── wrangler.jsonc          la copia de Max, en Workers Builds
 ```
+
+## Cómo funciona
+
+- **Una SPA con pre-render** (JAMstack, receta §"SPA"): el build escribe cada dirección con su
+  contenido, su title y su og:image, y al cargar el JS de siempre vuelve a pintar lo mismo. Las
+  flechas, los idiomas y los easter eggs no cambian de página, solo de dirección. Por eso no lleva
+  la transición de la casa: no hay recargas entre proyectos.
+- **El contenido, a la manera de la casa**: `data/site.json` + `projects/<slug>/project.json`,
+  campos en inglés, `{ "en", "ca" }`, fotos por número. `js/core/house.js` lo pasa a la forma
+  de antes (`{ slug: [slides] }`, con `title_cat`, `text_en`…), así que render.js y los efectos
+  no cambian. Una lista de `lists` es un grupo del menú; `about` tiene que ser el primero.
+- **Fotos**: una sola versión en el repo (imgToWeb). El build hace con **sharp** (`npm ci`) la
+  og:image (1200×630, sobre `#f5f5f0`) y las de 640 y 1200 del `srcset`, en `.cache/` (fuera de
+  git) y a `dist/` junto a su foto. Sin sharp, avisa y publica sin ellas.
+- **Vista previa**: Live Server sobre la carpeta (`index.html`). Sin `data-built` en `<html>`, el
+  JS valida los JSON con `schema/` y enseña en pantalla lo que pararía el build; las fotos van sin
+  `srcset` (las pequeñas solo las hace el build).
+- **Publicar, una en cada copia**: la nuestra, `.github/workflows/deploy.yml` a GitHub Pages
+  (solo corre en `meowrhino`; si falla, un issue). La de Max, Workers Builds con `wrangler.jsonc`.
+  El build mira dónde está: con `GITHUB_ACTIONS`, base `/maxito` y `noindex`; si no, la raíz y el
+  `url` de `site.json` (con `url`, se indexa). Traspaso: [TRASPASO.md](TRASPASO.md).
+- **Direcciones**: `/`, `/god/`, `/ca/`, `/ca/god/`; las de antes (`/en/god`, `/cat/god`) redirigen.
+- **Ocultos**: no hay. En una SPA el menú es la web entera; para quitar un proyecto, se quita de `lists`.
 
 ## Uso
 
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/meowrhino/maxito.git
-   ```
-
-2. `node build/build.mjs` escribe la web en `dist/` (no se commitea; con ffmpeg, también las og:image). Para verla: `node .claude/static-server.cjs` → http://localhost:8766.
-   Al hacer push a `main`, la Action (`.github/workflows/deploy.yml`) la construye y la publica en GitHub Pages.
-
-3. Para añadir nuevos proyectos, edita `data.json` siguiendo la estructura existente.
-
-## Tecnologías
-
-- HTML5
-- CSS3 (sin frameworks)
-- JavaScript vanilla (sin librerías)
+```bash
+npm ci
+node build/build.mjs      # escribe dist/
+```
 
 ## Cambios v2
 

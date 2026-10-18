@@ -1,5 +1,5 @@
-/* El build: data.json + index.html (la plantilla) -> dist/, la web tal cual
-   se publica. `node build/build.mjs`
+/* El build: data/site.json + projects/<slug>/ + index.html (la plantilla)
+   -> dist/, la web tal cual se publica. `node build/build.mjs`
 
    Cada página es una dirección de verdad, con su contenido ya escrito, su
    title, su og:image y su canonical (antes era una sola página y el JS
@@ -13,29 +13,28 @@
    cambian de página, solo de dirección. Las direcciones viejas (/en/god,
    /cat/god, /cat) redirigen a las nuevas.
 
-   Si algo está mal (una coma, una foto que no está), para y dice qué. */
+   Si algo está mal (una coma, un campo mal escrito, una foto que no está),
+   para y dice qué, en catalán (lo lee Max).
+
+   Los datos los lee js/core/house.js, el mismo que usa el navegador, y los
+   deja en la forma de siempre del JS ({ slug: [slides] }): lo de abajo no cambia. */
 
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { listedSlugs, toSlides } from '../js/core/house.js';
+import { validar } from '../js/core/validar.js';
 
 const ROOT = resolve(fileURLToPath(import.meta.url), '../..');
 const OUT = join(ROOT, 'dist');
-const SITE = 'https://maxazemar.com';
-// dónde vive la web dentro del dominio: '' en maxazemar.com, '/maxito' en meowrhino.github.io/maxito (lo pone la Action)
-const BASE = (process.env.BASE || '').replace(/\/+$/, '');
-const NAME = 'Max Azemar';
-const DEFAULT_DESCRIPTION = 'Portfolio of Max Azemar: art projects, research, and performative practices between art and life.';
-const DEFAULT_IMAGE = 'img/1.webp';
-const HOME = 'about';
+const HOME = 'about';   // la portada: el JS la trata aparte (js/core/data.js → sitePath, los efectos)
 // 'cat' es como lo llaman data.json y el JS; en la dirección y en hreflang, 'ca'
 const LANGS = {
   en: { code: 'en', locale: 'en_US', prefix: '' },
   cat: { code: 'ca', locale: 'ca_ES', prefix: '/ca' },
 };
-// lo que se copia tal cual a dist/
-const STATIC = ['style.css', 'app.js', 'js', 'data.json', 'data', 'img', 'CNAME', 'robots.txt'];
+// lo que se copia tal cual a dist/ (los JSON también: el JS los lee al cargar)
+const STATIC = ['style.css', 'app.js', 'js', 'data', 'projects'];
 
 function fail(msg) {
   console.error(`\n✗ ${msg}\n`);
@@ -44,24 +43,45 @@ function fail(msg) {
 
 /* ---------- los datos ---------- */
 
-let data;
-try {
-  data = JSON.parse(readFileSync(join(ROOT, 'data.json'), 'utf8'));
-} catch (err) {
-  fail(`data.json no se puede leer: ${err.message}\n  Casi siempre es una coma que falta o que sobra justo antes de esa línea.`);
-}
-const slugs = Object.keys(data);
-if (slugs[0] !== HOME) fail(`el primer bloque de data.json tiene que ser "${HOME}": es la portada.`);
-for (const slug of slugs) {
-  if (!/^[a-z0-9-]+$/.test(slug)) fail(`"${slug}": el nombre de un proyecto solo puede llevar minúsculas, números y guiones (sale en la dirección).`);
-  if (['ca', 'cat', 'en', 'data', 'img', 'js', 'og'].includes(slug)) fail(`"${slug}" no puede ser el nombre de un proyecto: es una carpeta de la web.`);
-  const slides = data[slug];
-  if (!Array.isArray(slides) || !slides.length) fail(`"${slug}" tiene que ser una lista con al menos un bloque [ { … } ].`);
-  if (!slides[0].title_en && !slides[0].title_cat) fail(`"${slug}" no tiene título (title_en o title_cat).`);
-  for (const slide of slides) {
-    if (slide.image && !existsSync(join(ROOT, slide.image))) fail(`"${slug}": la foto ${slide.image} no está.`);
+function read(rel) {
+  let text;
+  try { text = readFileSync(join(ROOT, rel), 'utf8'); } catch { fail(`no trobo ${rel}`); }
+  try { return JSON.parse(text); } catch (err) {
+    fail(`${rel} no és un JSON vàlid: ${err.message}\n  Gairebé sempre és una coma de més o de menys, o unes cometes sense tancar, a prop d'aquesta línia.`);
   }
 }
+// cada JSON, con su esquema (schema/): lo mismo que VS Code subraya en rojo
+const schema = (type) => JSON.parse(readFileSync(join(ROOT, 'schema', `${type}.json`), 'utf8'));
+const site = read('data/site.json');
+const errors = validar(site, schema('site'), 'data/site.json');
+const slugs = errors.length ? [] : listedSlugs(site);
+const projects = {};
+for (const slug of slugs) {
+  if (projects[slug]) errors.push(`data/site.json: "${slug}" surt dues vegades a "lists"`);
+  if (['ca', 'cat', 'en', 'data', 'js', 'og', 'projects', 'schema'].includes(slug)) errors.push(`data/site.json: "${slug}" no pot ser el nom d'un projecte: és una carpeta de la web.`);
+  const rel = `projects/${slug}/project.json`;
+  if (!existsSync(join(ROOT, rel))) { errors.push(`data/site.json: "lists" diu "${slug}", i no hi ha cap ${rel}`); continue; }
+  const p = projects[slug] = read(rel);
+  errors.push(...validar(p, schema('project'), rel));
+  for (const n of Array.isArray(p.photos) ? p.photos : []) {
+    if (!existsSync(join(ROOT, 'projects', slug, 'img', `${n}.webp`))) errors.push(`${rel}: "photos" diu "${n}", i no hi ha cap img/${n}.webp (passa-la per imgToWeb)`);
+  }
+}
+if (!errors.length && slugs[0] !== HOME) errors.push(`data/site.json: el primer projecte de la primera llista ha de ser "${HOME}": és la portada.`);
+if (errors.length) fail(`${errors.join('\n✗ ')}\n\nNo es publica res fins que s'arreglin.`);
+const data = toSlides(site, projects);
+
+/* Dónde se publica, según dónde se construye (JAMstack, patrones §5): en la
+   Action de GitHub (nuestra copia), meowrhino.github.io/maxito/ y sin indexar;
+   en cualquier otro sitio (Cloudflare, en la copia de Max), la raíz y el
+   dominio de site.json → "url", y se indexa si lo hay. */
+const github = process.env.GITHUB_ACTIONS === 'true';
+const [owner, repo] = (process.env.GITHUB_REPOSITORY || 'meowrhino/maxito').split('/');
+const BASE = github ? `/${repo}` : '';
+const SITE = github ? `https://${owner}.github.io${BASE}` : String(site.url || '').replace(/\/+$/, '');
+const INDEX = !github && !!site.url;
+const NAME = site.title;
+const DEFAULT_IMAGE = Object.values(data).flat().find((s) => s.image)?.image || '';
 
 /* ---------- lo mismo que js/core/data.js, para escribirlo sin navegador ---------- */
 
@@ -83,10 +103,11 @@ function safeURL(url) {
   return asset(u);
 }
 
+// las de 640 y 1200 las hace sharp (abajo) junto a la foto, como las pide el JS
 function responsive(p) {
   const src = asset(p);
   const m = src.match(/^(.*)\.webp$/i);
-  return m ? { src, srcset: `${m[1]}-640.webp 640w, ${m[1]}-1200.webp 1200w, ${src} 2000w` } : { src, srcset: '' };
+  return m && made.has(p) ? { src, srcset: `${m[1]}-640.webp 640w, ${m[1]}-1200.webp 1200w, ${src} 2000w` } : { src, srcset: '' };
 }
 
 function description(slug, lang) {
@@ -96,7 +117,8 @@ function description(slug, lang) {
     const text = first.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
     return text.length <= 160 ? text : text.slice(0, 157).trimEnd() + '...';
   }
-  return DEFAULT_DESCRIPTION;
+  const d = site.description;
+  return (d && typeof d === 'object' ? d[LANGS[lang].code] || d.en : d) || '';
 }
 
 /* El HTML de los textos, como lo deja appendSanitizedInlineHTML: solo
@@ -174,33 +196,57 @@ function main(slug, lang) {
     </main>`;
 }
 
-/* ---------- la imagen al compartir: 1200×630 en JPG (como almarbra) ---------- */
+/* ---------- las fotos que hace el build, con sharp ---------- */
 
+/* De cada foto: la de compartir (og:image), 1200×630 en JPG, la foto entera
+   sobre el fondo de la web con aire (como almarbra); y las de 640 y 1200 de
+   ancho para el srcset. En .cache/ (fuera de git), con nombre según la foto:
+   solo se rehacen si cambia. Las hace sharp (npm ci; va igual en la Action y
+   en Workers Builds); sin sharp se publica igual, se comparte la foto tal cual
+   y sin tamaños pequeños, y se avisa. */
 const OG_W = 1200;
 const OG_H = 630;
 const AIR = 48;
-const FIT = `scale=${OG_W - 2 * AIR}:${OG_H - 2 * AIR}:force_original_aspect_ratio=decrease,pad=${OG_W}:${OG_H}:(ow-iw)/2:(oh-ih)/2:0xf5f5f0`;
-let ffmpeg = true;
+const BG = '#f5f5f0';
+const SIZES = [640, 1200];
+const made = new Set();   // las fotos con su og y sus tamaños en .cache/
+// projects/god/img/1.webp → god-1
+const nameOf = (src) => src.replace(/^projects\/([^/]+)\/img\/(.+)\.webp$/i, '$1-$2');
+const cached = (dir, src, ext) => join(ROOT, '.cache', dir, nameOf(src) + ext);
+const fresh = (file, src) => existsSync(file) && statSync(file).mtimeMs >= statSync(join(ROOT, src)).mtimeMs;
 
-/* Hace (o saca de .cache/og/) la og:image de la foto `src` y la copia a
-   dist/og/; devuelve su ruta, o null si no hay ffmpeg (se comparte la foto). */
-function og(src) {
-  const name = src.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
-  const cached = join(ROOT, '.cache', 'og', `${name}.jpg`);
-  let ok = existsSync(cached) && statSync(cached).mtimeMs >= statSync(join(ROOT, src)).mtimeMs;
-  if (!ok && ffmpeg) {
-    try {
-      mkdirSync(dirname(cached), { recursive: true });
-      execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', join(ROOT, src), '-vf', FIT, '-q:v', '3', cached]);
-      ok = true;
-    } catch {
-      ffmpeg = false;
-      console.warn('⚠ sin ffmpeg (brew install ffmpeg): al compartir sale la foto tal cual');
+let sharp = null;
+try { sharp = (await import('sharp')).default; } catch (err) {
+  console.warn(`⚠ sense sharp (${err.code || err.message}): en compartir surt la foto tal qual, i sense mides petites. S'arregla amb: npm ci`);
+}
+for (const src of new Set(Object.values(data).flat().map((s) => s.image).filter(Boolean))) {
+  if (!sharp) break;
+  try {
+    const file = join(ROOT, src);
+    const og = cached('og', src, '.jpg');
+    if (!fresh(og, src)) {
+      mkdirSync(dirname(og), { recursive: true });
+      await sharp(file).resize(OG_W - 2 * AIR, OG_H - 2 * AIR, { fit: 'contain', background: BG })
+        .extend({ top: AIR, bottom: AIR, left: AIR, right: AIR, background: BG })
+        .flatten({ background: BG }).jpeg({ quality: 85, mozjpeg: true }).toFile(og);
     }
+    for (const w of SIZES) {
+      const out = cached('sizes', src, `-${w}.webp`);
+      if (fresh(out, src)) continue;
+      mkdirSync(dirname(out), { recursive: true });
+      await sharp(file).resize({ width: w, withoutEnlargement: true }).webp({ quality: 85 }).toFile(out);
+    }
+    made.add(src);
+  } catch (err) {
+    console.warn(`⚠ ${src}: sharp no la pot llegir (${err.message}); en compartir surt tal qual`);
   }
-  if (!ok) return null;
-  const out = `og/${name}.jpg`;
-  cpSync(cached, join(OUT, out));
+}
+
+/* La og de la foto `src`, copiada a dist/og/; su ruta, o null (se comparte la foto). */
+function og(src) {
+  if (!made.has(src)) return null;
+  const out = `og/${nameOf(src)}.jpg`;
+  cpSync(cached('og', src, '.jpg'), join(OUT, out));
   return out;
 }
 
@@ -224,8 +270,11 @@ function page(slug, lang, { robots } = {}) {
   const share = og(image);
   let html = template;
   html = swap(html, /<base href="[^"]*">/, `<base href="${BASE}/">`);
-  html = swap(html, /<html lang="[^"]*">/, `<html lang="${L.code}">`);
+  // data-built: el JS sabe que no es la vista previa (js/core/data.js)
+  html = swap(html, /<html lang="[^"]*">/, `<html lang="${L.code}" data-built>`);
   html = swap(html, /<title>[^<]*<\/title>/, `<title>${esc(pageTitle(slug, lang))}</title>`);
+  // en github.io, o sin dominio en site.json, la web es de pruebas: no se indexa
+  robots ||= INDEX ? '' : 'noindex';
   if (robots) html = swap(html, /(<meta name="robots" content=")[^"]*(")/, `$1${robots}$2`);
   html = setAttr(html, 'meta-description', 'content', desc);
   html = setAttr(html, 'meta-canonical', 'href', url);
@@ -272,6 +321,8 @@ const redirect = (to) => `<!DOCTYPE html>
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(join(OUT, 'og'), { recursive: true });
 for (const f of STATIC) cpSync(join(ROOT, f), join(OUT, f), { recursive: true });
+// las de 640 y 1200, junto a su foto (projects/god/img/1-640.webp)
+for (const src of made) for (const w of SIZES) cpSync(cached('sizes', src, `-${w}.webp`), join(OUT, src.replace(/\.webp$/i, `-${w}.webp`)));
 
 const urls = [];
 for (const lang of Object.keys(LANGS)) {
@@ -293,5 +344,6 @@ writeFileSync(join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 ${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}
 </urlset>
 `);
+writeFileSync(join(OUT, 'robots.txt'), INDEX ? `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n` : 'User-agent: *\nDisallow: /\n');
 
 console.log(`✓ dist/: ${urls.length} páginas (${slugs.length} × ${Object.keys(LANGS).length} idiomas)`);

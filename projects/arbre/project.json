@@ -1,0 +1,19 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "EQNEUA",
+  "text": {
+    "en": [
+      "The first chapter of botanical guides about trees often includes an attempt to define what a tree is: a task that, according to the biologist Francis Hallé, should be entrusted to philosophers. Through a <a href='data/EQNEUA_IMPRIMIR.pdf'>publication in the form of a portable slideshow</a>, I present research on arboreal metaphors and lay out arguments explaining why most of them are obsolete.",
+      "This research expands without establishing hierarchies between different theoretical studies in the humanities — Deleuze, Calvino, <a href='https://yalebooks.yale.edu/book/9780300225785/seeing-trees/'>Dümpelmann</a> — scientific research in the field of urban arboriculture — Wohlleben, Drénou, <a href='https://fr.wikipedia.org/wiki/Francis_Hall%C3%A9'>Hallé</a> — and artistic representations in which the tree acquires a special meaning — <a href='https://arxiu.perejaume.cat/arxiu/la-rel-de-larbre-es-una-roda'>Perejaume</a>, Abramović, etc. The format of the publication is inspired by the notebooks used by tour guides. There are two ways of approaching the book: as a reader — also reading the “presenter’s notes” — or as an attendee at <a href='https://www.lacapella.barcelona/ca/programacio/activitats/presentacio-del-llibre-el-que-no-es-un-arbre-de-max-azemar-en-el-marc-de-ja'>one of the presentations</a>, where only the images are shown, accompanied by a <a href='https://www.ibb.csic.es/ca/2023/05/el-que-no-es-un-arbre/'>guided walking tour</a>.",
+      "Photo by: <a href='https://ainacanyellesllado.com/'>Aina Canyelles</a>"
+    ],
+    "ca": [
+      "El primer capítol de les guies botàniques sobre arbres sovint inclou un intent de definir què és un arbre: una tasca que, segons el biòleg Francis Hallé, hauria de ser encomanada als filòsofs. Mitjançant una <a href='data/EQNEUA_IMPRIMIR.pdf'>publicació en forma de conferència de diapositives portàtil</a>, presento una recerca sobre les metàfores arbòries i exposo arguments que expliquen per què la majoria són obsoletes.",
+      "Aquesta recerca s’amplia sense establir jerarquies entre diferents estudis teòrics en l’àmbit de les humanitats —Deleuze, Calvino, <a href='https://yalebooks.yale.edu/book/9780300225785/seeing-trees/'>Dümpelmann</a>—, la recerca científica en el camp de l’arboricultura urbana —Wohlleben, Drénou, <a href='https://fr.wikipedia.org/wiki/Francis_Hall%C3%A9'>Hallé</a>— i representacions artístiques en què l’arbre adquireix un significat especial —<a href='https://arxiu.perejaume.cat/arxiu/la-rel-de-larbre-es-una-roda'>Perejaume</a>, Abramović, etc. El format de la publicació s’inspira en els quaderns utilitzats pels guies turístics. Hi ha dues maneres d’apropar-se al llibre: com a lector —llegint també les “notes del presentador”— o com a assistent a <a href='https://www.lacapella.barcelona/ca/programacio/activitats/presentacio-del-llibre-el-que-no-es-un-arbre-de-max-azemar-en-el-marc-de-ja'>una de les presentacions</a>, on només es veuen les imatges, acompanyades d’una <a href='https://www.ibb.csic.es/ca/2023/05/el-que-no-es-un-arbre/'>visita guiada a peu</a>.",
+      "Foto per: <a href='https://ainacanyellesllado.com/'>Aina Canyelles</a>"
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

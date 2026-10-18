@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "data/site.json: el general de la web",
+  "description": "data/site.json: el nom, el domini i què surt al menú, en quin ordre. VS Code llegeix aquest fitxer (pel \"$schema\" de dalt del JSON) per completar, explicar cada camp i subratllar el que està malament; el build i la vista prèvia el fan servir per revisar.",
+  "type": "object",
+  "required": [
+    "title",
+    "lists"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "_": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "description": "El nom: surt a la pestanya i a Google."
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^https://[^/]+$",
+      "description": "El domini, sense barra al final: \"https://maxazemar.com\". Sense domini, null (i Google no la indexa)."
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "en": {
+              "type": "string"
+            },
+            "ca": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "description": "El que surt a Google si una pàgina no té text. Igual en els dos idiomes, o { \"en\": \"…\", \"ca\": \"…\" }"
+    },
+    "lists": {
+      "type": "object",
+      "description": "Els grups del menú, en ordre; entre grup i grup, un espai. El primer projecte del primer grup és la portada. Per treure un projecte de la web, treu-lo de la llista.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "projects"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "projects": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+              "description": "El nom de la carpeta a projects/: minúscules, números i guions. Surt a l'adreça."
+            },
+            "description": "Els projectes del grup, en ordre: [\"god\", \"foc\"]"
+          }
+        }
+      }
+    }
+  }
+}

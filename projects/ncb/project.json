@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "NCB",
+  "text": {
+    "en": [
+      "Ed Sheeran is an unconditional fan of the city of Barcelona: he even has the Sagrada Família tattooed on his arm. It’s a shame that the song he dedicates to the city doesn’t have an official music video. Therefore, I propose <a href='https://www.youtube.com/watch?v=OyGyjN9h5YM'>a music video for Ed Sheeran’s song “Barcelona”</a>, made up of a series of videos showing seagulls devouring pigeons on the streets of the Catalan capital. The singer has not officially approved the video yet.",
+      "Since <a href='https://www.escolamassana.cat/ca/apertus-02-noitcefler-reflection_60655.pdf'>every reflection distorts reality</a>—even the most reliable mirror produces a reversed version—I explored a distorted image of Barcelona. This music video is one of the results. In the song “Barcelona”, Ed Sheeran encourages us to drink sangria and dance in front of the basilica, but he omits the image of the other Barcelona: the one with seagulls devouring pigeons. The proposed video consists of clips recorded by 17 tourists who, possibly first attracted by the fantasy projected by the pop artist, left with a grotesque souvenir of the city and uploaded the videos to YouTube."
+    ],
+    "ca": [
+      "Ed Sheeran és un fan incondicional de la ciutat de Barcelona: fins i tot té la Sagrada Família tatuada al braç. És una llàstima que la cançó que li dedica a la ciutat no tingui cap videoclip oficial. Per això, proposo <a href='https://www.youtube.com/watch?v=OyGyjN9h5YM'>un videoclip de la cançó “Barcelona” d’Ed Sheeran</a>, format per un conjunt de vídeos de gavines devorant coloms als carrers de la ciutat comptal. El cantant encara no ha acceptat oficialment el videoclip.",
+      "Donat que <a href='https://www.escolamassana.cat/ca/apertus-02-noitcefler-reflection_60655.pdf'>tot reflex distorsiona la realitat</a> —fins i tot el mirall més fiable emet una versió invertida—, vaig explorar la imatge distorsionada de Barcelona. Aquest videoclip és un dels resultats. En la cançó “Barcelona”, Ed Sheeran ens anima a beure sangria i a ballar davant de la basílica, però obvia la imatge de l’altra Barcelona: la de les gavines devorant coloms. El videoclip proposat consta de fragments gravats per 17 turistes que, possiblement atrets primer per la fantasia projectada per l’artista pop, es van endur un record grotesc de la ciutat i van penjar els vídeos a YouTube."
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

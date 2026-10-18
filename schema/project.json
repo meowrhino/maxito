@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "projects/<slug>/project.json: un projecte",
+  "description": "projects/<slug>/project.json: un projecte. Les fotos, a img/ de la mateixa carpeta (1.webp, 2.webp…, d'imgToWeb). VS Code llegeix aquest fitxer (pel \"$schema\" de dalt del JSON) per completar, explicar cada camp i subratllar el que està malament; el build i la vista prèvia el fan servir per revisar.",
+  "type": "object",
+  "required": [
+    "title"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "_": {
+      "type": "string"
+    },
+    "title": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "en": {
+              "type": "string"
+            },
+            "ca": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "description": "El títol, al menú i a la pàgina. Igual en els dos idiomes (\"GOD TO GREAT\"), o { \"en\": \"…\", \"ca\": \"…\" }"
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "El text, una llista de paràgrafs per idioma. El principi surt a Google. Enllaços dins del text: <a href='https://…'>així</a>; *cursiva* amb <em>…</em>.",
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ca": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "El número, entre cometes i sense .webp: \"1\""
+      },
+      "description": "Les fotos de img/, en ordre: [\"1\", \"2\"]. Cada una és una diapositiva; el text surt amb la primera. La primera surt també en compartir."
+    },
+    "links": {
+      "type": "array",
+      "description": "Els enllaços de sota el text, en ordre.",
+      "items": {
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "ca": {
+                    "type": "string"
+                  }
+                }
+              }
+            ],
+            "description": "El que es llegeix: \"CV.pdf\", o { \"en\": \"…\", \"ca\": \"…\" }"
+          },
+          "url": {
+            "type": "string",
+            "description": "On porta: \"https://…\", o un fitxer de la web, \"data/CV.pdf\". Sense url, és només text."
+          },
+          "prefix": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "ca": {
+                    "type": "string"
+                  }
+                }
+              }
+            ],
+            "description": "Opcional: el que va abans, sense enllaç: \"web: \""
+          },
+          "space": {
+            "type": "boolean",
+            "description": "Opcional: true deixa un espai abans d'aquest enllaç."
+          }
+        }
+      }
+    }
+  }
+}

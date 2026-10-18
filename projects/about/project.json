@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "ABOUT",
+  "text": {
+    "en": [
+      "Hello! My name is Max. My full CV states that I have worked in the subway as a train driver, as a flight attendant on an airplane, and as a volunteer on a Mediterranean llagut rowing team. However, in the future I would like to dedicate myself exclusively to urban arboriculture techniques, although I am currently an arts student living in New York. I’m doing my best to blur the gap between art and life.",
+      "My projects expand artistic research through tools such as performative lectures, installations, and actions linked to specific contexts. Based on an extensive first-person research process, I propose anecdotal situations that use absurdity to generate debate and highlight certain issues that challenge or concern me. Although I trust in ambiguous and dispersed processes, I strive to share each project in a way that is easy to understand."
+    ],
+    "ca": [
+      "Hola! Em dic Max. El meu currículum complet indica que he treballat al metro com a conductor de tren, com a auxiliar de vol en un avió i com a voluntari en un equip de rem en llagut mediterrani. En un futur m’agradaria dedicar-me exclusivament a la tècnica d’arboricultura urbana tot i que ara sóc estudiant d’arts i visc a Nova York. Em prenc molt seriosament el repte d’esborrar els límits entre l’art i la vida.",
+      "Els meus projectes expandeixen la recerca artística a través d’eines com conferències performatives, instal·lacions i accions vinculades a contextos específics. A partir d’un procés d’investigació extens en primera persona, proposo situacions anecdòtiques que utilitzen l’absurd per generar debats i evidenciar alguns fets que m’interpel·len. Tot i que confio en processos ambigus i dispersos, m’esforço per poder compartir cada projecte de manera entenedora."
+    ]
+  },
+  "links": [
+    {
+      "text": "CV.pdf",
+      "url": "data/CV.pdf"
+    },
+    {
+      "text": "Bio",
+      "url": "https://becarios.fundacionlacaixa.org/en/web/guest/fellows/max-enric-azemar-i-carnicero-B006289"
+    },
+    {
+      "text": "meowrhino.studio",
+      "url": "https://meowrhino.studio",
+      "prefix": "web: ",
+      "space": true
+    }
+  ]
+}

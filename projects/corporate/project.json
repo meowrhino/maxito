@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "CORPORATE",
+  "text": {
+    "en": [
+      "In 2015, I convinced the Intellectual Property Office of Barcelona to accept the registration of my body, so that it would be publicly cataloged as an organic, evolving, and exempt sculpture. Months later, the registrar sent me a lengthy letter explaining why the human genome is not registrable.",
+      "This gesture explores the recognition of authorship over my body, my image, and my identity, while assigning rights and duties different from those of any other human body. At the same time, through this action I investigate the requirements demanded by the bureaucratic system to access the identification regime of a work of art."
+    ],
+    "ca": [
+      "L’any 2015, vaig convèncer l’oficina de propietat intel·lectual de Barcelona perquè acceptés el registre del meu cos, de manera que fos catalogat públicament com una escultura orgànica, evolutiva i exempta. Mesos més tard, el registrador em va enviar una extensa carta on argumentava per què el genoma humà no és registrable.",
+      "Aquest gest explora el reconeixement de l’autoria sobre el meu cos, la meva imatge i la meva identitat, alhora que atribueix drets i deures diferents dels de qualsevol altre cos humà. D’altra banda, amb aquesta acció investigo quins són els requisits que exigeix el sistema burocràtic per accedir al règim d’identificació d’una obra d’art."
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "GETTING BY",
+  "text": {
+    "en": [
+      "The slogan “Your life is a startup” suggests that our lives are precariously close to failure, as more than nine out of ten startups fail in the years following their creation. I distributed several San Pedro cacti throughout the shared spaces of Escola Massana with the goal of reducing the potential risk of semicircular lipoatrophy faced by users of the new building, designed by Carme Pinós. Most of the cacti ended up dying after a few months.",
+      "This is a research project on the relationship between <a href='https://github.com/maxazc/sociotech/tree/master/projecte'>work</a>, life, and art, approached through first-person analysis of entrepreneurship and the entrepreneurial spirit. <a href='data/TFG_Gettingby_compartir.pdf'>Getting By: Successfully Undertaking Creative Practice</a> focuses on exploring project culture and its relationship with life understood as a work project, as well as analyzing the entrepreneurial imagination and the <a href='https://silviolorusso.com/work/entreprecariat-eng/'>intersections</a> between entrepreneurial genius and the role of the contemporary artist.",
+      "The research was <a href='data/TFG_Presentacio_compartir.pdf'>presented as a lecture</a>, built from slides documenting jobs and professional training courses I took alongside my university studies, including materials from various entrepreneurship courses I attended with the aim of founding a startup that ultimately never came to fruition."
+    ],
+    "ca": [
+      "L’eslògan “Your life is a startup” suggereix que les nostres vides estan molt a prop del fracàs, ja que més de nou de cada deu startups fracassen durant els anys posteriors a la seva creació. Distribueixo diversos cactus San Pedro als espais compartits de l’Escola Massana amb l’objectiu de reduir el possible risc de lipoatròfia semicircular al qual estaven exposats els usuaris del nou edifici, dissenyat per Carme Pinós. La majoria dels cactus van acabar morint al cap d’uns mesos.",
+      "Aquest és un projecte de recerca sobre la relació entre <a href='https://github.com/maxazc/sociotech/tree/master/projecte'>treball</a>, vida i art, a través de l’anàlisi en primera persona de l’emprenedoria i l’esperit empresarial. <a href='data/TFG_Gettingby_compartir.pdf'>Getting by: emprèn amb èxit la pràctica creativa</a> se centra a explorar la cultura del projecte i les seves relacions amb la vida entesa com un projecte de treball, així com a analitzar l’imaginari emprenedor i les <a href='https://silviolorusso.com/work/entreprecariat-eng/'>zones de contacte</a> entre el geni emprenedor i el rol de l’artista contemporani.",
+      "La investigació es va <a href='data/TFG_Presentacio_compartir.pdf'>presentar en forma de conferència</a>, construïda a partir de diapositives de feines i cursos de formació laboral que havia fet paral·lelament al grau universitari, incloent-hi materials de diversos cursos d’emprenedoria als quals vaig assistir amb l’objectiu de fundar una startup que mai no va acabar de veure la llum."
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

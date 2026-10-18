@@ -12,7 +12,7 @@ export const SEO = {
   siteName: 'Max Azemar',
   baseUrl: 'https://maxazemar.com',
   defaultDescription: 'Portfolio of Max Azemar: art projects, research, and performative practices between art and life.',
-  defaultImage: 'img/1.webp'
+  defaultImage: ''   // the first photo of the site, set by loadData
 };
 
 export const SAFE_LINK_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:']);

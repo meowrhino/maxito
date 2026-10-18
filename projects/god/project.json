@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/project.json",
+  "title": "GOD TO GREAT",
+  "text": {
+    "en": [
+      "These days I’m working on ambition, aspiration, and <a href='data/top 10 slides web provisional.pdf'>other things</a> that get left behind.",
+      "Photo by: <a href='https://bbonaventura.com/'>Bernat Bonaventura</a>"
+    ],
+    "ca": [
+      "Aquests dies estic treballant sobre l’ambició, l’aspiracionalitat i <a href='data/top 10 slides web provisional.pdf'>altres coses</a> que es deixen enrrere.",
+      "Foto per: <a href='https://bbonaventura.com/'>Bernat Bonaventura</a>"
+    ]
+  },
+  "photos": [
+    "1"
+  ]
+}

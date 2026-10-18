@@ -1,16 +1,47 @@
 import { state, SEO, ALLOWED_INLINE_TAGS } from './state.js';
 import { stripHTMLTags, truncateText } from './helpers.js';
+import { listedSlugs, toSlides } from './house.js';
+import { validar } from './validar.js';
+
+// The pages the build writes carry data-built on <html>. Without it this is
+// the preview (Live Server, no build): the JSON is checked against schema/
+// like the build does, and the photos have no smaller sizes yet.
+export const BUILT = document.documentElement.hasAttribute('data-built');
 
 // === Data loading ===
+// data/site.json + projects/<slug>/project.json (see house.js)
 export async function loadData() {
+  const get = async (path) => {
+    const res = await fetch(path, { cache: BUILT ? 'default' : 'no-store' });
+    if (!res.ok) throw new Error(`no trobo ${path}`);
+    const text = await res.text();
+    try { return JSON.parse(text); } catch (err) {
+      throw new Error(`${path} no és un JSON vàlid: gairebé sempre és una coma de més o de menys, o unes cometes sense tancar. (${err.message})`);
+    }
+  };
   try {
-    const res = await fetch('data.json');
-    if (!res.ok) throw new Error('error loading data.json');
-    state.data = await res.json();
+    const site = await get('data/site.json');
+    const slugs = listedSlugs(site).filter((s) => typeof s === 'string');
+    const projects = Object.fromEntries(await Promise.all(slugs.map(async (s) => [s, await get(`projects/${s}/project.json`)])));
+    if (!BUILT) {
+      const [siteSchema, projectSchema] = await Promise.all([get('schema/site.json'), get('schema/project.json')]);
+      const errors = [
+        ...validar(site, siteSchema, 'data/site.json'),
+        ...slugs.flatMap((s) => validar(projects[s], projectSchema, `projects/${s}/project.json`)),
+      ];
+      if (errors.length) throw new Error(errors.map((e) => `✗ ${e}`).join('\n'));
+    }
+    state.data = toSlides(site, projects);
     state.projects = Object.keys(state.data);
+    SEO.defaultImage = Object.values(state.data).flat().find((s) => s.image)?.image || '';
     return true;
   } catch (err) {
     console.error('error loading data:', err);
+    // on screen, not in the console: nobody looks there
+    const pre = document.createElement('pre');
+    pre.style.cssText = 'white-space: pre-wrap; margin: 0; padding: 2rem; font: 15px/1.5 monospace;';
+    pre.textContent = `Això no es publicaria:\n\n${err.message}\n\nArregla-ho, desa, i la pàgina es recarrega sola.`;
+    document.body.replaceChildren(pre);
     return false;
   }
 }
@@ -206,7 +237,8 @@ export function getResponsiveImageSources(path) {
   }
 
   const match = original.match(/^(.*)\.webp$/i);
-  if (!match) {
+  // the -640 and -1200 sizes are made by the build: not in the preview
+  if (!match || !BUILT) {
     return { src: original, srcset: '', sizes: '', original };
   }
 
