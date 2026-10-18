@@ -9,6 +9,8 @@ import {
   createLinkElement,
   getProjectDescription,
   buildPath,
+  sitePath,
+  BASE,
   toAbsoluteURL,
   getResponsiveImageSources
 } from './data.js';
@@ -61,9 +63,9 @@ function handleSlideTextClick(event) {
 
 export function syncURLAndSEO(slug, slide) {
   const relativeURL = buildPath(slug, state.lang);
-  const canonicalURL = `${SEO.baseUrl}${buildPath(slug, state.lang)}`;
-  const caURL = `${SEO.baseUrl}${buildPath(slug, 'cat')}`;
-  const enURL = `${SEO.baseUrl}${buildPath(slug, 'en')}`;
+  const canonicalURL = `${SEO.baseUrl}${sitePath(slug, state.lang)}`;
+  const caURL = `${SEO.baseUrl}${sitePath(slug, 'cat')}`;
+  const enURL = `${SEO.baseUrl}${sitePath(slug, 'en')}`;
   const projectTitle = getProjectTitle(slug);
   const title = slug === 'about' ? SEO.siteName : `${projectTitle} — ${SEO.siteName}`;
   const description = getProjectDescription(slug);
@@ -461,7 +463,8 @@ export function closeImageModal() {
 
 // === URL parsing ===
 export function parseURL() {
-  const segments = window.location.pathname.split('/').filter(Boolean);
+  const { pathname } = window.location;
+  const segments = (pathname.startsWith(BASE + '/') ? pathname.slice(BASE.length) : pathname).split('/').filter(Boolean);
 
   // /, /:slug/, /ca/, /ca/:slug/ (see buildPath)
   if (segments[0] === 'ca') {

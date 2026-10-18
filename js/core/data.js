@@ -168,8 +168,17 @@ export function getProjectDescription(slug) {
   return SEO.defaultDescription;
 }
 
-// Same addresses as build/build.mjs: /, /god/, /ca/, /ca/god/
+// Where the site lives inside the domain: '' on maxazemar.com, '/maxito' on
+// meowrhino.github.io/maxito (the build writes it in <base href>).
+export const BASE = new URL(document.baseURI).pathname.replace(/\/+$/, '');
+
+// Link inside the site: BASE + sitePath
 export function buildPath(slug, lang = state.lang) {
+  return BASE + sitePath(slug, lang);
+}
+
+// Same addresses as build/build.mjs: /, /god/, /ca/, /ca/god/ (for canonical/hreflang)
+export function sitePath(slug, lang = state.lang) {
   const prefix = lang === 'cat' ? '/ca' : '';
   if (!slug || slug === 'about') return `${prefix}/`;
   return `${prefix}/${encodeURIComponent(slug)}/`;
@@ -187,7 +196,7 @@ export function toAbsoluteURL(path) {
 export function resolveAsset(path) {
   if (!path) return '';
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return '/' + String(path).replace(/^\/+/, '');
+  return BASE + '/' + String(path).replace(/^\/+/, '');
 }
 
 export function getResponsiveImageSources(path) {

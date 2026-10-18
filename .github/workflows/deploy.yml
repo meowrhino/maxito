@@ -23,8 +23,11 @@ jobs:
       - uses: actions/setup-node@v7
         with: { node-version: '22' }
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - id: pages
+        uses: actions/configure-pages@v6
+      # '/maxito' en meowrhino.github.io/maxito; vacío con dominio propio (maxazemar.com)
       - run: node build/build.mjs
-      - uses: actions/configure-pages@v6
+        env: { BASE: '${{ steps.pages.outputs.base_path }}' }
       - uses: actions/upload-pages-artifact@v5
         with: { path: dist }
 

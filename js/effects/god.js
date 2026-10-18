@@ -225,7 +225,7 @@ export function enhanceGodBlueWords(container, slug) {
 export function enhanceGodOthersLink(container, slug) {
   if (slug !== GOD_TARGET_SLUG || !container) return;
   const phrase = state.lang === 'cat' ? 'altres coses' : 'other things';
-  const pdfUrl = '/data/top%2010%20slides%20web%20provisional.pdf';
+  const pdfUrl = 'data/top%2010%20slides%20web%20provisional.pdf';
 
   replaceFirstPhraseWithNode(container, phrase, (matchedText) => {
     const a = document.createElement('a');

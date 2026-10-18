@@ -23,6 +23,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(fileURLToPath(import.meta.url), '../..');
 const OUT = join(ROOT, 'dist');
 const SITE = 'https://maxazemar.com';
+// dónde vive la web dentro del dominio: '' en maxazemar.com, '/maxito' en meowrhino.github.io/maxito (lo pone la Action)
+const BASE = (process.env.BASE || '').replace(/\/+$/, '');
 const NAME = 'Max Azemar';
 const DEFAULT_DESCRIPTION = 'Portfolio of Max Azemar: art projects, research, and performative practices between art and life.';
 const DEFAULT_IMAGE = 'img/1.webp';
@@ -69,14 +71,15 @@ const title = (slug, lang) => pick(data[slug][0], 'title', lang) || slug;
 const group = (slug) => { const g = Number(data[slug][0].group); return g >= 1 && g <= 3 ? g : 2; };
 const paragraphs = (slide, lang) => { const v = pick(slide, 'text', lang); return v ? [].concat(v) : []; };
 const path = (slug, lang) => `${LANGS[lang].prefix}/${slug === HOME ? '' : `${slug}/`}`;
+const href = (slug, lang) => BASE + path(slug, lang);
 const pageTitle = (slug, lang) => slug === HOME ? NAME : `${title(slug, lang)} — ${NAME}`;
 const abs = (p) => /^https?:\/\//.test(p) ? p : `${SITE}/${p.replace(/^\/+/, '')}`;
-const asset = (p) => /^https?:\/\//.test(p) ? p : `/${String(p).replace(/^\/+/, '')}`;
+const asset = (p) => /^https?:\/\//.test(p) ? p : `${BASE}/${String(p).replace(/^\/+/, '')}`;
 
 function safeURL(url) {
   const u = typeof url === 'string' ? url.trim() : '';
   if (!u) return null;
-  if (/^(https?:\/\/|mailto:|tel:)/i.test(u) || u.startsWith('/')) return u;
+  if (/^(https?:\/\/|mailto:|tel:)/i.test(u) || u.startsWith('//')) return u;
   return asset(u);
 }
 
@@ -132,7 +135,7 @@ function nav(current, lang) {
   return slugs.map((slug) => {
     const gap = prev !== null && group(slug) !== prev ? '<div class="project-group-gap" aria-hidden="true"> </div>' : '';
     prev = group(slug);
-    return `${gap}<a class="project-link${slug === current ? ' active' : ''}" href="${path(slug, lang)}">${esc(title(slug, lang))}</a>`;
+    return `${gap}<a class="project-link${slug === current ? ' active' : ''}" href="${href(slug, lang)}">${esc(title(slug, lang))}</a>`;
   }).join('');
 }
 
@@ -142,7 +145,7 @@ function thumbs(lang) {
     columns: Math.max(1, Math.ceil(others.length / 2)),
     html: others.filter((s) => data[s][0].image).map((slug) => {
       const r = responsive(data[slug][0].image);
-      return `<a class="slide-thumb" href="${path(slug, lang)}" aria-label="${esc(title(slug, lang))}"><img src="${esc(r.src)}" srcset="${esc(r.srcset)}" sizes="(max-width: 768px) 44vw, 160px" loading="lazy" decoding="async" alt="${esc(title(slug, lang))}"></a>`;
+      return `<a class="slide-thumb" href="${href(slug, lang)}" aria-label="${esc(title(slug, lang))}"><img src="${esc(r.src)}" srcset="${esc(r.srcset)}" sizes="(max-width: 768px) 44vw, 160px" loading="lazy" decoding="async" alt="${esc(title(slug, lang))}"></a>`;
     }).join(''),
   };
 }
@@ -220,6 +223,7 @@ function page(slug, lang, { robots } = {}) {
   const image = data[slug][0].image || DEFAULT_IMAGE;
   const share = og(image);
   let html = template;
+  html = swap(html, /<base href="[^"]*">/, `<base href="${BASE}/">`);
   html = swap(html, /<html lang="[^"]*">/, `<html lang="${L.code}">`);
   html = swap(html, /<title>[^<]*<\/title>/, `<title>${esc(pageTitle(slug, lang))}</title>`);
   if (robots) html = swap(html, /(<meta name="robots" content=")[^"]*(")/, `$1${robots}$2`);
@@ -259,8 +263,8 @@ const redirect = (to) => `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><title>${NAME}</title>
 <link rel="canonical" href="${SITE}${to}">
 <meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=${to}">
-</head><body><a href="${to}">${SITE}${to}</a></body></html>
+<meta http-equiv="refresh" content="0; url=${BASE}${to}">
+</head><body><a href="${BASE}${to}">${SITE}${to}</a></body></html>
 `;
 
 /* ---------- escribir dist/ ---------- */

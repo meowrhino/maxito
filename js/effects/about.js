@@ -39,7 +39,7 @@ function getAboutRevealMappings() {
   if (lang === 'cat') {
     return [
       { phrase: 'Hola!', type: 'link', url: 'https://youtu.be/Z01MSGmzGSc?si=cK9n341RAZNngKc0&t=14' },
-      { phrase: 'El meu currículum complet', type: 'link', url: '/data/CV.pdf' },
+      { phrase: 'El meu currículum complet', type: 'link', url: 'data/CV.pdf' },
       { phrase: 'recerca artística', type: 'link', url: localizedPath('arbre') },
       { phrase: 'conferències performatives', type: 'link', url: localizedPath('foc') },
       { phrase: 'instal·lacions', type: 'link', url: localizedPath('gettingby') },
@@ -60,7 +60,7 @@ function getAboutRevealMappings() {
 
   return [
     { phrase: 'Hello!', type: 'link', url: 'https://youtu.be/Z01MSGmzGSc?si=cK9n341RAZNngKc0&t=14' },
-    { phrase: 'My full CV', type: 'link', url: '/data/CV.pdf' },
+    { phrase: 'My full CV', type: 'link', url: 'data/CV.pdf' },
     { phrase: 'artistic research', type: 'link', url: localizedPath('arbre') },
     { phrase: 'performative lectures', type: 'link', url: localizedPath('foc') },
     { phrase: 'installations', type: 'link', url: localizedPath('gettingby') },
